@@ -19,7 +19,7 @@ app.get('/id/:id', (req, res) => {
 
   // Redirigir al navegador para servir el archivo index.html desde la carpeta public
   // O enviar directamente el archivo index.html
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Iniciar el servidor
