@@ -1,0 +1,18 @@
+# Directorio de dependencias de Node
+node_modules/
+
+# Archivos de entorno
+.env
+
+# Directorio de salida de la compilación
+dist/
+
+# Archivos de log
+npm-debug.log
+yarn-error.log
+
+# Directorio de caché de IDEs/editores
+.idea/
+.vscode/
+*.swp
+*.swo
