@@ -32,15 +32,15 @@ function alerta() {
 }
 
 function irCocina() {
-    location.href = "cocina.html"
+    location.href = "/panelcontrol/cocina.html"
 }
 
 function irCarta() {
-    location.href = "gestionCarta.html"
+    location.href = "/panelcontrol/gestionCarta.html"
 }
 
 function irPedidos() {
-    location.href = "index.html"
+    location.href = "/panelcontrol/index.html"
 }
 
 
