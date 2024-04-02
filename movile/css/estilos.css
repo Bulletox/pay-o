@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+i {
+    font-size: 2em;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.contenedorPadre {
+    width: 50%;
+    height: 100vh;
+    border: 0.1em solid black;
+}
+
+.iconos {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #202C39;
+    margin-top: 5em;
+}
+
+.titulo2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #202C39;
+    margin-top: 0em;
+}
+
+.titulo h1 {
+    font-size: 3em;
+}
+
+.circulo1 {
+    position: fixed;
+    border-radius: 100%;
+    margin-left: 200vw;
+    z-index: -2;
+    width: 40%;
+    height: 30%;
+    top: 5%;
+    background-color: #FFEBD7;
+    color: white;
+    transform: rotate(-70deg);
+}
+
+.circulo2 {
+    position: fixed;
+    border-radius: 100%;
+    margin-left: 100vw;
+    z-index: -2;
+    width: 40%;
+    height: 25%;
+    top: -10%;
+    background-color: #F2D492;
+    color: white;
+    animation-delay: .3s;
+}
+
+.circulo3 {
+    position: fixed;
+    border-radius: 100%;
+    margin-left: -3vw;
+    z-index: -2;
+    width: 50%;
+    height: 30%;
+    top: +5%;
+    background-color: #F29559;
+    color: white;
+    animation-delay: .6s;
+}
+
+@media (max-width: 800px) {
+    .contenedorPadre {
+        width: 100%;
+    }
+}

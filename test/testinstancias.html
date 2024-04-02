@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="../bootstrap.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <div>
+        <button id="crearInstancia">Crear Instancia Mesa</button>
+        <button id="crearPedido">Crear Pedido</button>
+        <button id="subPedido">Crear Plato</button>
+        <ul id="listaPlatos"></ul>
+        <div id="conteoPlatosPorTipo"></div>
+
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+            authDomain: "dam2pay-o.firebaseapp.com",
+            projectId: "dam2pay-o",
+            storageBucket: "dam2pay-o.appspot.com",
+            messagingSenderId: "1010112748895",
+            appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+            measurementId: "G-H36HTF38QD"
+        };
+        firebase.initializeApp(firebaseConfig);
+        let db = firebase.firestore();
+        function obtenerIdDesdeUrl() {
+            const partesUrl = window.location.pathname.split('/');
+            const indiceId = partesUrl.indexOf('id') + 1;
+            return partesUrl[indiceId];
+        }
+
+        // Variables globales para IDs
+        let instanciaId = obtenerIdDesdeUrl(); // Obtiene el ID de la instancia desde la URL
+        let pedidoId = null;
+        let subPedidoId = null;
+        function obtenerDatosPlatos() {
+            db.collection("/Restaurantes/Restaurantes/Platos").get().then((querySnapshot) => {
+                const listaHtml = document.getElementById("listaPlatos");
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `Plato: ${data.nombrePlato}, Precio: ${data.precio} - Cantidad: `;
+
+                    // Contenedor para el contador
+                    const contador = document.createElement("span");
+
+                    // Botón de decremento
+                    const btnDecremento = document.createElement("button");
+                    btnDecremento.textContent = "-";
+                    btnDecremento.onclick = () => actualizarContador(doc.id, false);
+
+                    // Botón de incremento
+                    const btnIncremento = document.createElement("button");
+                    btnIncremento.textContent = "+";
+                    // btnIncremento.onclick = () => actualizarContador(doc.id, true);
+                    btnIncremento.onclick = () => agregarPlato(doc.id);
+                    // Escuchar cambios en tiempo real para este plato específico
+                    const docRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`).doc(doc.id);
+                    docRef.onSnapshot((docSnapshot) => {
+                        if (docSnapshot.exists) {
+                            const platoData = docSnapshot.data();
+                            contador.textContent = platoData.cantidad || 0; // Actualizar contador en tiempo real
+                        }
+                    });
+
+                    // Añadir botones y contador al elemento de la lista
+                    listItem.appendChild(btnDecremento);
+                    listItem.appendChild(contador);
+                    listItem.appendChild(btnIncremento);
+                    listaHtml.appendChild(listItem);
+                });
+            }).catch((error) => {
+                console.log("Error al obtener los documentos: ", error);
+            });
+        }
+
+        function actualizarContador(idPlato, incrementar) {
+            if (!pedidoId || !subPedidoId) {
+                console.error("No se ha creado un pedido o subPedido. Los ID son null.");
+                return;
+            }
+
+            const platoRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`).doc(idPlato);
+
+            db.runTransaction((transaction) => {
+                return transaction.get(platoRef).then((doc) => {
+                    if (!doc.exists && incrementar) {
+                        // Si el plato no existe y estamos incrementando, añadir el plato con cantidad 1
+                        transaction.set(platoRef, {
+                            cantidad: 1,
+                            comentarios: "", // Asumiendo que se añaden sin comentarios inicialmente
+                            idPlato: db.doc("/Restaurantes/Restaurantes/Platos/" + idPlato),
+                            usuarios: [] // Asumiendo que no hay usuarios vinculados inicialmente
+                        });
+                    } else if (doc.exists) {
+                        // Si el plato ya existe, incrementar o decrementar la cantidad
+                        let nuevaCantidad = (doc.data().cantidad || 0) + (incrementar ? 1 : -1);
+                        nuevaCantidad = Math.max(nuevaCantidad, 0); // Asegurar que la cantidad no sea negativa
+                        transaction.update(platoRef, { cantidad: nuevaCantidad });
+                    }
+                    // Si el plato no existe y estamos decrementando, no hacer nada
+                });
+            }).then(() => {
+                console.log("Transacción completada con éxito");
+            }).catch((error) => {
+                console.error("Transacción fallida: ", error);
+            });
+        }
+
+        function agregarPlato(idPlato, comentarios = "") {
+            if (!pedidoId || !subPedidoId) {
+                console.error("No se ha creado un pedido o subPedido. Los ID son null.");
+                return;
+            }
+
+            // Crear referencia a la colección donde se añadirán los nuevos documentos/platos
+            const platosPedidoRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`);
+
+            // Crear un nuevo documento para el plato incrementado
+            platosPedidoRef.add({
+                cantidad: 1, // La cantidad siempre será 1 ya que cada documento representa un plato individual
+                comentarios: comentarios, // Añadir comentarios si se proporcionan
+                idPlato: db.doc("/Restaurantes/Restaurantes/Platos/" + idPlato), // Referencia al documento del plato
+                usuarios: [], // Asumiendo que no hay usuarios vinculados inicialmente
+                // Puedes añadir más campos según sea necesario
+            }).then(() => {
+                console.log("Plato agregado con éxito");
+                contarPlatosPorTipo();
+            }).catch((error) => {
+                console.error("Error al agregar plato: ", error);
+            });
+        }
+
+        function decrementarPlato(idPlato) {
+            console.log("Función decrementarPlato no implementada");
+        }
+
+        // crear instancia de mesa.
+        // Definir la letiable globalmente l
+
+
+        // document.getElementById("crearInstancia").addEventListener("click", function () {
+        //     let estado = "1";
+        //     let idMesa = "ID_DE_EJEMPLO";
+        //     let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
+        //     let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
+        //     let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+
+        //     db.collection("/Instanciamesas").add({
+        //         estado: estado,
+        //         idMesa: idMesa,
+        //         idRestaurante: idRestaurante,
+        //         timestampInicio: timestampInicio,
+        //         usuarios: usuarios
+        //     })
+        //         .then((docRef) => {
+        //             console.log("Documento escrito con ID: ", docRef.id);
+        //             // Guardar la ID de la instancia en la letiable
+        //             instanciaId = docRef.id;
+        //         })
+        //         .catch((error) => console.error("Error añadiendo el documento: ", error));
+        // });
+
+        document.getElementById("crearPedido").addEventListener("click", function () {
+            let estado = ""; // El estado del pedido, asumo que querrás actualizarlo más tarde
+            let idMesa = "Restaurantes/Restaurantes/Mesas/sPZgLeLOPevATqC3UFoG"; // Referencia a la mesa
+            let idRestaurante = ""; // ID del restaurante, asumo que actualizarás este valor
+            let idInstancia = instanciaId; // Usando la letiable `instanciaId` almacenada previamente
+            let timestampCreacion = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:35:24+01:00")); // Marca de tiempo de creación
+            if (instanciaId === null) {
+                console.error("No se ha creado una instancia de mesa la id de la instancia es null.");
+                return;
+            }
+            db.collection("/Pedidos").add({
+                estado: estado,
+                idMesa: db.doc(idMesa), // Referencia directa al documento de la Mesa
+                idRestaurante: idRestaurante,
+                idInstancia: db.doc(`/Instanciamesas/${idInstancia}`), // Referencia directa al documento de la Instancia
+                timestampCreacion: timestampCreacion,
+            })
+                .then((docRef) => {
+                    console.log("Pedido creado con ID: ", docRef.id);
+                    pedidoId = docRef.id;
+                })
+                .catch((error) => {
+                    console.error("Error creando el pedido: ", error);
+                });
+        });
+
+        document.getElementById("subPedido").addEventListener("click", function () {
+            let tamestampCracion = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:35:24+01:00"));
+            let estado = "0"; // 0 = Creando, 1 = Pendiente, 2 = En proceso, 3 = Listo, 4 = Entregado
+            if (pedidoId === null) {
+                console.error("No se ha creado un pedido la id del pedido es null.");
+                return;
+            }
+            db.collection(`/Pedidos/${pedidoId}/subPedido`).add({
+                estado: estado,
+                timestampCreacion: tamestampCracion
+            })
+                .then((docRef) => {
+                    console.log("SubPedido creado con ID: ", docRef.id);
+                    subPedidoId = docRef.id;
+                    // platosPedido()
+                    obtenerDatosPlatos();
+                })
+                .catch((error) => {
+                    console.error("Error creando el subPedido: ", error);
+                });
+        })
+
+        function platosPedido() {
+            db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`).add({
+                timestampCreacion: firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:35:24+01:00"))
+            })
+        }
+        function anadirProducto(idPlato) {
+            // Asumiendo que `idPlato` es el ID del documento en la colección de platos que quieres actualizar
+            const platoRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`).doc(idPlato);
+
+            // Actualizar el documento existente con nuevos valores
+            platoRef.update({
+                cantidad: "0",
+                // comentarios: comentarios,
+                comentarios: "comentarios",
+                idPlato: db.doc("/Restaurantes/Restaurantes/Platos/" + idPlato),
+                // Puedes agregar un array de ID de usuarios si es necesario
+                usuarios: firebase.firestore.FieldValue.arrayUnion(idUsuario)
+            })
+                .then(() => {
+                    console.log("Producto actualizado con éxito");
+                })
+                .catch((error) => {
+                    console.error("Error actualizando producto: ", error);
+                });
+        }
+        function contarPlatosPorTipo() {
+            if (!pedidoId || !subPedidoId) {
+                console.error("El pedidoId o subPedidoId no están definidos.");
+                return;
+            }
+
+            const platosPedidoRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`);
+            platosPedidoRef.get().then((querySnapshot) => {
+                const conteoPlatos = {}; // Objeto para mantener el conteo de cada tipo de plato
+
+                querySnapshot.forEach((doc) => {
+                    const plato = doc.data();
+                    const idPlato = plato.idPlato; // Asume que `idPlato` es una referencia al documento del plato
+
+                    // Si el plato ya está en el objeto, incrementa el conteo, si no, inicialízalo en 1
+                    if (conteoPlatos[idPlato]) {
+                        conteoPlatos[idPlato]++;
+                    } else {
+                        conteoPlatos[idPlato] = 1;
+                    }
+                });
+
+                // Ahora, actualiza el HTML con el conteo de cada tipo de plato
+                const conteoPlatosElemento = document.getElementById("conteoPlatosPorTipo");
+                conteoPlatosElemento.innerHTML = ''; // Limpiar el contenido anterior
+                Object.keys(conteoPlatos).forEach(idPlato => {
+                    // Necesitarás obtener el nombre del plato usando su ID, lo cual puede requerir otra llamada a la base de datos
+                    const platoRef = db.doc(`/Restaurantes/Restaurantes/Platos/${idPlato}`);
+                    platoRef.get().then(doc => {
+                        if (doc.exists) {
+                            const platoData = doc.data();
+                            const nombrePlato = platoData.nombrePlato; // Asume que el campo se llama `nombrePlato`
+                            const cantidad = conteoPlatos[idPlato];
+                            const platoItem = document.createElement("div");
+                            platoItem.textContent = `${nombrePlato}: ${cantidad}`;
+                            conteoPlatosElemento.appendChild(platoItem);
+                        }
+                    });
+                });
+            }).catch((error) => {
+                console.error("Error al contar platos por tipo: ", error);
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>

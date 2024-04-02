@@ -1,0 +1,161 @@
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+    <title>Panel Control</title>
+
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+
+    <div class="d-flex flex-row" style="z-index: 2;">
+        <div class="navBarLeft d-flex flex-column vw-15 animate__animated animate__fadeInLeft animate__slow vh-100"
+            style="z-index: 1;">
+            <nav id="sidebar" class=" js-sidebar vw-40">
+                <div class="sidebar-content js-simplebar d-flex flex-column">
+                    <div class="d-flex flex-row">
+                        <i class="pt-5 bi bi-chevron-left cursor-pointer" style="font-size: 3em; padding-left: 1vw;"
+                            onclick="irPedidos()"></i>
+                        <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
+                            onclick="handleClick();">
+                            <div class="contenido d-flex flex-column align-items-center justify-content-center h-100">
+                                <i class="bi bi-plus-circle mb-3 fs-1"></i>
+                                Arrastra una imagen aquí
+                            </div>
+                        </div>
+                        <input type="file" id="file_input" style="display: none;" accept="image/*"
+                            onchange="previewImage(event);">
+                    </div>
+
+                    <div class="d-flex flex-column justify-content-center align-items-center"
+                        style="background-color: #F2D492;">
+                        <input class="input" type="text" placeholder="Nombre...">
+                        <input class="input" type="text" placeholder="Descripción..." style="padding-bottom: 60%;">
+                        <button class="button">Confirmar</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-flex flex-column p-5" style="margin-left: 25vw; width: 75vw;">
+
+            <h1 class="text-dark">Comida/Bebida</h1>
+            <div class="input-group mb-5">
+                <input id="inputComida" type="text" class="form-control border"
+                    aria-label="Text input with dropdown button" placeholder="/" disabled>
+                <button class="btn btn-outline-secondary dropdown-toggle ps-5 pe-5 pt-4 pb-4" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item opcion-menu" href="#" onclick="texto(this)">
+                            <p>Comida</p>
+                        </a></li>
+                    <li><a class="dropdown-item opcion-menu" href="#" onclick="texto(this)">
+                            <p>Bebida</p>
+                        </a></li>
+                </ul>
+            </div>
+
+            <h1 class="text-dark">Cantidad</h1>
+            <div class="input-group mb-5">
+                <input id="cantidad" type="cantidad" class="form-control border" placeholder="/"
+                    aria-label="Text input with dropdown button" disabled>
+                <button class="btn btn-outline-secondary dropdown-toggle ps-5 pe-5 pt-4 pb-4" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">1 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">2 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">3 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">4 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">5 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">6 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">7 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">8 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">9 persona</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto2(this)">10 persona</a></li>
+                </ul>
+            </div>
+
+            <h1 class="text-dark">Alérgenos</h1>
+            <div class="input-group mb-5">
+                <input id="alergenos" type="text" class="form-control border" placeholder="/"
+                    aria-label="Text input with dropdown button" disabled>
+                <button class="btn btn-outline-secondary dropdown-toggle ps-5 pe-5 pt-4 pb-4" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Cacahuete</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Altramuces</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Apio</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Moluscos</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Crustaceo</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Gluten</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Soja</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Huevo</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Mostaza</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Nuez</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Dióxido azufre y sulfitos</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Pescado</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Lácteos</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="texto3(this)">Sésamo</a></li>
+                </ul>
+            </div>
+
+            <h1 class="text-dark">Ingredientes</h1>
+            <input class="input w-100" type="text" placeholder="ingredientes..."
+                style="padding-bottom: 50vh; background-color: white !important; margin-bottom: 0 !important;">
+
+        </div>
+</body>
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+
+<!-- Configuración de Firebase y funciones de inicio de sesión anónimas -->
+<script>
+    // Configuración de Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+        authDomain: "dam2pay-o.firebaseapp.com",
+        projectId: "dam2pay-o",
+        storageBucket: "dam2pay-o.appspot.com",
+        messagingSenderId: "1010112748895",
+        appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+        measurementId: "G-H36HTF38QD"
+    };
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Función para iniciar sesión anónima
+    function iniciarSesionAnonima() {
+        firebase.auth().signInAnonymously()
+            .then(function (result) {
+                console.log('Usuario anónimo conectado', result.user);
+                // Puedes usar result.user.uid como identificador único para el usuario
+            })
+            .catch(function (error) {
+                console.error('Error en inicio de sesión anónimo', error);
+            });
+    }
+    // Asegúrate de llamar a iniciarSesionAnonima cuando sea apropiado en tu aplicación
+    window.onload = iniciarSesionAnonima;
+</script>
+<script src="js/sidebar.js"></script>
+
+</html>

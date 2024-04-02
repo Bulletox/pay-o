@@ -1,0 +1,1834 @@
+<html lang="es">
+                
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>                                 
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+    <title>Panel Control</title>
+
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+
+    <div class="ventanaEmergentePedidos">
+
+    </div>
+
+    <div class="d-flex flex-row">
+        <div class="navBarLeft d-flex flex-column position-fixed vw-15 animate__animated animate__fadeInLeft animate__slow"
+            style="z-index: 1;">
+            <nav id="sidebar" class=" js-sidebar vw-15">
+                <div class="sidebar-content js-simplebar ">
+                    <a class="sidebar-brand m-1" href="index.html">
+                        <img class="me-3" src="img/logo.png" alt="" width="65" height="65">
+                        <span class="align-middle fs-1 color-primary">PAY - O</span>
+                    </a>
+
+                    <ul class="sidebar-nav">
+
+                        <div class="image d-flex justify-content-center">
+                            <img src="img/separador.png" alt="" height="30" width="90%">
+                        </div>
+
+                        <li class="sidebar-item mt-4 d-flex flex-column fs-2 ms-4" style="z-index: 999;">
+
+
+                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irPedidos()">Pedidos
+                                ></span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCocina()">Cocina</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irAyuda()">Help</span>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="main ms-119 animate__animated animate__fadeIn animate__slow" style="z-index: 2;">
+            <div class="cirCulo animate__animated  animate__zoomIn animate__slower">.</div>
+            <div class="cirCulo2 animate__animated  animate__zoomIn animate__slower">.</div>
+            <nav
+                class="d-flex justify-content-between navbar navbar-expand navbar-light navbar-bg animate__animated animate__fadeInDown animate__slower">
+                <a onclick="toggleSidebarLeft()">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+                <div class="navbar-nav ml" onclick="toggleSidebar()">
+                    <a class="sidebar-toggle js-sidebar-toggle">
+                        <div class="flex-end" style="display: flex !important;">
+                            <i class="bi bi-egg-fried fs-1 animate__animated animate__swing animate__delay-2s"
+                                style="color: black;"></i>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+
+            <nav id="egg-fried-sidebar" class="sidebar-right">
+                <div class="sidebar-content" style="z-index: 5 !important;">
+                    <a class="sidebar-brand" href="#">
+                        <i onclick="toggleSidebar()" class="bi bi-x-octagon-fill fs-1 text-dark"
+                            style="margin: 3px;"></i>
+                        <p></p>
+                        <span class="align-middle color-primary"
+                            style="display: flex; justify-content: center">Cocina</span>
+
+                    </a>
+
+
+                    <div class="card" style="margin: 1em 1em 1em 1em;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Mesa - 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Inicio de Item de Menú -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <!-- Repetición de elementos según sea necesario -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-card-id="card1">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin: 1em 1em 1em 1em;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Mesa - 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Inicio de Item de Menú -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <!-- Repetición de elementos según sea necesario -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-card-id="card1">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin: 1em 1em 1em 1em;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Mesa - 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Inicio de Item de Menú -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <!-- Repetición de elementos según sea necesario -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-card-id="card1">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin: 1em 1em 1em 1em;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Mesa - 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Inicio de Item de Menú -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <!-- Repetición de elementos según sea necesario -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                    alérgenos / comentario
+                                </div>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                <label class="form-check-label d-block" for="mesa1Plato1">
+                                    Plato x1
+                                </label>
+                            </div>
+                            <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-card-id="card1">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+            </nav>
+
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown"></a>
+                    </li>
+                </ul>
+            </div>
+            </nav>
+
+            <main class="content mb-5">
+                <div class="container-fluid p-0">
+                    <h1 class="h3 mb-3 text-dark">Mesas</h1>
+                    <div class="row " data-masonry='{"percentPosition": true }'>
+                        <!-- Inicio de la Iteración de Mesas -->
+                        <!-- animate__animated animate__fadeOutLeft -->
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                        <!-- <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                        <button type="button" class="btn btn-outline-danger" data-card-id="card1">Eliminar</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                        <button type="button" class="btn btn-outline-danger"
+                                            data-card-id="card1">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Mesa - 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Inicio de Item de Menú -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block text-break" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <!-- Repetición de elementos según sea necesario -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                        <div
+                                            class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                                            alérgenos / comentario
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
+                                        <label class="form-check-label d-block" for="mesa1Plato1">
+                                            Plato x1
+                                        </label>
+                                    </div>
+                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="row">
+                                            <div class="col-6 text-end"><button type="button"
+                                                    class="btn btn-outline-success">Confirmar</button></div>
+                                            <div class="col-6"> <button type="button" class="btn btn-outline-danger"
+                                                    data-card-id="card1">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer
+                class="footer d-flex fixed-bottom vh-6 justify-content-around align-items-center ms-119 animate__animated animate__fadeInUp animate__slower"
+                style="z-index: 3;">
+                <div class="d-flex flex-row text-light mt-2 cursor-pointer">
+                    <i class="bi bi-pencil-square fs-1 me-3 mt-1"></i>
+                    <h1>Editar</h1>
+                </div>
+
+                <div class="d-flex flex-row text-light mt-2 cursor-pointer">
+                    <i class="bi bi-plus-circle fs-1 me-3 mt-1"></i>
+                    <h1>Añadir</h1>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+<!-- Configuración de Firebase y funciones de inicio de sesión anónimas -->
+<script>
+    // Configuración de Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+        authDomain: "dam2pay-o.firebaseapp.com",
+        projectId: "dam2pay-o",
+        storageBucket: "dam2pay-o.appspot.com",
+        messagingSenderId: "1010112748895",
+        appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+        measurementId: "G-H36HTF38QD"
+    };
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Función para iniciar sesión anónima
+    function iniciarSesionAnonima() {
+        firebase.auth().signInAnonymously()
+            .then(function (result) {
+                console.log('Usuario anónimo conectado', result.user);
+                // Puedes usar result.user.uid como identificador único para el usuario
+            })
+            .catch(function (error) {
+                console.error('Error en inicio de sesión anónimo', error);
+            });
+    }
+    // Asegúrate de llamar a iniciarSesionAnonima cuando sea apropiado en tu aplicación
+    window.onload = iniciarSesionAnonima;
+</script>
+<script src="js/sidebar.js"></script>
+
+</html>

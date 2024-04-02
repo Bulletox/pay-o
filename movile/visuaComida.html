@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/estilos.css"> -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Comida</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body style="background-color: #FFD1A4;">
+    <div class="contenedorPadre d-flex flex-column">
+        <div class="contenedorIMG d-flex justify-content-start"
+            style="width: 100%; height: 100%; overflow:hidden">
+            <i class="bi bi-arrow-left-circle-fill cursor-pointer position-fixed fs-2 text-light p-3" onclick="goBack()"></i>
+            <img class="w-100" src="img/paellaperomejor.png" alt="" style="max-height: 35vh; object-fit: cover;">
+        </div>
+        <div class="p-3">
+            <h1 class="nombre">Paella</h1>
+            <p class="precio">2.23€</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dignissimos itaque voluptate odio
+                numquam veritatis ex accusamus id corrupti? Ratione maxime illum ad omnis molestiae quod molestias
+                cupiditate perferendis aperiam.</p>
+
+        </div>
+        <div class="info p-3 vh-50"
+            style="border-radius: 0.5em; background-color: #FFEBD7; margin: 0; padding: 0; height: 100%;">
+            <div class="d-flex flex-row justify-content-between">
+                <h1 class="alergias">Alérgenos:</h1>
+                <a href="alergias.html"><i class="bi bi-info-circle"></i></a>
+            </div>
+            <div class="d-flex imgAlergias d-flex flex-row mb-4 flex-wrap">
+                <img class="me-2" src="img/altramuces.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/apio.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/huevo.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/cascara.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/altramuces.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/apio.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/huevo.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/cascara.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/altramuces.png" alt="" height="50" width="50">
+                <img class="me-2" src="img/apio.png" alt="" height="50" width="50">
+            </div>
+            <h1>Cantidad:</h1>
+            <p class="mb-4">Para 4 personas</p>
+            <h1>Ingredientes:</h1>
+            <p class="mb-4" style="padding-bottom: 5em;">Huevos, tomate, lechuga, javier, contable y caca</p>
+        </div>
+    </div>
+    <div class="abajo d-flex flex-row justify-content-center position-fixed fixed-bottom">
+        <button class="btn btn-primary d-flex justify-content-center align-items-center w-50 p-4 border rounded-0 fs-2"
+            style="max-height: 74px !important;">Añadir por 2.23€</button>
+        <div class="d-flex flex-row justify-content-around btn btn-primary w-50 p-3 border rounded-0 fs-2"
+            style="max-height: 74px !important;">
+            <i class="bi bi-dash-circle cursor-pointer"></i>
+            <p>1</p>
+            <i class="bi bi-plus-circle cursor-pointer"></i>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

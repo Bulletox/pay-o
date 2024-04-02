@@ -1,0 +1,331 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+    <title>Panel Control</title>
+
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+
+    <div class="ventanaEmergentePedidos">
+
+    </div>
+
+    <div class="d-flex flex-row">
+        <div
+            class="navBarLeft d-flex flex-column position-fixed vw-15 animate__animated animate__fadeInLeft animate__slow">
+            <nav id="sidebar" class=" js-sidebar vw-15">
+                <div class="sidebar-content js-simplebar ">
+                    <a class="sidebar-brand m-1" href="index.html">
+                        <img class="me-3" src="img/logo.png" alt="" width="65" height="65">
+                        <span class="align-middle fs-1 color-primary">PAY - O</span>
+                    </a>
+
+                    <ul class="sidebar-nav">
+
+                        <div class="image d-flex justify-content-center">
+                            <img src="img/separador.png" alt="" height="30" width="90%">
+                        </div>
+
+                        <li class="sidebar-item mt-4 d-flex flex-column fs-2 ms-4" style="z-index: 999;">
+                            <a class="sidebar-link d-flex flex-column fs-2 color-primary fw-bold" href="index.html">
+                                <i class="align-middle" data-feather="sliders"></i>
+                                <span class="align-middle mb-4 cursor-pointer" onclick="irPedidos()">Pedidos</span>
+                                <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
+                                <span class="align-middle mb-4 cursor-pointer text-light" onclick="irCocina()">Cocina
+                                    ></span>
+                                <span class="align-middle mb-4 cursor-pointer" onclick="irAyuda()">Help</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="main ms-119 animate__animated animate__fadeIn animate__slow">
+            <div class="cirCulo animate__animated  animate__zoomIn animate__slower">.</div>
+            <div class="cirCulo2 animate__animated  animate__zoomIn animate__slower">.</div>
+            <nav
+                class="d-flex justify-content-between navbar navbar-expand navbar-light navbar-bg animate__animated animate__fadeInDown animate__slower">
+                <a onclick="toggleSidebarLeft()">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+
+
+
+
+            </nav>
+
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown"></a>
+                    </li>
+                </ul>
+            </div>
+            </nav>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+                style="margin-left: 5em; margin-right: 5em; margin-bottom: 50px ;">
+                <div class="col">
+                    <div class="card shadow-sm border" style="height: 99%;">
+
+                        <h1 style="color: black; display: flex; margin: 1em;justify-content: center;">
+                            <span style="margin-right: 2em;"> Mesa - 13 </span>
+
+                            <span style="color: red; padding-left: 1em;"><i class="bi bi-arrow-up-short bi-lg"></i>
+                                10,12m</span>
+                        </h1>
+
+                        <div class="card-body" style="display: flex;justify-content: center; ">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                        </div>
+
+                        <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px;">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Cocaina ..... 1</h1>
+                        </div>
+
+                        <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px;">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Coca-Cola ..... 3</h1>
+                        </div>
+
+                        <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px;">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Paella ..... 1</h1>
+                        </div>
+
+                        <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px;">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Salchipapa ..... 1</h1>
+                        </div>
+
+                        <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px;">
+                            <div class="content">
+                                <label class="checkBox">
+                                    <input id="ch1" type="checkbox">
+                                    <div class="transition"></div>
+                                    <p></p>
+                                </label>
+                            </div>
+                            <h1 style="color: black;">Cabezon ..... 1</h1>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm border">
+                        <div class="card shadow-sm border" style="height: 99%;">
+
+                            <h1 style="color: black; display: flex; margin: 1em;justify-content: center;">
+                                <span style="margin-right: 2em;"> Mesa - 13 </span>
+
+                                <span style="color: red; padding-left: 1em;"><i class="bi bi-arrow-up-short bi-lg"></i>
+                                    10,12m</span>
+                            </h1>
+
+                            <div class="card-body" style="display: flex;justify-content: center; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center; margin-top: -50px;">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+                            <div class="card-body" style="display: flex;justify-content: center;margin-top: -50px; ">
+                                <div class="content">
+                                    <label class="checkBox">
+                                        <input id="ch1" type="checkbox">
+                                        <div class="transition"></div>
+                                        <p></p>
+                                    </label>
+                                </div>
+                                <h1 style="color: black;">Un javier salvaje ..... 1</h1>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm border">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="770"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">Thumbnail</text>
+                        </svg>
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-body-secondary">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+            <!-- <footer class="footer d-flex fixed-bottom vh-6 justify-content-around align-items-center ms-119 animate__animated animate__fadeInUp animate__slower"
+                style="z-index: 3;">
+                <div class="d-flex flex-row text-light mt-2">
+                    <i class="bi bi-pencil-square fs-1 me-3 mt-1"></i>
+                    <h1>Editar</h1>
+                </div>
+
+                <div class="d-flex flex-row text-light mt-2">
+                    <i class="bi bi-plus-circle fs-1 me-3 mt-1"></i>
+                    <h1>Añadir</h1>
+                </div>
+            </footer> -->
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+<!-- Configuración de Firebase y funciones de inicio de sesión anónimas -->
+<script>
+    // Configuración de Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+        authDomain: "dam2pay-o.firebaseapp.com",
+        projectId: "dam2pay-o",
+        storageBucket: "dam2pay-o.appspot.com",
+        messagingSenderId: "1010112748895",
+        appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+        measurementId: "G-H36HTF38QD"
+    };
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Función para iniciar sesión anónima
+    function iniciarSesionAnonima() {
+        firebase.auth().signInAnonymously()
+            .then(function (result) {
+                console.log('Usuario anónimo conectado', result.user);
+                // Puedes usar result.user.uid como identificador único para el usuario
+            })
+            .catch(function (error) {
+                console.error('Error en inicio de sesión anónimo', error);
+            });
+    }
+    // Asegúrate de llamar a iniciarSesionAnonima cuando sea apropiado en tu aplicación
+    window.onload = iniciarSesionAnonima;
+</script>
+<script src="js/sidebar.js"></script>
+
+</html>
