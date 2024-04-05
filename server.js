@@ -17,9 +17,8 @@ app.get('/id/:id', (req, res) => {
   // Establecer una cookie con el ID de la instancia
   res.cookie('instanciaId', instanciaId, { maxAge: 900000});
 
-  // Redirigir al navegador para servir el archivo index.html desde la carpeta public
-  // O enviar directamente el archivo index.html
-  res.sendFile(path.join(__dirname, 'public', '/movile/index.html'));
+  // Redirigir al navegador para servir el archivo menu.html desde la carpeta public
+  res.sendFile(path.join(__dirname, 'public', 'movile/menu.html'));
 });
 
 // Ruta genérica para capturar todas las solicitudes no manejadas por las rutas anteriores
