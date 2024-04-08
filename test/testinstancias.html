@@ -103,7 +103,8 @@
                             cantidad: 1,
                             comentarios: "", // Asumiendo que se añaden sin comentarios inicialmente
                             idPlato: db.doc("/Restaurantes/Restaurantes/Platos/" + idPlato),
-                            usuarios: [] // Asumiendo que no hay usuarios vinculados inicialmente
+                            usuarios: [], // Asumiendo que no hay usuarios vinculados inicialmente
+                            estado: "0" // Asumiendo que el estado inicial es 0
                         });
                     } else if (doc.exists) {
                         // Si el plato ya existe, incrementar o decrementar la cantidad
@@ -152,27 +153,27 @@
         // Definir la letiable globalmente l
 
 
-        // document.getElementById("crearInstancia").addEventListener("click", function () {
-        //     let estado = "1";
-        //     let idMesa = "ID_DE_EJEMPLO";
-        //     let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
-        //     let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
-        //     let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+        document.getElementById("crearInstancia").addEventListener("click", function () {
+            let estado = "1";
+            let idMesa = "ID_DE_EJEMPLO";
+            let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
+            let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
+            let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
 
-        //     db.collection("/Instanciamesas").add({
-        //         estado: estado,
-        //         idMesa: idMesa,
-        //         idRestaurante: idRestaurante,
-        //         timestampInicio: timestampInicio,
-        //         usuarios: usuarios
-        //     })
-        //         .then((docRef) => {
-        //             console.log("Documento escrito con ID: ", docRef.id);
-        //             // Guardar la ID de la instancia en la letiable
-        //             instanciaId = docRef.id;
-        //         })
-        //         .catch((error) => console.error("Error añadiendo el documento: ", error));
-        // });
+            db.collection("/Instanciamesas").add({
+                estado: estado,
+                idMesa: idMesa,
+                idRestaurante: idRestaurante,
+                timestampInicio: timestampInicio,
+                usuarios: usuarios
+            })
+                .then((docRef) => {
+                    console.log("Documento escrito con ID: ", docRef.id);
+                    // Guardar la ID de la instancia en la letiable
+                    instanciaId = docRef.id;
+                })
+                .catch((error) => console.error("Error añadiendo el documento: ", error));
+        });
 
         document.getElementById("crearPedido").addEventListener("click", function () {
             let estado = ""; // El estado del pedido, asumo que querrás actualizarlo más tarde
