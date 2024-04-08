@@ -4422,7 +4422,7 @@ fieldset:disabled .btn {
 
 .navbar {
     --bs-navbar-padding-x: 1.375rem;
-    --bs-navbar-padding-y: 0.875rem;
+    --bs-navbar-padding-y: 0rem;
     --bs-navbar-color: rgba(var(--bs-emphasis-color-rgb), 0.65);
     --bs-navbar-hover-color: rgba(var(--bs-emphasis-color-rgb), 0.8);
     --bs-navbar-disabled-color: rgba(var(--bs-emphasis-color-rgb), 0.3);
@@ -14508,7 +14508,8 @@ a.list-group-item {
 }
 
 .navbar-bg {
-    background: #fff
+    background: #fff;
+    height: 5vh !important;
 }
 
 .navbar-brand {
