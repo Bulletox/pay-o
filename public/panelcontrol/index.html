@@ -14,20 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var masonryGrid = document.querySelector('.row[data-masonry]');
-            if (masonryGrid) {
-                var msnry = new Masonry(masonryGrid, {
-                    itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
-                    percentPosition: true
-                });
-            } else {
-                console.error('El elemento de masonry no se encontró.');
-            }
-        });
-
-    </script>
     <title>Panel Control</title>
 </head>
 
@@ -167,13 +153,13 @@
                     <div class="row " data-masonry='{"percentPosition": true }'>
                         <!-- Inicio de la Iteración de Mesas -->
                         <!-- animate__animated animate__fadeOutLeft -->
-                        <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
+
+                        <!-- <div class=" col-sm-6 col-md-6 col-lg-4 col-xl-2 col-xxl-2 mb-4 " id="card1">
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0">Mesa - 100</h5>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Inicio de Item de Menú -->
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
                                         <label class="form-check-label d-block text-break" for="mesa1Plato1">
@@ -184,7 +170,6 @@
                                             alérgenos / comentario
                                         </div>
                                     </div>
-                                    <!-- Repetición de elementos según sea necesario -->
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="checkbox" value="" id="mesa1Plato1">
                                         <label class="form-check-label d-block" for="mesa1Plato1">
@@ -202,7 +187,6 @@
                                         </label>
                                     </div>
 
-                                    <!-- Contenedor de botones con flexbox para alinearlos en lados opuestos -->
                                     <div class="d-flex justify-content-between mt-3">
                                         <div class="row">
                                             <div class="col-6 text-end"><button type="button"
@@ -211,13 +195,11 @@
                                                     data-card-id="card1">Eliminar</button>
                                             </div>
                                         </div>
-                                        <!-- <button type="button" class="btn btn-outline-success">Confirmar</button>
-                                        <button type="button" class="btn btn-outline-danger" data-card-id="card1">Eliminar</button> -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </div> -->
+                        
                         <!-- Fin de la Iteración de Mesas -->
                     </div>
                 </div>
@@ -240,8 +222,9 @@
     </div>
 
 </body>
-<script src="/panelcontrol/js/cargarmesas.js" type="module"></script>
+<script src="./panelcontrol/js/cargarmesas.js" type="module"></script>
 <script src="./panelcontrol/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
 <!-- <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script> -->
 <!-- Configuración de Firebase y funciones de inicio de sesión anónimas -->
