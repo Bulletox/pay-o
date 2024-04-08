@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row " data-masonry='{"percentPosition": true }'>
+    </div>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+        authDomain: "dam2pay-o.firebaseapp.com",
+        projectId: "dam2pay-o",
+        storageBucket: "dam2pay-o.appspot.com",
+        messagingSenderId: "1010112748895",
+        appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+        measurementId: "G-H36HTF38QD"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    async function cargarPedidos() {
+        const pedidosContainer = document.querySelector('.row[data-masonry]');
+        const pedidosColRef = collection(db, 'Pedidos');
+
+        try {
+            const querySnapshot = await getDocs(pedidosColRef);
+            querySnapshot.forEach((docPedido) => {
+                const pedidoId = docPedido.id;
+                const numeroMesa = docPedido.data().numeroMesa;
+                const tarjetaPedido = document.createElement('div');
+                tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
+                tarjetaPedido.innerHTML = `
+                        <div class="card" id="card-${pedidoId}">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Mesa - ${numeroMesa}</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Aquí irán los platos del pedido -->
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+
+                pedidosContainer.appendChild(tarjetaPedido);
+
+                const cardBody = tarjetaPedido.querySelector('.card-body');
+
+                // Recorrer la subcolección 'subPedido' y crear las tarjetas de los platos
+                docPedido.ref.collection('subPedido').get().then(subPedidoSnapshot => {
+                    subPedidoSnapshot.forEach(subDoc => {
+                        subDoc.ref.collection('platosPedido').get().then(platosSnapshot => {
+                            platosSnapshot.forEach(docPlato => {
+                                const plato = docPlato.data();
+                                const platoElement = document.createElement('div');
+                                platoElement.classList.add('form-check', 'mb-2');
+                                platoElement.innerHTML = `
+                <input class="form-check-input" type="checkbox" value="" id="plato-${docPlato.id}">
+                <label class="form-check-label d-block text-break" for="plato-${docPlato.id}">
+                  Plato x${plato.cantidad}
+                </label>
+                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                  ${plato.comentarios || 'Sin comentarios'}
+                </div>
+              `;
+
+                                cardBody.appendChild(platoElement);
+                            });
+                        });
+                    });
+                });
+            });
+        } catch (error) {
+                console.error("Error al cargar los pedidos: ", error);
+            }
+        }
+
+    // Llamar a la función cuando el DOM esté listo
+    window.addEventListener('DOMContentLoaded', () => cargarPedidos());
+</script>
+
+</html>
