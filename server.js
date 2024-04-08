@@ -19,6 +19,7 @@ app.get('/id/:id', (req, res) => {
 
   // Redirigir al navegador para servir el archivo menu.html desde la carpeta public
   res.sendFile(path.join(__dirname, 'public', 'movile/menu.html'));
+  res.sendFile(path.join(__dirname, 'public', `panelcontrol/${instanciaId}/comida.html`));
 });
 
 // Ruta genérica para capturar todas las solicitudes no manejadas por las rutas anteriores
