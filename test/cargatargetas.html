@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <div class="row " data-masonry='{"percentPosition": true }'>
     </div>
@@ -15,12 +13,9 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
     // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
         apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
         authDomain: "dam2pay-o.firebaseapp.com",
@@ -30,6 +25,7 @@
         appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
         measurementId: "G-H36HTF38QD"
     };
+
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -44,59 +40,42 @@
             const querySnapshot = await getDocs(pedidosColRef);
             querySnapshot.forEach((docPedido) => {
                 const pedidoId = docPedido.id;
-                const numeroMesa = docPedido.data().numeroMesa;
+                const pedidoData = docPedido.data();
                 const tarjetaPedido = document.createElement('div');
                 tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
                 tarjetaPedido.innerHTML = `
-                        <div class="card" id="card-${pedidoId}">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Mesa - ${numeroMesa}</h5>
-                            </div>
-                            <div class="card-body">
-                                <!-- Aquí irán los platos del pedido -->
-                            </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <button type="button" class="btn btn-outline-success">Confirmar</button>
-                                <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
-                            </div>
+                    <div class="card" id="card-${pedidoId}">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Pedido - ${pedidoId}</h5>
                         </div>
-                    `;
+                        <div class="card-body">
+                            <!-- Aquí irán los detalles del pedido -->
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-outline-success">Confirmar</button>
+                            <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
+                        </div>
+                    </div>
+                `;
 
                 pedidosContainer.appendChild(tarjetaPedido);
 
+                // Aquí puedes agregar más datos del pedido si están disponibles en la data del pedido
                 const cardBody = tarjetaPedido.querySelector('.card-body');
-
-                // Recorrer la subcolección 'subPedido' y crear las tarjetas de los platos
-                docPedido.ref.collection('subPedido').get().then(subPedidoSnapshot => {
-                    subPedidoSnapshot.forEach(subDoc => {
-                        subDoc.ref.collection('platosPedido').get().then(platosSnapshot => {
-                            platosSnapshot.forEach(docPlato => {
-                                const plato = docPlato.data();
-                                const platoElement = document.createElement('div');
-                                platoElement.classList.add('form-check', 'mb-2');
-                                platoElement.innerHTML = `
-                <input class="form-check-input" type="checkbox" value="" id="plato-${docPlato.id}">
-                <label class="form-check-label d-block text-break" for="plato-${docPlato.id}">
-                  Plato x${plato.cantidad}
-                </label>
-                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
-                  ${plato.comentarios || 'Sin comentarios'}
-                </div>
-              `;
-
-                                cardBody.appendChild(platoElement);
-                            });
-                        });
-                    });
-                });
+                // Supongamos que tienes 'total' y 'estado' en los datos del pedido
+                const totalElement = document.createElement('p');
+                totalElement.textContent = `Total: $${pedidoData.total}`;
+                const estadoElement = document.createElement('p');
+                estadoElement.textContent = `Estado: ${pedidoData.estado}`;
+                cardBody.appendChild(totalElement);
+                cardBody.appendChild(estadoElement);
             });
         } catch (error) {
-                console.error("Error al cargar los pedidos: ", error);
-            }
+            console.error("Error al cargar los pedidos: ", error);
         }
+    }
 
     // Llamar a la función cuando el DOM esté listo
     window.addEventListener('DOMContentLoaded', () => cargarPedidos());
 </script>
-
 </html>
