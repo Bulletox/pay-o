@@ -173,8 +173,8 @@ h6 {
     color: white;
     font-weight: 400;
     line-height: 1.2;
-    margin-bottom: .5rem;
-    margin-top: 0
+    /* margin-bottom: .5rem;
+    margin-top: 0 */
 }
 
 .h1,

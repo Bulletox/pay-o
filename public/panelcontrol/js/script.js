@@ -27,10 +27,6 @@ function toggleSidebarLeft() {
     }
 }
 
-function alerta() {
-    alert("asd")
-}
-
 function irCocina() {
     location.href = "/panelcontrol/cocina.html"
 }
@@ -41,6 +37,10 @@ function irCarta() {
 
 function irPedidos() {
     location.href = "/panelcontrol/index.html"
+}
+
+function irAyuda() {
+    location.href = "/panelcontrol/help.html"
 }
 
 
