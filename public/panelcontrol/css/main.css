@@ -229,3 +229,20 @@
     margin-bottom: 5em;
 }
 
+/* #flechas {
+    position: relative;
+}
+
+#iconoIzquierda {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+#iconoDerecha {
+    position: absolute;
+    right: 0;
+    top: 4%;
+    transform: translateY(-50%);
+} */
