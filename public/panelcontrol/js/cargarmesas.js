@@ -129,7 +129,7 @@ async function cargarPlatosPedido(pedidoId, db) {
             platoElement.innerHTML = `
         <input class="form-check-input" type="checkbox" value="" id="plato-">
             <label class="form-check-label d-block text-break" for="plato-">
-                ${plato.nombrePlato} x
+                ${plato.nombrePlato} x 1
             </label>
                  <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
                  ${plato.comentarios}
