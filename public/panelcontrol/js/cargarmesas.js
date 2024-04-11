@@ -23,12 +23,12 @@ const db = getFirestore(app);
 async function cargarPedidos() {
     const pedidosContainer = document.querySelector('.row[data-masonry]');
     const pedidosColRef = collection(db, 'Pedidos');
+    let cargasPlatosPromesas = []; // Arreglo para almacenar las promesas de cargarPlatosPedido()
 
     try {
         const querySnapshot = await getDocs(pedidosColRef);
         querySnapshot.forEach((docPedido) => {
             const pedidoId = docPedido.id;
-            const pedidoData = docPedido.data();
             const tarjetaPedido = document.createElement('div');
             tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
             tarjetaPedido.innerHTML = `
@@ -48,16 +48,28 @@ async function cargarPedidos() {
                     </div>
                 </div>
             `;
-            console.log(1);
             pedidosContainer.appendChild(tarjetaPedido);
-            cargarPlatosPedido(pedidoId, db)
-            // Aquí puedes agregar más datos del pedido si están disponibles en la data del pedido
-            const cardBody = tarjetaPedido.querySelector('.platos');
+
+            // Agregar cada promesa de cargarPlatosPedido al arreglo
+            cargasPlatosPromesas.push(cargarPlatosPedido(pedidoId, db));
         });
+
+        // Espera a que todas las cargas de platos se completen
+        await Promise.all(cargasPlatosPromesas);
+
+        // Ahora que todos los datos están cargados, inicializa Masonry
+        var masonryGrid = document.querySelector('.row[data-masonry]');
+        if (masonryGrid) {
+            new Masonry(masonryGrid, {
+                itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
+                percentPosition: true
+            });
+        }
     } catch (error) {
         console.error("Error al cargar los pedidos: ", error);
     }
 }
+
 
 async function cargarPlatosPedido(pedidoId, db) {
     const pedidoRef = doc(db, 'Pedidos', pedidoId);
@@ -143,23 +155,20 @@ async function cargarPlatosPedido(pedidoId, db) {
     }
 }
 
-
-
 // No olvides pasar la instancia de tu base de datos (`db`) cuando llames a esta función.
-
-
 
 // // Llamar a la función cuando el DOM esté listo
 // window.addEventListener('DOMContentLoaded', () => cargarPedidos());
 window.addEventListener('DOMContentLoaded', () => {
     cargarPedidos().then(() => {
-        // Asegúrate de que este código se ejecute solo después de que cargarPedidos haya terminado
-        var masonryGrid = document.querySelector('.row[data-masonry]');
+        // Este código se ejecuta después de que cargarPedidos() y todas sus operaciones internas han terminado.
+        // Es aquí donde deberías inicializar Masonry, para asegurarte de que se haga después de cargar todos los datos.
+        const masonryGrid = document.querySelector('.row[data-masonry]');
         if (masonryGrid) {
             new Masonry(masonryGrid, {
                 itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
                 percentPosition: true
             });
         }
-    }).catch(error => console.error("Error al cargar los pedidos o inicializar Masonry: ", error));
+    }).catch(error => console.error("Error durante la inicialización de los pedidos o Masonry: ", error));
 });
