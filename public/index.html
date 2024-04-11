@@ -46,7 +46,15 @@
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
-
+    <script type="text/javascript">
+      // Función autoejecutable para redireccionar
+      (function() {
+          window.onload = function() {
+              // Redirecciona a otra página
+              window.location.href = 'panelcontrol/index.html';
+          };
+      })();
+    </script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
@@ -85,5 +93,6 @@
         }
       });
     </script>
+
   </body>
 </html>
