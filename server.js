@@ -18,8 +18,9 @@ app.get('/id/:id', (req, res) => {
   res.cookie('instanciaId', instanciaId, { maxAge: 900000});
 
   // Redirigir al navegador para servir el archivo menu.html desde la carpeta public
-  res.sendFile(path.join(__dirname, 'public', 'movile/menu.html'));
-  res.sendFile(path.join(__dirname, 'public', `panelcontrol/${instanciaId}/comida.html`));
+  // res.sendFile(path.join(__dirname, 'public', 'movile/menu.html'));
+  // res.sendFile(path.join(__dirname, 'public', `panelcontrol/${instanciaId}/comida.html`));
+  res.sendFile(path.join(__dirname, 'test', `testinstancias.html`));
 });
 
 // Ruta genérica para capturar todas las solicitudes no manejadas por las rutas anteriores
