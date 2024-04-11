@@ -19,19 +19,24 @@
     </div>
     <div class="container animate__animated animate__fadeIn">
         <header class="fixed-top FFD1A4 position-fixed">
-            <div class="iconos d-flex justify-content-around m-4 fs-7 align-items-center">
+            <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
                 <a class="c-black" href="/movile/menu.html"><i class="bi bi-arrow-return-left"></i></a>
-                <h1 class="mb-0">Tu carrito</h1>
-                <a href="/movile/alergias.html"><i class="bi bi-info-circle"></i></a>
+                <h1 class="mb-0"><strong>Tu carrito</strong></h1>
+                <i class="bi bi-info-circle" style="visibility: hidden;"></i>
             </div>
         </header>
 
         <!-- Ejemplos de comida -->
 
         <div class="contenedorPadre mt-10 m-3 mb-10">
-            <div class="d-flex flex-row align-items-center categoria mb-3">
-                <img class="me-3" src="img/food-restaurant.png" alt="" width="35" height="35">
-                <h1>Comida</h1>
+            <div class="d-flex flex-row align-items-center categoria mb-3 justify-content-between">
+                <div class="d-flex flex-row align-items-center iz">
+                    <img class="me-3" src="img/food-restaurant.png" alt="" width="35" height="35">
+                    <h1>Comida</h1>
+                </div>
+                <div class="de">
+                    <img src="img/advertencia.png" alt="" height="35" width="35">
+                </div>
             </div>
             <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
                 <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
@@ -47,30 +52,9 @@
                         <img src="img/paella.png" alt="" height="125" width="125">
                     </div>
                     <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/paella.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
                     </div>
                 </div>
             </div>
@@ -89,9 +73,30 @@
                         <img src="img/paella.png" alt="" height="125" width="125">
                     </div>
                     <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
+                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
+                    <strong>Paella</strong>
+                    <p class="mt-0"><strong>2.35 €</strong></p>
+                    <div class="short">
+                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
+                            ipsum...</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
+                        <img src="img/paella.png" alt="" height="125" width="125">
+                    </div>
+                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
                     </div>
                 </div>
             </div>
@@ -115,9 +120,9 @@
                         <img src="img/cocacola.png" alt="" height="125" width="125">
                     </div>
                     <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
                     </div>
                 </div>
             </div>
@@ -136,9 +141,9 @@
                         <img src="img/cocacola.png" alt="" height="125" width="125">
                     </div>
                     <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
                     </div>
                 </div>
             </div>
@@ -157,13 +162,12 @@
                         <img src="img/cocacola.png" alt="" height="125" width="125">
                     </div>
                     <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
+                        <i class="fs-4 bi bi-dash-circle cursor-pointer"></i>
+                        <p><strong>1</strong></p>
+                        <i class="fs-4 bi bi-plus-circle cursor-pointer"></i>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="abajo d-flex flex-row align-items-center justify-content-center position-fixed fixed-bottom">
