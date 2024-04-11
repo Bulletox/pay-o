@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="css/estilos.css"> -->
 
-    <link rel="stylesheet" href="/movile/css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Comida</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -21,15 +21,15 @@
     <div class="container animate__animated animate__fadeIn">
         <header class="fixed-top FFD1A4 position-fixed">
             <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
-                <a class="c-black" href="/movile/menu.html"><i class="bi bi-arrow-return-left"></i></a>
+                <a class="c-black" href="menu.html"><i class="bi bi-arrow-return-left"></i></a>
                 <h1 class="mb-0"><strong>Nuestra carta</strong></h1>
-                <a href="/movile/carrito.html"><img src="img/carrito-de-compras.png" alt="" width="40" height="40"></a>
+                <a href="carrito.html"><img src="img/carrito-de-compras.png" alt="" width="40" height="40"></a>
             </div>
         </header>
 
         <!-- Ejemplos de comida -->
 
-        <div class="contenedorPadre mt-10 m-3 mb-10">
+        <div class="contenedorPadre mt-10 m-3 mb-10" id="platosContainer">
             <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
                 <div class="d-flex flex-row align-items-center iz">
                     <img class="me-3" src="img/food-restaurant.png" alt="" width="35" height="35">
@@ -131,12 +131,14 @@
         </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/cargarmenu.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
