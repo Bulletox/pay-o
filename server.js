@@ -25,7 +25,7 @@ app.get('/id/:id', (req, res) => {
 // Ruta genérica para capturar todas las solicitudes no manejadas por las rutas anteriores
 app.get('*', (req, res) => {
   // Enviar el archivo index.html para cualquier ruta no definida
-  res.sendFile(path.join(__dirname, 'public', 'panelcontrol/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'movile/menu.html'));
 });
 
 // Iniciar el servidor
