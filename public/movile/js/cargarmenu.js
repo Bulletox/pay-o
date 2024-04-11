@@ -1,9 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const platosContainer = document.getElementById('platosContainer');
+    const platosContainer = document.getElementById('.platosContainer');
 
     try {
         // Configuración de Firebase
@@ -19,50 +19,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
-        // Inicializar Firebase
-        //firebase.initializeApp(firebaseConfig);
-        
-        // Obtener todos los restaurantes
+
+        console.log('Firebase inicializado');
+
         const restaurantesSnapshot = await getDocs(collection(db, 'Restaurantes'));
+        let htmlContent = ''; // Se utiliza para acumular el HTML de todos los platos
 
-        restaurantesSnapshot.forEach(async (restauranteDoc) => {
+        for (const restauranteDoc of restaurantesSnapshot.docs) {
             const platosSnapshot = await getDocs(collection(restauranteDoc.ref, 'Platos'));
-
             platosSnapshot.forEach((platoDoc) => {
                 const plato = platoDoc.data();
-
-                const itemComida = document.createElement('div');
-                itemComida.classList.add('itemComida', 'd-flex', 'justify-content-between', 'pb-1', 'border-bottom', 'mb-3', 'cursor-pointer');
-
-                const descript = document.createElement('div');
-                descript.classList.add('descript', 'd-flex', 'flex-column');
-
-                const nombrePlato = document.createElement('strong');
-                nombrePlato.textContent = plato.nombrePlato;
-                descript.appendChild(nombrePlato);
-
-                const precioPlato = document.createElement('p');
-                precioPlato.innerHTML = `<strong>${plato.precio} €</strong>`;
-                descript.appendChild(precioPlato);
-
-                const descripcionPlato = document.createElement('div');
-                descripcionPlato.classList.add('short');
-                descripcionPlato.innerHTML = `<p class="ellipsis">${plato.descripcion || ''}</p>`;
-                descript.appendChild(descripcionPlato);
-
-                itemComida.appendChild(descript);
-
-                const imagenPlato = document.createElement('img');
-                imagenPlato.src = plato.imagenUrl;
-                imagenPlato.alt = plato.nombrePlato;
-                imagenPlato.height = 125;
-                imagenPlato.width = 125;
-                itemComida.appendChild(imagenPlato);
-
-                platosContainer.appendChild(itemComida);
+                htmlContent += `
+                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()" }>
+                        <div class="descript d-flex flex-column">
+                            <strong>${plato.nombrePlato}</strong>
+                            <p><strong>${plato.precio}</strong></p>
+                            <div class="short">
+                                <p class="ellipsis">${plato.descripcion || ''}</p>
+                            </div>
+                        </div>
+                        <div class="" style="height: 100%;">
+                            <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
+                        </div>
+                    </div>
+                `;
             });
-        });
+        }
+        platosContainer.innerHTML = htmlContent; // Se inserta el HTML acumulado en el contenedor de platos una sola vez
     } catch (error) {
         console.error(error);
     }
 });
+// window.addEventListener('DOMContentLoaded', () => ca);
