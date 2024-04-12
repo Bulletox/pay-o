@@ -3,7 +3,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebas
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const platosContainer = document.getElementById('.platosContainer');
+    const platosContainer = document.getElementById('platosContainer');
 
     try {
         // Configuración de Firebase
@@ -23,13 +23,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('Firebase inicializado');
 
         const restaurantesSnapshot = await getDocs(collection(db, 'Restaurantes'));
-        let htmlContent = ''; // Se utiliza para acumular el HTML de todos los platos
-
+        let htmlContentcomida = ''; // Se utiliza para acumular el HTML de todos los platos
+        let htmlContentbebida = ''; 
         for (const restauranteDoc of restaurantesSnapshot.docs) {
             const platosSnapshot = await getDocs(collection(restauranteDoc.ref, 'Platos'));
             platosSnapshot.forEach((platoDoc) => {
                 const plato = platoDoc.data();
-                htmlContent += `
+                if (plato.categoria == 0){
+                    htmlContentcomida += `
                     <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()" }>
                         <div class="descript d-flex flex-column">
                             <strong>${plato.nombrePlato}</strong>
@@ -43,11 +44,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                     </div>
                 `;
+                }else{
+                    htmlContentbebida += `
+                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()" }>
+                        <div class="descript d-flex flex-column">
+                            <strong>${plato.nombrePlato}</strong>
+                            <p><strong>${plato.precio}</strong></p>
+                            <div class="short">
+                                <p class="ellipsis">${plato.descripcion || ''}</p>
+                            </div>
+                        </div>
+                        <div class="" style="height: 100%;">
+                            <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
+                        </div>
+                    </div>
+                `;
+                }
+                
             });
         }
-        platosContainer.innerHTML = htmlContent; // Se inserta el HTML acumulado en el contenedor de platos una sola vez
+        platosContainer.innerHTML = htmlContentcomida; 
+        bebidasContainer.innerHTML = htmlContentbebida; 
     } catch (error) {
         console.error(error);
     }
 });
-// window.addEventListener('DOMContentLoaded', () => ca);
