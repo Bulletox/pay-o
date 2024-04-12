@@ -43,7 +43,9 @@ function irAyuda() {
     location.href = "/panelcontrol/help.html"
 }
 
-
+function irmesas() {
+    location.href = "/panelcontrol/gestionmesas.html"
+}
 // Imagen
 
 function handleClick() {
