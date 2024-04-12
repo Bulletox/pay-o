@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="../bootstrap.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <button id="crearInstancia">Crear Instancia Mesa</button>
+        <div id="urlInstancia"></div> <!-- Elemento para mostrar la URL -->
+        <div id="qr-code"></div </div>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+                authDomain: "dam2pay-o.firebaseapp.com",
+                projectId: "dam2pay-o",
+                storageBucket: "dam2pay-o.appspot.com",
+                messagingSenderId: "1010112748895",
+                appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+                measurementId: "G-H36HTF38QD"
+            };
+            firebase.initializeApp(firebaseConfig);
+            let db = firebase.firestore();
+            // Asumiendo que firebase y db ya están inicializados correctamente
+            document.getElementById("crearInstancia").addEventListener("click", function () {
+                let estado = "1";
+                let idMesa = "ID_DE_EJEMPLO";
+                let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
+                let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
+                let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+
+                db.collection("/Instanciamesas").add({
+                    estado: estado,
+                    idMesa: idMesa,
+                    idRestaurante: idRestaurante,
+                    timestampInicio: timestampInicio,
+                    usuarios: usuarios
+                })
+                    .then((docRef) => {
+                        console.log("Documento escrito con ID: ", docRef.id);
+                        const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
+                        const urlCompleta = `${urlBase}?id=${docRef.id}`; // Añade la ID como un parámetro de consulta
+                        document.getElementById("urlInstancia").innerText = `URL de la Instancia: ${urlCompleta}`;
+                        generarQR(urlCompleta);
+                    })
+
+                    .catch((error) => console.error("Error añadiendo el documento: ", error));
+            });
+
+            function generarQR(urlcompleta) {
+                var tipo = 4; // Tipo de QR
+                var errorCorrectionLevel = 'L'; // Nivel de corrección de errores
+                var qr = qrcode(tipo, errorCorrectionLevel);
+                qr.addData(urlcompleta); // El contenido del QR
+                qr.make();
+                document.getElementById('qr-code').innerHTML = qr.createImgTag(); // Crear y agregar la imagen del QR
+            }
+
+        </script>
+</body>
+
+</html>
