@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const plato = platoDoc.data();
                 if (plato.categoria == 0){
                     htmlContentcomida += `
-                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()" }>
+                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()">
                         <div class="descript d-flex flex-column">
-                            <strong>${plato.nombrePlato}</strong>
-                            <p><strong>${plato.precio}</strong></p>
+                            <strong class = "fs-3">${plato.nombrePlato}</strong>
+                            <p><strong>${plato.precio}€</strong></p>
                             <div class="short">
                                 <p class="ellipsis">${plato.descripcion || ''}</p>
                             </div>
@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
                 }else{
                     htmlContentbebida += `
-                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()" }>
+                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida()">
                         <div class="descript d-flex flex-column">
-                            <strong>${plato.nombrePlato}</strong>
-                            <p><strong>${plato.precio}</strong></p>
+                            <strong class = "fs-3">${plato.nombrePlato}</strong>
+                            <p><strong>${plato.precio}€</strong></p>
                             <div class="short">
                                 <p class="ellipsis">${plato.descripcion || ''}</p>
                             </div>
