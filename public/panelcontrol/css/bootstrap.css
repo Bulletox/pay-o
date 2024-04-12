@@ -4,6 +4,9 @@
  * Copyright 2023 AdminKit
  * Licensed under MIT (https://github.com/adminkit/adminkit/blob/master/LICENSE)
  */
+
+ 
+
 :root,
 [data-bs-theme=light] {
     --bs-blue: #3b7ddd;
@@ -3428,19 +3431,19 @@ fieldset:disabled .btn {
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #3b7ddd;
-    --bs-btn-border-color: #3b7ddd;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #326abc;
-    --bs-btn-hover-border-color: #2f64b1;
-    --bs-btn-focus-shadow-rgb: 88, 145, 226;
+    --bs-btn-bg: #F29559;
+    --bs-btn-border-color: #F29559;
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: #df7d3c;
+    --bs-btn-hover-border-color: #F29559;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #2f64b1;
-    --bs-btn-active-border-color: #2c5ea6;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-active-bg: #F29559;
+    --bs-btn-active-border-color: #F29559;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #3b7ddd;
-    --bs-btn-disabled-border-color: #3b7ddd
+    --bs-btn-disabled-bg: #F29559;
+    --bs-btn-disabled-border-color: #F29559;
 }
 
 .btn-secondary {
@@ -5301,6 +5304,11 @@ fieldset:disabled .btn {
         border-left-width: var(--bs-list-group-border-width);
         margin-left: calc(var(--bs-list-group-border-width)*-1)
     }
+}
+
+*{
+    margin: 0;
+    padding: 0;
 }
 
 @media(min-width:768px) {
