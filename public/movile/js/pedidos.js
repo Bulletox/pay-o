@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const queryParams = new URLSearchParams(window.location.search);
-    const idInstancia = queryParams.get('idInstancia'); // Obtén la ID de la instancia desde la URL
+    const idInstancia = queryParams.get('id'); // Obtén la ID de la instancia desde la URL
 
     if (idInstancia) {
         console.log("ID de la Instancia:", idInstancia);
