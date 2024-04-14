@@ -49,7 +49,8 @@
                 })
                     .then((docRef) => {
                         console.log("Documento escrito con ID: ", docRef.id);
-                        const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
+                        // const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
+                        const urlBase = "http://localhost:3000/movile/menu.html";
                         const urlCompleta = `${urlBase}?id=${docRef.id}`; // Añade la ID como un parámetro de consulta
                         document.getElementById("urlInstancia").innerText = `URL de la Instancia: ${urlCompleta}`;
                         generarQR(urlCompleta);
