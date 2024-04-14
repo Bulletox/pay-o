@@ -1,35 +1,37 @@
+const instanciaManager = {
+    globalIdInstancia: null,
 
-// Variable global para almacenar la ID de la instancia
-let globalIdInstancia = null;
+    init: function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.handleLoad();
+            this.setupEventListeners();
+        });
+    },
 
-document.addEventListener('DOMContentLoaded', function() {
-    const queryParams = new URLSearchParams(window.location.search);
-    globalIdInstancia = queryParams.get('idInstancia'); // Almacena la ID globalmente
+    handleLoad: function() {
+        const queryParams = new URLSearchParams(window.location.search);
+        this.globalIdInstancia = queryParams.get('id');
 
-    if (globalIdInstancia) {
-        console.log("ID de la Instancia:", globalIdInstancia);
-    } else {
-        console.log("No se encontró ID de instancia en la URL.");
+        if (this.globalIdInstancia) {
+            console.log("ID de la Instancia:", this.globalIdInstancia);
+        } else {
+            console.error("No se encontró ID de instancia en la URL.");
+        }
+    },
+
+    setupEventListeners: function() {
+        document.getElementById('addItemsBtn').addEventListener('click', () => this.navigate('comida.html'));
+        document.getElementById('modifyItemsBtn').addEventListener('click', () => this.navigate('carrito.html'));
+        document.getElementById('payBtn').addEventListener('click', () => this.navigate('cuentaTotal.html'));
+    },
+
+    navigate: function(page) {
+        if (this.globalIdInstancia) {
+            location.href = `/movile/${page}?id=${this.globalIdInstancia}`;
+        } else {
+            console.error("Error: No hay ID de instancia disponible.");
+        }
     }
-});
+};
 
-
-function visuaComida() {
-    if (globalIdInstancia) {
-        location.href = `visuaComida.html?id=${globalIdInstancia}`;
-    } else {
-        console.log("Error: No hay ID de instancia disponible.");
-    }
-}
-
-function verCarro() {
-    if (globalIdInstancia) {
-        location.href = `carrito.html?id=${globalIdInstancia}`;
-    } else {
-        console.log("Error: No hay ID de instancia disponible.");
-    }
-}
-
-function goBack() {
-    window.history.go(-1);
-}
+instanciaManager.init();
