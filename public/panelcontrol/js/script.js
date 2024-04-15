@@ -38,6 +38,10 @@ function irCarta() {
     location.href = "/panelcontrol/gestionCarta.html"
 }
 
+function irVisuaCarta() {
+    location.href = "/panelcontrol/visuaCarta.html"
+}
+
 function irPedidos() {
     location.href = "/panelcontrol/index.html"
 }
