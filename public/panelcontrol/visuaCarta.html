@@ -57,13 +57,11 @@
             <div class="cirCulo animate__animated  animate__zoomIn animate__slower">.</div>
             <div class="cirCulo2 animate__animated  animate__zoomIn animate__slower">.</div>
             <nav class="d-flex justify-content-between navbar navbar-expand navbar-light navbar-bg animate__animated animate__fadeInDown animate__slower"
-                style="border-bottom: 0.1em solid rgb(89, 89, 89);">
+                style="border-bottom: 0.1em solid rgb(219, 219, 219);">
                 <a onclick="toggleSidebarLeft()">
                     <i class="hamburger align-self-center"></i>
                 </a>
             </nav>
-
-
 
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav navbar-align">
@@ -81,29 +79,33 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Platos</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col" style="visibility: hidden;" scope="col">Handle</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td id="nombrePlato">Paella</td>
+                            <td id="precioPlato">6.25€</td>
+                            <td id="cantidad">2 personas</td>
+                            <td><button class="btn btn-primary" onclick="irCarta()">Modificar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                            <td id="nombrePlato">Pizza</td>
+                            <td id="precioPlato">8.25€</td>
+                            <td id="cantidad">4 personas</td>
+                            <td><button class="btn btn-primary" onclick="irCarta()">Modificar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                            <td id="nombrePlato">Macarrones</td>
+                            <td id="precioPlato">5.25€</td>
+                            <td id="cantidad">1 personas</td>
+                            <td><button class="btn btn-primary" onclick="irCarta()">Modificar</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -111,7 +113,7 @@
         </div>
     </div>
 </body>
-
+<script src="js/cargarTabla.js"></script>
 <script src="js/cargarmesas.js" type="module"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
