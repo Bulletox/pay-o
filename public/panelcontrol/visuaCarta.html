@@ -1,0 +1,121 @@
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+    <title>Panel Control</title>
+</head>
+
+<body>
+    <div class="d-flex flex-row">
+        <div class="navBarLeft d-flex flex-column position-fixed vw-15 animate__animated animate__fadeInLeft animate__slow"
+            style="z-index: 1;">
+            <nav id="sidebar" class=" js-sidebar vw-15">
+                <div class="sidebar-content js-simplebar ">
+                    <a class="sidebar-brand m-1" href="/panelcontrol/ladingpage.html">
+                        <img class="me-3" src="/panelcontrol/img/logo.png" alt="" width="65" height="65">
+                        <span class="align-middle fs-1 color-primary">PAY - O</span>
+                    </a>
+
+                    <ul class="sidebar-nav">
+
+
+                        <div class="image d-flex justify-content-center">
+                            <img src="/panelcontrol/img/separador.png" alt="" height="30" width="90%">
+                        </div>
+
+                        <li class="sidebar-item mt-4 d-flex flex-column fs-2 ms-4" style="z-index: 999;">
+
+
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irPedidos()">Pedidos</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
+                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irVisuaCarta()">Visua.
+                                carta
+                                ></span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCocina()">Cocina</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irmesas()">Instancias</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irAyuda()">Help</span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="main ms-119 animate__animated animate__fadeIn animate__slow" style="z-index: 2;">
+            <div class="cirCulo animate__animated  animate__zoomIn animate__slower">.</div>
+            <div class="cirCulo2 animate__animated  animate__zoomIn animate__slower">.</div>
+            <nav class="d-flex justify-content-between navbar navbar-expand navbar-light navbar-bg animate__animated animate__fadeInDown animate__slower"
+                style="border-bottom: 0.1em solid rgb(89, 89, 89);">
+                <a onclick="toggleSidebarLeft()">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+            </nav>
+
+
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown"></a>
+                    </li>
+                </ul>
+            </div>
+            </nav>
+
+            <!-- Tablas -->
+
+            <main class="content mb-5 animate__animated animate__fadeIn" style="z-index: 999; background-color: white;">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+</body>
+
+<script src="js/cargarmesas.js" type="module"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+
+</html>
