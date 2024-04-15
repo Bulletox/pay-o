@@ -45,7 +45,8 @@
                             <span class="align-middle mb-4 cursor-pointer" onclick="irPedidos()">Pedidos</span>
                             <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
                             <span class="align-middle mb-4 cursor-pointer" onclick="irCocina()">Cocina</span>
-                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irmesas()">Instancias ></span>
+                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irmesas()">Instancias
+                                ></span>
                             <span class="align-middle mb-4 cursor-pointer" onclick="irAyuda()">Help</span>
                         </li>
                     </ul>
@@ -73,9 +74,15 @@
         <h1 class="m-5" style="color: #F29559;"><strong>Crear instancia para mesas</strong></h1>
         <button class="btn btn-primary mb-3 w-25" id="crearInstancia">Crear</button>
         <h1 class="fs-2 text-dark m-3">Nueva URL de la instancia:</h1>
-        <div class="fs-4 border p-1" id="urlInstancia" style="height: 2em; min-width: 20em;"></div>
+
+        <div class="d-flex justify-content-center input-group">
+            <div class="fs-4 border p-1" id="urlInstancia" style="height: 2em; min-width: 20em;"></div>
+            <span class="input-group-text cursor-pointer border" onclick="copyToClipboard(this)"><i
+                    class="bi bi-clipboard"></i></span>
+        </div>
+
         <!-- Elemento para mostrar la URL -->
-        <h1 class="fs-2 text-dark m-3">QR de la instancia:</h1>
+        <h1 class="fs-1 text-dark m-3">QR de la instancia:</h1>
         <div id="qr-code">
             <p style="border: 0.1em solid black; height: 81px; width: 81px;">.</p>
         </div>
@@ -127,7 +134,36 @@
                     qr.make();
                     document.getElementById('qr-code').innerHTML = qr.createImgTag(); // Crear y agregar la imagen del QR
                 }
+                function copyToClipboard(element) {
+                    // Seleccionar el texto dentro del div
+                    var div = document.getElementById('urlInstancia');
+                    var text = div.innerText;
 
+                    // Crear un elemento temporal textarea para copiar el texto
+                    var tempInput = document.createElement("textarea");
+                    tempInput.value = text;
+
+                    // Agregar el elemento temporal al DOM
+                    document.body.appendChild(tempInput);
+
+                    // Seleccionar el texto dentro del elemento temporal
+                    tempInput.select();
+
+                    // Copiar el texto seleccionado al portapapeles
+                    document.execCommand('copy');
+
+                    // Eliminar el elemento temporal
+                    document.body.removeChild(tempInput);
+
+                    // Cambiar el icono del span a 'check' temporalmente
+                    var originalIcon = element.innerHTML;
+                    element.innerHTML = '<i class="bi bi-clipboard-check-fill"></i>';
+
+                    // Restaurar el icono original después de 5 segundos
+                    setTimeout(function () {
+                        element.innerHTML = originalIcon;
+                    }, 3000);
+                }
             </script>
             <footer></footer>
 </body>
