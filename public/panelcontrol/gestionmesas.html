@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -6,69 +5,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Panel de Control</title>
-    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <title>Panel Control</title>
 </head>
 
 <body>
-    <div>
-        <button id="crearInstancia">Crear Instancia Mesa</button>
-        <div id="urlInstancia"></div> <!-- Elemento para mostrar la URL -->
-        <div id="qr-code"></div>
-        <script>
-            const firebaseConfig = {
-                apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
-                authDomain: "dam2pay-o.firebaseapp.com",
-                projectId: "dam2pay-o",
-                storageBucket: "dam2pay-o.appspot.com",
-                messagingSenderId: "1010112748895",
-                appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
-                measurementId: "G-H36HTF38QD"
-            };
-            firebase.initializeApp(firebaseConfig);
-            let db = firebase.firestore();
-            // Asumiendo que firebase y db ya están inicializados correctamente
-            document.getElementById("crearInstancia").addEventListener("click", function () {
-                let estado = "1";
-                let idMesa = "ID_DE_EJEMPLO";
-                let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
-                let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
-                let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+    <div class="d-flex flex-row">
+        <div class="navBarLeft d-flex flex-column position-fixed vw-15 animate__animated animate__fadeInLeft animate__slow"
+            style="z-index: 1;">
+            <nav id="sidebar" class=" js-sidebar vw-15">
+                <div class="sidebar-content js-simplebar ">
+                    <a class="sidebar-brand m-1" href="/panelcontrol/ladingpage.html">
+                        <img class="me-3" src="/panelcontrol/img/logo.png" alt="" width="65" height="65">
+                        <span class="align-middle fs-1 color-primary">PAY - O</span>
+                    </a>
 
-                db.collection("/Instanciamesas").add({
-                    estado: estado,
-                    idMesa: idMesa,
-                    idRestaurante: idRestaurante,
-                    timestampInicio: timestampInicio,
-                    usuarios: usuarios
-                })
-                    .then((docRef) => {
-                        console.log("Documento escrito con ID: ", docRef.id);
-                        // const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
-                        const urlBase = "http://localhost:3000/movile/menu.html";
-                        const urlCompleta = `${urlBase}?id=${docRef.id}`; // Añade la ID como un parámetro de consulta
-                        document.getElementById("urlInstancia").innerText = `URL de la Instancia: ${urlCompleta}`;
-                        generarQR(urlCompleta);
+                    <ul class="sidebar-nav">
+
+
+                        <div class="image d-flex justify-content-center">
+                            <img src="/panelcontrol/img/separador.png" alt="" height="30" width="90%">
+                        </div>
+
+                        <li class="sidebar-item mt-4 d-flex flex-column fs-2 ms-4" style="z-index: 999;">
+
+
+                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irPedidos()">Pedidos
+                                ></span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irCocina()">Cocina</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irmesas()">Instancias</span>
+                            <span class="align-middle mb-4 cursor-pointer" onclick="irAyuda()">Help</span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="main ms-119 animate__animated animate__fadeIn animate__slow" style="z-index: 2;">
+            <div class="cirCulo animate__animated  animate__zoomIn animate__slower">.</div>
+            <div class="cirCulo2 animate__animated  animate__zoomIn animate__slower">.</div>
+            <nav
+                class="d-flex justify-content-between navbar navbar-expand navbar-light navbar-bg animate__animated animate__fadeInDown animate__slower">
+                <a onclick="toggleSidebarLeft()">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+            </nav>
+
+
+        </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center creaInstan caja2 position-absolute top-50 start-50 translate-middle"
+        style="z-index: 10;">
+        <h1 class="m-5" style="color: #F29559;"><strong>Crear instancia para mesas</strong></h1>
+        <button class="btn btn-primary mb-3 w-25" id="crearInstancia">Crear</button>
+        <h1 class="fs-2 text-dark m-3">Nueva URL de la instancia:</h1>
+        <div class="fs-4 border p-1" id="urlInstancia" style="height: 2em; min-width: 20em;"></div>
+        <!-- Elemento para mostrar la URL -->
+        <h1 class="fs-2 text-dark m-3">QR de la instancia:</h1>
+        <div id="qr-code">
+            <p style="border: 0.1em solid black; height: 81px; width: 81px;">.</p>
+        </div>
+        =======
+        <div>
+            <button id="crearInstancia">Crear Instancia Mesa</button>
+            <div id="urlInstancia"></div> <!-- Elemento para mostrar la URL -->
+            <div id="qr-code"></div>
+            >>>>>>> c47f79a97311e3d1d287ed90d7749617bf4aaa37
+            <script>
+                const firebaseConfig = {
+                    apiKey: "AIzaSyCXgWg0zUv9eTmeI0rcAw5tIMOGi4MdUlQ",
+                    authDomain: "dam2pay-o.firebaseapp.com",
+                    projectId: "dam2pay-o",
+                    storageBucket: "dam2pay-o.appspot.com",
+                    messagingSenderId: "1010112748895",
+                    appId: "1:1010112748895:web:1c995663d6b03e4acd2aea",
+                    measurementId: "G-H36HTF38QD"
+                };
+                firebase.initializeApp(firebaseConfig);
+                let db = firebase.firestore();
+                // Asumiendo que firebase y db ya están inicializados correctamente
+                document.getElementById("crearInstancia").addEventListener("click", function () {
+                    let estado = "1";
+                    let idMesa = "ID_DE_EJEMPLO";
+                    let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
+                    let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
+                    let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+
+                    db.collection("/Instanciamesas").add({
+                        estado: estado,
+                        idMesa: idMesa,
+                        idRestaurante: idRestaurante,
+                        timestampInicio: timestampInicio,
+                        usuarios: usuarios
                     })
+                        .then((docRef) => {
+                            console.log("Documento escrito con ID: ", docRef.id);
+                            // const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
+                            const urlBase = "http://localhost:3000/movile/menu.html";
+                            const urlCompleta = `${urlBase}?id=${docRef.id}`; // Añade la ID como un parámetro de consulta
+                            document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
+                            generarQR(urlCompleta);
+                        })
 
-                    .catch((error) => console.error("Error añadiendo el documento: ", error));
-            });
+                        .catch((error) => console.error("Error añadiendo el documento: ", error));
+                });
 
-            function generarQR(urlcompleta) {
-                var tipo = 4; // Tipo de QR
-                var errorCorrectionLevel = 'L'; // Nivel de corrección de errores
-                var qr = qrcode(tipo, errorCorrectionLevel);
-                qr.addData(urlcompleta); // El contenido del QR
-                qr.make();
-                document.getElementById('qr-code').innerHTML = qr.createImgTag(); // Crear y agregar la imagen del QR
-            }
+                function generarQR(urlcompleta) {
+                    var tipo = 4; // Tipo de QR
+                    var errorCorrectionLevel = 'L'; // Nivel de corrección de errores
+                    var qr = qrcode(tipo, errorCorrectionLevel);
+                    qr.addData(urlcompleta); // El contenido del QR
+                    qr.make();
+                    document.getElementById('qr-code').innerHTML = qr.createImgTag(); // Crear y agregar la imagen del QR
+                }
 
-        </script>
+            </script>
+            <footer></footer>
 </body>
+<script src="js/cargarmesas.js" type="module"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
 
 </html>
