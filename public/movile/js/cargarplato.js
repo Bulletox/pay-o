@@ -34,19 +34,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             const htmlPlato = `
                 <div class="contenedorPadre d-flex flex-column">
                     <div class="contenedorIMG d-flex justify-content-start" style="width: 100%; height: 100%; overflow:hidden">
-                        <a href="comida.html"><i class="bi bi-arrow-left-circle-fill cursor-pointer position-fixed fs-2 text-light p-3"></i></a>
+                        <i class="bi bi-arrow-left-circle-fill cursor-pointer position-fixed fs-2 text-light p-3" onclick="goBack()"></i>
                         <img class="w-100" src="${plato.imagenUrl}" alt="" style="max-height: 35vh; object-fit: cover;">
                     </div>
                     <div class="p-3" id="platoCon">
                         <div class="d-flex justify-content-between align-items-center" style="height: 2em !important; ">
                             <h1 class="nombre">${plato.nombrePlato}</h1>
                             <div class="d-flex flex-row align-items-center justify-content-around fs-2">
-                                <i class="bi bi-dash-circle cursor-pointer pe-4"></i>
-                                <p class="mb-4">1</p>
-                                <i class="bi bi-plus-circle cursor-pointer ps-4"></i>
+
+                            <i class="bi bi-dash-circle cursor-pointer pe-4" onclick="restarCantidad()"></i>
+                            <!-- Cantidad actual -->
+                            <p class="mb-4" id="cantidadPlatos">1</p>
+                            <!-- Botón de Sumar -->
+                            <i class="bi bi-plus-circle cursor-pointer ps-4" onclick="sumarCantidad()"></i>
+                                
                             </div>
                         </div>
-                        <p class="precio">${plato.precio}</p>
+                        <p class="precio">${plato.precio} €</p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dignissimos itaque voluptate odio numquam veritatis ex accusamus id corrupti? Ratione maxime illum ad omnis molestiae quod molestias cupiditate perferendis aperiam.</p>
                     </div>
                     <div class="d-flex w-100" style="background-color: #f7f7f7; height: 10px;">.</div>
@@ -67,19 +71,50 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p class="mb-4" style="padding-bottom: 5em;">${plato.Ingredientes}</p>
                     </div>
                     <div class="abajo d-flex flex-row justify-content-center position-fixed fixed-bottom">
-        <button class="btn btn-primary d-flex justify-content-center align-items-center w-100 p-4 border rounded-0 fs-2"
-            style="max-height: 74px !important;">Añadir ${plato.precio}</button>
-    </div>
+                    <button class="btn btn-primary d-flex justify-content-center align-items-center w-100 p-4 border rounded-0 fs-2"
+                        style="max-height: 74px !important;">Añadir ${plato.precio} €</button>
+                    </div>
                 </div>
             `;
 
-            // Insertar el HTML generado en el contenedor de platos
-            platoCon.innerHTML = htmlPlato;
-        } else {
-            console.log('No se encontró el plato con la ID especificada.');
-        }
+             // Insertar el HTML generado en el contenedor de platos
+             platoCon.innerHTML = htmlPlato;
 
-    } catch (error) {
-        console.error(error);
-    }
-});
+             // Función para sumar la cantidad
+             const cantidadPlatosElement = document.getElementById('cantidadPlatos');
+             const precioPlato = plato.precio;
+ 
+             let cantidad = 1; // Cantidad inicial
+             let precioTotal = precioPlato * cantidad; // Precio total inicial
+ 
+             const actualizarCantidadYPrecio = () => {
+                cantidadPlatosElement.textContent = cantidad;
+                const precioTexto = `${precioTotal.toFixed(2)} €`;
+                document.querySelector('.precio').textContent = precioTexto; // Actualizar el precio fuera del botón
+                document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
+            };
+            
+ 
+             window.sumarCantidad = () => {
+                 cantidad++;
+                 precioTotal = precioPlato * cantidad;
+                 actualizarCantidadYPrecio();
+             };
+ 
+             window.restarCantidad = () => {
+                 if (cantidad > 1) {
+                     cantidad--;
+                     precioTotal = precioPlato * cantidad;
+                     actualizarCantidadYPrecio();
+                 }
+             };
+ 
+             actualizarCantidadYPrecio(); // Actualizar la cantidad y el precio inicialmente
+         } else {
+             console.log('No se encontró el plato con la ID especificada.');
+         }
+ 
+     } catch (error) {
+         console.error(error);
+     }
+ });
