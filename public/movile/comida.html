@@ -21,9 +21,10 @@
     <div class="container animate__animated animate__fadeIn">
         <header class="fixed-top FFD1A4 position-fixed">
             <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
-                <a class="c-black" href="menu.html"><i class="bi bi-arrow-return-left"></i></a>
+                <i class="bi bi-arrow-return-left cursor-pointer" onclick="goBack()"></i>
                 <h1 class="mb-0"><strong>Nuestra carta</strong></h1>
-                <a href="carrito.html"><img src="img/carrito-de-compras.png" alt="" width="40" height="40"></a>
+                <img class="cursor-pointer" id="modifyItemsBtn" src="img/carrito-de-compras.png" alt="" width="40"
+                    height="40">
             </div>
         </header>
 
@@ -65,6 +66,12 @@
             <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
             </div>
         </div>
+
+        <!-- Elementos para evitar errores -->
+        <div id="addItemsBtn"></div>
+        <div id="payBtn"></div>
+        <div id="contenedorPadre"></div>
+        
 
         <script src="js/script.js"></script>
         <script src="js/cargarmenu.js" type="module"></script>
