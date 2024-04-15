@@ -7,6 +7,7 @@
 //     var sidebar = document.getElementById('egg-fried-sidebar');
 //     sidebar.classList.toggle('hide');
 let sideBar = true;
+let emergente = false;
 
 function toggleSidebar() {
     var sidebar = document.getElementById('egg-fried-sidebar');
@@ -20,9 +21,11 @@ function toggleSidebar() {
 function toggleSidebarLeft() {
     if (sideBar === true) {
         document.querySelector('.main').style.marginLeft = "0vw"
+        document.querySelector('footer').style.marginLeft = "0vw"
         sideBar = false
     } else {
         document.querySelector('.main').style.marginLeft = "15vw"
+        document.querySelector('footer').style.marginLeft = "15vw"
         sideBar = true
     }
 }
@@ -112,4 +115,17 @@ function texto3(e) {
 function updatePlaceholder() {
     const alergenosInput = document.getElementById("alergenos");
     alergenosInput.value = alergenosArray.join(", ");
+}
+
+function emergenteInfo(){
+    if(emergente){
+        document.querySelector('.caja').style.display = "none"
+        document.querySelector('.capaNegra').style.display = "none"
+
+        emergente = false
+    }else{
+        document.querySelector('.caja').style.display = "flex"
+        document.querySelector('.capaNegra').style.display = "flex"
+        emergente = true
+    }
 }
