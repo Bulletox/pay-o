@@ -2,6 +2,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/fireba
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
+function visuaComida(platoId) {
+    window.location.href = `visuaComida.html?id=${platoId}`;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const platosContainer = document.getElementById('platosContainer');
 
@@ -60,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                     </div>
                 `;
+                console.log(platoDoc.id);
                 }
                 
             });
@@ -69,4 +74,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error(error);
     }
+    
 });

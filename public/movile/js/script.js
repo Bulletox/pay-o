@@ -23,6 +23,7 @@ const instanciaManager = {
         document.getElementById('addItemsBtn').addEventListener('click', () => this.navigate('comida.html'));
         document.getElementById('modifyItemsBtn').addEventListener('click', () => this.navigate('carrito.html'));
         document.getElementById('payBtn').addEventListener('click', () => this.navigate('cuentaTotal.html'));
+        document.getElementById('contenedorPadre').addEventListener('click', () => this.navigate('visua.html'));
     },
 
     navigate: function(page) {
