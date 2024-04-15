@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const plato = platoDoc.data();
                 if (plato.categoria == 0){
                     htmlContentcomida += `
-                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida(${platoDoc.id})">
+                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-4 cursor-pointer" onclick="visuaComida(${platoDoc.id})">
                         <div class="descript d-flex flex-column">
                             <strong class = "fs-3">${plato.nombrePlato}</strong>
                             <p><strong>${plato.precio}€</strong></p>
