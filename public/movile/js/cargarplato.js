@@ -4,7 +4,16 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 
 document.addEventListener('DOMContentLoaded', async () => {
     const platoCon = document.getElementById('platoCon');
-    const platoId = '2nAZVPac9z5XdHlKSlut'; // ID del plato que deseas cargar
+    
+    // Usar URLSearchParams para obtener el ID del plato de la URL
+    const queryParams = new URLSearchParams(window.location.search);
+    const platoId = queryParams.get('plId');  // Obtiene el platoId de la URL
+
+    if (!platoId) {
+        console.error('No se proporcionó el ID del plato en la URL');
+        platoCon.innerHTML = '<p>Error: No se proporcionó el ID del plato.</p>';
+        return;
+    }
 
     try {
         // Configuración de Firebase
