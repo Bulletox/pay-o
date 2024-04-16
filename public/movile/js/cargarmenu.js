@@ -2,12 +2,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/fireba
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
-function visuaComida(platoId) {
-    window.location.href = `visuaComida.html?id=${platoId}`;
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
     const platosContainer = document.getElementById('platosContainer');
+    const bebidasContainer = document.getElementById('bebidasContainer'); // Asegúrate de que este elemento existe en tu HTML
+
+    // Obtener parámetros de la URL
+    const queryParams = new URLSearchParams(window.location.search);
+    const instanciaId = queryParams.get('iId');
+    const pedidoId = queryParams.get('pId');
 
     try {
         // Configuración de Firebase
@@ -33,40 +35,31 @@ document.addEventListener('DOMContentLoaded', async () => {
             const platosSnapshot = await getDocs(collection(restauranteDoc.ref, 'Platos'));
             platosSnapshot.forEach((platoDoc) => {
                 const plato = platoDoc.data();
-                if (plato.categoria == 0){
-                    htmlContentcomida += `
-                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-4 cursor-pointer" onclick="visuaComida(${platoDoc.id})">
-                        <div class="descript d-flex flex-column">
-                            <strong class = "fs-3">${plato.nombrePlato}</strong>
-                            <p><strong>${plato.precio}€</strong></p>
-                            <div class="short">
-                                <p class="ellipsis">${plato.descripcion || ''}</p>
+                const platoId = platoDoc.id;
+                const platoLink = `visuaComida.html?iId=${instanciaId}&pId=${pedidoId}&plId=${platoId}`;
+
+                const itemHtml = `
+                    <a href="${platoLink}">
+                        <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-4 cursor-pointer">
+                            <div class="descript d-flex flex-column">
+                                <strong class="fs-3">${plato.nombrePlato}</strong>
+                                <p><strong>${plato.precio}€</strong></p>
+                                <div class="short">
+                                    <p class="ellipsis">${plato.descripcion || ''}</p>
+                                </div>
+                            </div>
+                            <div class="" style="height: 100%;">
+                                <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
                             </div>
                         </div>
-                        <div class="" style="height: 100%;">
-                            <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
-                        </div>
-                    </div>
+                    </a>
                 `;
-                console.log(platoDoc.id);
-                }else{
-                    htmlContentbebida += `
-                    <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-3 cursor-pointer" onclick="visuaComida(${platoDoc.id})">
-                        <div class="descript d-flex flex-column">
-                            <strong class = "fs-3">${plato.nombrePlato}</strong>
-                            <p><strong>${plato.precio}€</strong></p>
-                            <div class="short">
-                                <p class="ellipsis">${plato.descripcion || ''}</p>
-                            </div>
-                        </div>
-                        <div class="" style="height: 100%;">
-                            <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
-                        </div>
-                    </div>
-                `;
-                console.log(platoDoc.id);
+
+                if (plato.categoria == 0) {
+                    htmlContentcomida += itemHtml;
+                } else {
+                    htmlContentbebida += itemHtml;
                 }
-                
             });
         }
         platosContainer.innerHTML = htmlContentcomida; 
@@ -74,5 +67,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error(error);
     }
-    
 });
