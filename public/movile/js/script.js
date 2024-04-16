@@ -1,6 +1,6 @@
 const instanciaManager = {
     globalIdInstancia: null,
-
+    globalIdpedido: null,
     init: function () {
         document.addEventListener('DOMContentLoaded', () => {
             this.handleLoad();
@@ -10,12 +10,13 @@ const instanciaManager = {
 
     handleLoad: function () {
         const queryParams = new URLSearchParams(window.location.search);
-        this.globalIdInstancia = queryParams.get('id');
-
-        if (this.globalIdInstancia) {
+        this.globalIdInstancia = queryParams.get('iId');
+        this.globalIdpedido = queryParams.get('pId'); 
+        if (this.globalIdInstancia && this.globalIdpedido) { // Verifica ambos IDs
             console.log("ID de la Instancia:", this.globalIdInstancia);
+            console.log("ID del Pedido:", this.globalIdpedido);
         } else {
-            console.error("No se encontró ID de instancia en la URL.");
+            console.error("No se encontraron los IDs necesarios en la URL.");
         }
     },
 
@@ -27,10 +28,10 @@ const instanciaManager = {
     },
 
     navigate: function (page) {
-        if (this.globalIdInstancia) {
-            location.href = `/movile/${page}?id=${this.globalIdInstancia}`;
+        if (this.globalIdInstancia && this.globalIdpedido) {
+            location.href = `/movile/${page}?iId=${this.globalIdInstancia}&pId=${this.globalIdpedido}`;
         } else {
-            console.error("Error: No hay ID de instancia disponible.");
+            console.error("Error: No hay IDs de instancia o pedido disponibles.");
         }
     }
 };
