@@ -72,7 +72,8 @@
 
     <div class="d-flex flex-column align-items-center justify-content-center creaInstan caja2 position-absolute top-50 start-50 translate-middle"
         style="z-index: 10;">
-        <h1 class="me-5 ms-5 mb-5" style="color: #F29559; font-size: 3em;"><strong>Crea instancia para mesas</strong></h1>
+        <h1 class="me-5 ms-5 mb-5" style="color: #F29559; font-size: 3em;"><strong>Crea instancia para mesas</strong>
+        </h1>
         <button class="btn btn-primary mb-3 w-25" id="crearInstancia">Crear</button>
         <h1 class="fs-2 text-dark m-3">URL de la instancia:</h1>
 
@@ -102,39 +103,60 @@
                 let db = firebase.firestore();
                 // Asumiendo que firebase y db ya están inicializados correctamente
                 document.getElementById("crearInstancia").addEventListener("click", function () {
-                    let estado = "1";
+                    let estadoInstancia = "1";
                     let idMesa = "ID_DE_EJEMPLO";
                     let idRestaurante = "ID_RESTAURANTE_EJEMPLO";
                     let timestampInicio = firebase.firestore.Timestamp.fromDate(new Date("2024-02-28T13:41:18+01:00"));
-                    let usuarios = ["ID_USUARIO_1", "ID_USUARIO_2", "ID_USUARIO_3"];
+                    let usuarios = [];
 
                     db.collection("/Instanciamesas").add({
-                        estado: estado,
+                        estado: estadoInstancia,
                         idMesa: idMesa,
                         idRestaurante: idRestaurante,
                         timestampInicio: timestampInicio,
                         usuarios: usuarios
-                    })
-                        .then((docRef) => {
-                            console.log("Documento escrito con ID: ", docRef.id);
-                            // const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
-                            const urlBase = "http://localhost:3000/movile/menu.html";
-                            const urlCompleta = `${urlBase}?id=${docRef.id}`; // Añade la ID como un parámetro de consulta
-                            document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
-                            generarQR(urlCompleta);
-                        })
-
-                        .catch((error) => console.error("Error añadiendo el documento: ", error));
+                    }).then((docRefInstancia) => {
+                        console.log("Instancia de mesa creada con ID: ", docRefInstancia.id);
+                        crearPedido(docRefInstancia.id);
+                    }).catch((error) => console.error("Error añadiendo la instancia de mesa: ", error));
                 });
 
-                function generarQR(urlcompleta) {
-                    var tipo = 4; // Tipo de QR
-                    var errorCorrectionLevel = 'L'; // Nivel de corrección de errores
-                    var qr = qrcode(tipo, errorCorrectionLevel);
-                    qr.addData(urlcompleta); // El contenido del QR
-                    qr.make();
-                    document.getElementById('qr-code').innerHTML = qr.createImgTag(); // Crear y agregar la imagen del QR
+                function crearPedido(idInstancia) {
+                    let estadoPedido = "";
+                    let idMesaPedido = "Restaurantes/Restaurantes/Mesas/sPZgLeLOPevATqC3UFoG";
+                    let idRestaurantePedido = "";
+                    let timestampCreacion = firebase.firestore.Timestamp.fromDate(new Date());
+
+                    db.collection("/Pedidos").add({
+                        estado: estadoPedido,
+                        idMesa: db.doc(idMesaPedido),
+                        idRestaurante: idRestaurantePedido,
+                        idInstancia: db.doc(`/Instanciamesas/${idInstancia}`),
+                        timestampCreacion: timestampCreacion,
+                    }).then((docRefPedido) => {
+                        console.log("Pedido creado con ID: ", docRefPedido.id);
+                        actualizarURLConPedido(idInstancia, docRefPedido.id);
+                    }).catch((error) => {
+                        console.error("Error creando el pedido: ", error);
+                    });
                 }
+
+                function actualizarURLConPedido(idInstancia, idPedido) {
+                    const urlBase = "http://localhost:3000/movile/menu.html";
+                    const urlCompleta = `${urlBase}?iId=${idInstancia}&pId=${idPedido}`;
+                    document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
+                    generarQR(urlCompleta);
+                }
+
+                function generarQR(urlCompleta) {
+                    var tipo = 4;
+                    var errorCorrectionLevel = 'L';
+                    var qr = qrcode(tipo, errorCorrectionLevel);
+                    qr.addData(urlCompleta);
+                    qr.make();
+                    document.getElementById('qr-code').innerHTML = qr.createImgTag();
+                }
+
                 function copyToClipboard(element) {
                     // Seleccionar el texto dentro del div
                     var div = document.getElementById('urlInstancia');
