@@ -21,7 +21,7 @@ const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', function() {
     const queryParams = new URLSearchParams(window.location.search);
-    const idInstancia = queryParams.get('id');
+    const idInstancia = queryParams.get('iId');
 
     if (idInstancia) {
         console.log("ID de la Instancia:", idInstancia);

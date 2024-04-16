@@ -142,28 +142,37 @@
                 }
 
                 function actualizarURLConPedido(idInstancia, idPedido) {
-                    const urlBase = "http://localhost:3000/movile/menu.html";
+                    // const urlBase = "http://localhost:3000/movile/menu.html";
+                    const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
                     const urlCompleta = `${urlBase}?iId=${idInstancia}&pId=${idPedido}`;
                     document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
                     generarQR(urlCompleta);
                 }
 
                 function generarQR(urlCompleta) {
-                    var tipo = 4;
-                    var errorCorrectionLevel = 'L';
-                    var qr = qrcode(tipo, errorCorrectionLevel);
+                    console.log("Generando QR para la URL: ", urlCompleta);
+                    let tipo = 10;  // Tipo del QR, donde '4' es un valor que permite cierta cantidad de datos.
+                    let errorCorrectionLevel = 'L';  // Nivel de corrección de errores: 'L' (Low), 'M' (Medium), 'Q' (Quartile), 'H' (High)
+                    let qr = qrcode(tipo, errorCorrectionLevel);
                     qr.addData(urlCompleta);
                     qr.make();
-                    document.getElementById('qr-code').innerHTML = qr.createImgTag();
+                    let qrCodeDiv = document.getElementById('qr-code');
+                    if (qrCodeDiv) {
+                        qrCodeDiv.innerHTML = qr.createImgTag(); // Esta función crea un <img> con el QR
+                    } else {
+                        console.error('El elemento para mostrar el QR no está disponible en el DOM');
+                    }
                 }
+
+
 
                 function copyToClipboard(element) {
                     // Seleccionar el texto dentro del div
-                    var div = document.getElementById('urlInstancia');
-                    var text = div.innerText;
+                    let div = document.getElementById('urlInstancia');
+                    let text = div.innerText;
 
                     // Crear un elemento temporal textarea para copiar el texto
-                    var tempInput = document.createElement("textarea");
+                    let tempInput = document.createElement("textarea");
                     tempInput.value = text;
 
                     // Agregar el elemento temporal al DOM
@@ -179,7 +188,7 @@
                     document.body.removeChild(tempInput);
 
                     // Cambiar el icono del span a 'check' temporalmente
-                    var originalIcon = element.innerHTML;
+                    let originalIcon = element.innerHTML;
                     element.innerHTML = '<i class="bi bi-clipboard-check-fill"></i>';
 
                     // Restaurar el icono original después de 5 segundos

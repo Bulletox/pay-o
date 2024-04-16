@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                         <p class="precio">${plato.precio} €</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dignissimos itaque voluptate odio numquam veritatis ex accusamus id corrupti? Ratione maxime illum ad omnis molestiae quod molestias cupiditate perferendis aperiam.</p>
+                        <p>${plato.descripcion}</p>
                     </div>
                     <div class="d-flex w-100" style="background-color: #f7f7f7; height: 10px;">.</div>
                     <div class="info p-3 vh-50" style="border-radius: 0.5em; background-color: #ffffff; margin: 0; padding: 0; height: 100%;">
