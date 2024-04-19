@@ -39,9 +39,7 @@
 
 
                             <span class="align-middle mb-4 cursor-pointer" onclick="irPedidos()">Pedidos</span>
-                            <span class="align-middle mb-4 cursor-pointer" onclick="irCarta()">Gest. carta</span>
-                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irVisuaCarta()">Visua.
-                                carta
+                            <span class="align-middle mb-4 text-light cursor-pointer" onclick="irVisuaCarta()">Carta
                                 ></span>
                             <span class="align-middle mb-4 cursor-pointer" onclick="irCocina()">Cocina</span>
                             <span class="align-middle mb-4 cursor-pointer" onclick="irmesas()">Instancias</span>
@@ -72,17 +70,20 @@
             </div>
             </nav>
 
+            <div class="tablaPlatos" id="tablaPlatos"></div>
+
             <!-- Tablas -->
 
             <main class="content mb-5 animate__animated animate__fadeIn" style="z-index: 999; background-color: white;">
+                <h1 class="text-dark mb-3"><strong>Platos creados</strong></h1>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" style="visibility: hidden;">#</th>
                             <th scope="col">Platos</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
-                            <th scope="col" style="visibility: hidden;" scope="col">Handle</th>
+                            <th scope="col" style="visibility: hidden;">Handle</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,9 +113,10 @@
             </main>
         </div>
     </div>
+    <footer></footer>
 </body>
-<script src="js/cargarTabla.js"></script>
-<script src="js/cargarmesas.js" type="module"></script>
+<script type="module" src="js/cargarTabla.js"></script>
+<!-- <script src="js/cargarmesas.js" type="module"></script> -->
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
     integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
