@@ -1,98 +1,137 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+    <title>Panel Control</title>
+</head>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.10.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.10.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>AA</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<body style="background-color: white;">
+    <div class="" style="max-width: 100%; min-width: 100%;">
+        <header class="d-flex flex-wrap justify-content-between align-items-center w-100 pt-3 border-bottom"
+            style="background-color: #F2D492;">
+            <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+                <img class="me-3 ms-5" src="/panelcontrol/img/logo.png" alt="" height="60" width="60">
+                <h1 class="text-dark fs-1"><strong>Pay - o</strong></h1>
+            </a>
+            <div class="d-flex flex-row align-items-center justify-content-between">
+                <a style="color: black;" href="index.html"><p class="fs-4 me-4 mt-2 user-select-none cursor-pointer"><strong>Iniciar sesión</strong></p></a>
+                
+                <button class="btn btn-primary mb-1 me-5 rounded-5"><strong>Comenzar gratis</strong></button>
+            </div>
+        </header>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-    <script type="text/javascript">
-      // Función autoejecutable para redireccionar
-      (function() {
-          window.onload = function() {
-              // Redirecciona a otra página
-              window.location.href = 'panelcontrol/index.html';
-          };
-      })();
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
+    <div class="d-flex flex-row align-items-center mb-4 bg-body-tertiary rounded-3">
+        <div class="col-7">
+            <div class="d-flex flex-column align-items-start" style="max-width: 800px; margin-left: 15%;">
+                <h1 class="display-5 fw-bold text-dark">¡Simplifica tu gestión de pedidos con nuestra plataforma para
+                    buffets!</h1>
+                <p class="col-md-8 fs-4">Ya no te preocupes por el caos de los pedidos en tu buffet. Con nuestra
+                    plataforma especializada, tanto clientes como personal del local disfrutarán de una experiencia
+                    fluida y eficiente. Desde la selección de platos hasta la entrega en la mesa, todo está bajo
+                    control.</p>
+                <button class="btn btn-primary btn-lg" type="button">¡Regístrate ahora!</button>
+            </div>
+        </div>
+        <div class="">
+            <img class="w-100 h-100" src="img/imagen_restaurante.jpg" alt="">
+        </div>
+    </div>
 
-  </body>
+    <!-- Los cols -->
+
+    <div class="container mb-5 mt-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/buffet.jpg" alt="" height="250">
+                    <div class="card-body">
+                        <h1 class="text-dark mb-2" style="max-height: 2.5m; min-height: 2.5em;">Pedidos móviles intuitivos para clientes</h1>
+                        <p class="card-text">Nuestra aplicación móvil permite a tus clientes navegar fácilmente por tu menú, seleccionar sus platos favoritos y enviarlos directamente a tu panel de control. Desde allí, tu equipo de camareros y cajeros puede manejar los pedidos de manera eficiente, garantizando una experiencia sin problemas tanto para tus clientes como para tu personal.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-body-secondary">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/cocina.jpg" alt="" height="250">
+
+                    <div class="card-body">
+                        <h1 class="text-dark mb-2" style="max-height: 2.5m; min-height: 2.5em;">Control total en la cocina</h1>
+                        <p class="card-text">Nuestro panel de control especializado brinda a tu equipo de cocina una visión clara y organizada de todos los pedidos entrantes. Desde la confirmación hasta la preparación, cada paso del proceso está sincronizado para garantizar una ejecución impecable. Simplifica tu operación y deleita a tus clientes con platos perfectamente preparados.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-body-secondary">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/movile.jpg" alt="" height="250">
+
+                    <div class="card-body">
+                        <h1 class="text-dark mb-2" style="max-height: 2.5m; min-height: 2.5em;"> Potencia tu buffet con tecnología de vanguardia.</h1>
+                       
+                        <p class="card-text">Con nuestra solución basada en la nube y alimentada por Firebase, lleva tu buffet al siguiente nivel. Olvídate de los pedidos perdidos o desorganizados. Con nuestra plataforma, tu negocio estará equipado con las herramientas necesarias para brindar un servicio de primera clase y una experiencia gastronómica inigualable.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-body-secondary">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-100">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Pay - O, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex fs-2" style="color: rgb(190, 190, 190);">
+                <i class="bi bi-twitter-x me-3"></i>
+                <i class="bi bi-instagram me-3"></i>
+                <i class="bi bi-facebook me-3"></i>
+                <i class="bi bi-discord me-4"></i>
+            </ul>
+        </footer>
+    </div>
+</body>
+<script src="js/cargarmesas.js" type="module"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+
 </html>
