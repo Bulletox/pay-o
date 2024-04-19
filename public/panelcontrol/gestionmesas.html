@@ -78,7 +78,8 @@
         <h1 class="fs-2 text-dark m-3">URL de la instancia:</h1>
 
         <div class="d-flex justify-content-center input-group">
-            <div class="fs-4 border p-1" id="urlInstancia" style="height: 4em; min-width: 30em; text-align: center;"></div>
+            <div class="fs-4 border p-1" id="urlInstancia" style="height: 4em; min-width: 30em; text-align: center;">
+            </div>
             <span class="input-group-text cursor-pointer border" onclick="copyToClipboard(this)"><i
                     class="bi bi-clipboard"></i></span>
         </div>
@@ -135,12 +136,25 @@
                         timestampCreacion: timestampCreacion,
                     }).then((docRefPedido) => {
                         console.log("Pedido creado con ID: ", docRefPedido.id);
+                        crearSubPedido(idInstancia, docRefPedido.id);
                         actualizarURLConPedido(idInstancia, docRefPedido.id);
                     }).catch((error) => {
                         console.error("Error creando el pedido: ", error);
                     });
                 }
+                function crearSubPedido(idInstancia, idPedido) {
+                    let estadoSubPedido = "0"; // O el estado inicial que desees
+                    let timestampCreacionSubPedido = firebase.firestore.Timestamp.fromDate(new Date()); // La fecha y hora actual
 
+                    db.collection("/Pedidos").doc(idPedido).collection("subPedidos").add({
+                        estado: estadoSubPedido,
+                        timestampCreacion: timestampCreacionSubPedido
+                    }).then((docRefSubPedido) => {
+                        console.log("SubPedido creado con ID: ", docRefSubPedido.id);
+                    }).catch((error) => {
+                        console.error("Error creando el subPedido: ", error);
+                    });
+                }
                 function actualizarURLConPedido(idInstancia, idPedido) {
                     // const urlBase = "http://localhost:3000/movile/menu.html";
                     const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
