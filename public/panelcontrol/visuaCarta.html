@@ -70,19 +70,24 @@
             </div>
             </nav>
 
-            <div class="tablaPlatos" id="tablaPlatos"></div>
-
             <!-- Tablas -->
 
             <main class="content mb-5 animate__animated animate__fadeIn" style="z-index: 999; background-color: white;">
-                <h1 class="text-dark mb-3"><strong>Platos creados</strong></h1>
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="iz d-flex flex-row align-items-center">
+                        <img class="me-3" src="img/plato.png" alt="" height="45" width="45">
+                        <h1 class="text-dark"><strong>Platos creados</strong></h1>
+                    </div>
+                    <button class="btn btn-primary fs-4"><i class="bi bi-plus-circle me-2"></i> Añadir
+                            platos</button>
+                </div>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="visibility: hidden;">#</th>
-                            <th scope="col">Platos</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
+                            <th class="text-dark" scope="col">Platos</th>
+                            <th class="text-dark" scope="col">Precio</th>
+                            <th class="text-dark" scope="col">Cantidad</th>
                             <th scope="col" style="visibility: hidden;">Handle</th>
                         </tr>
                     </thead>
