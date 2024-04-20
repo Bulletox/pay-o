@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p class="mb-4" style="padding-bottom: 5em;">${plato.Ingredientes}</p>
                     </div>
                     <div class="abajo d-flex flex-row justify-content-center position-fixed fixed-bottom">
-                    <button class="btn btn-primary d-flex justify-content-center align-items-center w-100 p-4 border rounded-0 fs-2"
-                        style="max-height: 74px !important;">Añadir ${plato.precio} €</button>
+                    <button id="precio" class="btn btn-primary d-flex justify-content-center align-items-center w-100 p-4 border rounded-0 fs-2"
+                        style="max-height: 74px !important; "onclick="goBack()">Añadir ${plato.precio} €</button>
                     </div>
                 </div>
             `;
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
              const actualizarCantidadYPrecio = () => {
                 cantidadPlatosElement.textContent = cantidad;
                 const precioTexto = `${precioTotal.toFixed(2)} €`;
-                document.querySelector('.precio').textContent = precioTexto; // Actualizar el precio fuera del botón
+                document.querySelector('#precio').textContent = precioTexto; // Actualizar el precio fuera del botón
                 document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
             };
             
@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                  cantidad++;
                  precioTotal = precioPlato * cantidad;
                  actualizarCantidadYPrecio();
+                //  anadirPlato();
              };
  
              window.restarCantidad = () => {
@@ -127,3 +128,91 @@ document.addEventListener('DOMContentLoaded', async () => {
          console.error(error);
      }
  });
+
+// let estadoPedido = []; // Estado local para mantener los platos antes de enviarlos a Firestore
+
+// function anadirPlato() {
+//     const queryParams = new URLSearchParams(window.location.search);
+//     const idPlato = queryParams.get('plId');  // Obtiene el platoId de la URL
+//     const platoExistente = estadoPedido.find(plato => plato.idPlato === idPlato);
+//     if (platoExistente) {
+//         platoExistente.cantidad += cantidad;
+//     } else {
+//         estadoPedido.push({
+//             idPlato : idPlato,
+//             cantidad : 1,
+//             comentarios: ""
+//         });
+//     }
+// }
+// function iniciarSesionAnonima() {
+//     signInAnonymously(auth)
+//         .then((result) => {
+//             console.log('Usuario anónimo conectado', result.user.uid);
+//             return result.user.uid;
+//         })
+//         .catch((error) => {
+//             console.error('Error en inicio de sesión anónimo', error);
+//         });
+// }
+// function buscarUltimoSubpedidoConEstadoCero(pedidoId) {
+//     const db = firebase.firestore(); // Asegúrate de inicializar Firestore
+//     const subpedidosRef = db.collection(`/Pedidos/${pedidoId}/subPedido`);
+
+//     subpedidosRef.where('estado', '==', '0')
+//         .orderBy('timestampCreacion', 'desc') // Asegúrate de que 'timestampCreacion' sea un campo de timestamp en Firestore
+//         .limit(1)
+//         .get()
+//         .then(snapshot => {
+//             if (!snapshot.empty) {
+//                 const ultimoSubpedido = snapshot.docs[0];
+//                 console.log("Último subpedido con estado '0':", ultimoSubpedido.id);
+//                 return ultimoSubpedido.id;
+//             } else {
+//                 console.log("No se encontraron subpedidos con estado '0'.");
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error al buscar el último subpedido con estado '0':", error);
+//         });
+// }
+// document.addEventListener('DOMContentLoaded', () => {
+//     // Tu código existente aquí...
+    
+//     // Asegúrate de que este código se ejecute después de que el botón "precio" haya sido creado y esté presente en el DOM
+//     const precioBtn = document.getElementById('precio');
+//     precioBtn.addEventListener('click', function() {
+//         // Llama a la función que quieres ejecutar cuando se haga clic en el botón
+//         enviarPedido();
+//     });
+// });
+
+
+// function enviarPedido() {
+//     const queryParams = new URLSearchParams(window.location.search);
+//     const pedidoId = queryParams.get('pId');
+//     const subPedidoId = buscarUltimoSubpedidoConEstadoCero(pedidoId);
+//     const pedidosRef = db.collection(`/Pedidos/${pedidoId}/subPedido/${subPedidoId}/platosPedido`);
+//     estadoPedido.forEach(plato => {
+//         const platoRef = pedidosRef.doc(plato.idPlato);
+
+//         platoRef.set({
+//             cantidad: plato.cantidad.toString(),
+//             comentarios: plato.comentarios,
+//             idPlato: db.doc(`/Restaurantes/Restaurantes/Platos/${plato.idPlato}`),
+//             usuarios: firebase.firestore.FieldValue.arrayUnion(iniciarSesionAnonima())
+//         })
+//         .then(() => {
+//             console.log("Plato añadido con éxito: ", plato.idPlato);
+//         })
+//         .catch((error) => {
+//             console.error("Error al añadir plato: ", error);
+//         });
+//     });
+
+//     // Limpia el estado local después de enviar el pedido
+//     estadoPedido = [];
+// }
+
+// // Llamar esta función cuando se haga clic en el botón de añadir pedido
+// // enviarPedido(pedidoId, subPedidoId, idUsuario);
