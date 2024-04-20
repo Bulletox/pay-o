@@ -21,13 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const uid = await iniciarSesionAnonima(auth);
     
-    const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
-    if (!subPedidoId) {
-        console.log(subPedidoId);
-        console.error("No se pudo obtener un subpedido con estado '0'");
-        return;
-    }
-    const platosPedidoRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
+    
     const queryParams = new URLSearchParams(window.location.search);
 
     const platoId = queryParams.get('plId');
@@ -35,15 +29,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('No se proporcionó el ID del plato en la URL');
         return;
     }
-    
+
     const pedidoId = queryParams.get('pId');
     if (!pedidoId) {
         console.error('No se proporcionó el ID del pedido en la URL');
         return;
     }
+    
+
+    const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
+    if (!subPedidoId) {
+        console.log(subPedidoId);
+        console.error("No se pudo obtener un subpedido con estado '0'");
+        return;
+    }
     const cantidadPlatosElement = document.getElementById('cantidadPlatos');
     let cantidad = parseInt(cantidadPlatosElement.textContent, 10) || 0;
-    
+    const platosPedidoRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
     window.sumarCantidad = () => {
         const nuevoPlato = {
             comentarios: '',
