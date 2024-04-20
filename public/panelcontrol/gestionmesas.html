@@ -147,7 +147,7 @@
 
                     // Creamos el subPedido
                     db.collection("/Pedidos").doc(idPedido).collection("subPedidos").add({
-                        estado: estadoSubPedido,
+                        estado: parseInt(estadoSubPedido),
                         timestampCreacion: timestampCreacionSubPedido
                     }).then((docRefSubPedido) => {
                         console.log("SubPedido creado con ID: ", docRefSubPedido.id);

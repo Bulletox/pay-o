@@ -47,26 +47,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     let cantidad = parseInt(cantidadPlatosElement.textContent, 10) || 0;
     const platosPedidoRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
     window.sumarCantidad = () => {
+        const botonSumar = document.getElementById('boton-sumar'); // Asegúrate de que tienes un elemento con este ID.
+        botonSumar.disabled = true; // Deshabilita el botón inmediatamente cuando se clickea.
+    
         const nuevoPlato = {
             comentarios: '',
             idPlato: doc(db, `Restaurantes/Restaurantes/Platos/${platoId}`),
             usuario: uid,
             timestamp: new Date()
         };
+    
         addDoc(platosPedidoRef, nuevoPlato).then(docRef => {
             console.log("Plato agregado con ID: ", docRef.id);
             cantidad++;
             cantidadPlatosElement.textContent = cantidad;
+            botonSumar.disabled = false; // Habilita el botón de nuevo.
         }).catch(error => {
             console.error("Error al agregar plato: ", error);
+            botonSumar.disabled = false; // Habilita el botón de nuevo.
         });
     };
-
+    
     window.restarCantidad = async () => {
+        const botonRestar = document.getElementById('boton-restar'); // Asegúrate de tener un elemento con este ID.
+        botonRestar.disabled = true; // Deshabilita el botón inmediatamente cuando se clickea.
+    
         console.log("Cantidad actual: ", cantidad);
         if (cantidad > 0) {
             console.log("Eliminando último plato...");
-            // Añadir condiciones para incluir la verificación del UID del usuario y el ID del plato
             const q = query(
                 platosPedidoRef, 
                 where('usuario', '==', uid),
@@ -76,20 +84,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             );
             const snapshot = await getDocs(q);
     
-            // Comprueba si hay documentos antes de intentar leerlos.
             if (!snapshot.empty) {
                 const lastDoc = snapshot.docs[0];
-                console.log("Último plato a eliminar:", lastDoc.data()); // Ahora es seguro leer los datos
-    
-                // Usa la ruta completa del documento para eliminarlo
                 await deleteDoc(doc(db, `${platosPedidoRef.path}/${lastDoc.id}`));
                 console.log("Plato eliminado con ID: ", lastDoc.id);
                 cantidad--;
                 cantidadPlatosElement.textContent = cantidad;
             } else {
-                console.log("No hay platos que coincidan con el usuario y plato especificados para eliminar.");
+                console.log("No hay platos que coincidan para eliminar.");
             }
         }
+        botonRestar.disabled = false; // Habilita el botón de nuevo.
     };
     
     
