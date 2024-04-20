@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
+
     const uid = await iniciarSesionAnonima(auth);
-    const pedidoId = 'MyKzFJ1VJKFsN56pEUjP';
+    
     const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
     if (!subPedidoId) {
         console.log(subPedidoId);
@@ -28,16 +29,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     const platosPedidoRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
     const queryParams = new URLSearchParams(window.location.search);
-    const platoId = queryParams.get('plId');
 
+    const platoId = queryParams.get('plId');
+    if (!platoId) {
+        console.error('No se proporcionó el ID del plato en la URL');
+        return;
+    }
+    
+    const pedidoId = queryParams.get('pId');
+    if (!pedidoId) {
+        console.error('No se proporcionó el ID del pedido en la URL');
+        return;
+    }
     const cantidadPlatosElement = document.getElementById('cantidadPlatos');
     let cantidad = parseInt(cantidadPlatosElement.textContent, 10) || 0;
-
+    
     window.sumarCantidad = () => {
         const nuevoPlato = {
             comentarios: '',
             idPlato: doc(db, `Restaurantes/Restaurantes/Platos/${platoId}`),
             usuario: uid,
+            timestamp: new Date()
         };
         addDoc(platosPedidoRef, nuevoPlato).then(docRef => {
             console.log("Plato agregado con ID: ", docRef.id);
@@ -48,23 +60,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
-    window.restarCantidad = () => {
+    window.restarCantidad = async () => {
+        console.log("Cantidad actual: ", cantidad);
         if (cantidad > 0) {
-            getDocs(query(platosPedidoRef, orderBy('timestamp'), limitToLast(1)))
-                .then(snapshot => {
-                    if (!snapshot.empty) {
-                        const lastDoc = snapshot.docs[0];
-                        deleteDoc(doc(db, platosPedidoRef.path, lastDoc.id)).then(() => {
-                            console.log("Plato eliminado con ID: ", lastDoc.id);
-                            cantidad--;
-                            cantidadPlatosElement.textContent = cantidad;
-                        });
-                    }
-                }).catch(error => {
-                    console.error("Error al eliminar el último plato: ", error);
-                });
+            console.log("Eliminando último plato...");
+            // Añadir condiciones para incluir la verificación del UID del usuario y el ID del plato
+            const q = query(
+                platosPedidoRef, 
+                where('usuario', '==', uid),
+                where('idPlato', '==', doc(db, `Restaurantes/Restaurantes/Platos/${platoId}`)),
+                orderBy('timestamp', 'desc'), 
+                limitToLast(1)
+            );
+            const snapshot = await getDocs(q);
+    
+            // Comprueba si hay documentos antes de intentar leerlos.
+            if (!snapshot.empty) {
+                const lastDoc = snapshot.docs[0];
+                console.log("Último plato a eliminar:", lastDoc.data()); // Ahora es seguro leer los datos
+    
+                // Usa la ruta completa del documento para eliminarlo
+                await deleteDoc(doc(db, `${platosPedidoRef.path}/${lastDoc.id}`));
+                console.log("Plato eliminado con ID: ", lastDoc.id);
+                cantidad--;
+                cantidadPlatosElement.textContent = cantidad;
+            } else {
+                console.log("No hay platos que coincidan con el usuario y plato especificados para eliminar.");
+            }
         }
-    };    
+    };
+    
+    
+        
 });
 
 async function buscarUltimoSubpedidoConEstadoCero(pedidoId, db) {
