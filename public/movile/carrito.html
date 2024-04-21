@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="/movile/css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Tu carro</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/disabled.css">
 </head>
 
 <body>
@@ -65,8 +66,10 @@
         </div>
 
         <div class="abajo d-flex flex-row align-items-center justify-content-center position-fixed fixed-bottom">
-            <button class="btn btn-primary w-100 p-4 border rounded-0">Confirmar</button>
+            <button id="confirmarPedidoBtn" class="btn btn-primary w-100 p-4 border rounded-0">Confirmar</button>
         </div>
+        
+        
     </div>
     <script type="module" src="js/cargarcarritoV2.js"></script>
     <script src="js/script.js"></script>
