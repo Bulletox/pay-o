@@ -4988,8 +4988,6 @@
  
  .card-subtitle {
      color: var(--bs-card-subtitle-color);
-     margin-top:
- 
  }
  
  .card-subtitle,
@@ -14452,7 +14450,7 @@
  }
  
  footer.footer ul {
-     margin-bottom: 0
+     margin-bottom: 0;
  }
  
  @media(max-width:767.98px) {
@@ -14471,23 +14469,23 @@
      display: block;
      height: 3px;
      transition: background .1s ease-in-out, color .1s ease-in-out;
-     width: 24px
+     width: 24px;
  }
  
  .hamburger {
-     position: relative
+     position: relative;
  }
  
  .hamburger:before {
      position: absolute;
      top: -7.5px;
-     width: 24px
+     width: 24px;
  }
  
  .hamburger:after {
      bottom: -7.5px;
      position: absolute;
-     width: 16px
+     width: 16px;
  }
  
  .sidebar-toggle:hover .hamburger,
