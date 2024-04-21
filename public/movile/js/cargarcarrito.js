@@ -37,13 +37,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         let htmlContent = '';
 
         subPedidoSnapshot.forEach((doc) => {
+            console.log(doc.id);
             const subPedido = doc.data();
-
+            console.log(subPedido);
             // Verificar que el subpedido tenga estadoSubPedido igual a 0
             if (subPedido.estadoSubPedido === 0) {
                 const plato = subPedido.plato;
                 const platoId = subPedido.platoId;
-
+                console.log(plato);
                 const itemHtml = `
                     <div class="itemComida d-flex justify-content-between pb-1 border-bottom mb-4" data-id="${doc.id}">
                         <div class="descript d-flex flex-column">
