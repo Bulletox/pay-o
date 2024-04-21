@@ -87,13 +87,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Esta función puede ser llamada para actualizar la UI cada vez que hay un cambio
-    // Esta función puede ser llamada para actualizar la UI cada vez que hay un cambio
     function updateUI(conteoPlatos) {
         let htmlContent = '';
         const confirmarBtn = document.getElementById('confirmarPedidoBtn'); // Accede al botón Confirmar
     
         // Verifica si el objeto conteoPlatos está vacío
-        if (Object.keys(conteoPlatos).length === 0) {
+        if (Object.keys(conteoPlatos).length === 1) {
             htmlContent = '<p>Empieza tu pedido.</p>'; // Mensaje cuando no hay platos
             confirmarBtn.disabled = true; // Deshabilita el botón Confirmar
         } else {
