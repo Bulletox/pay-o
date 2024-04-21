@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Obtiene los parámetros de la URL
     const queryParams = new URLSearchParams(window.location.search);
     const pedidoId = queryParams.get('pId');
+    
 
     // Obtén el ID del último subpedido con estado 0
     const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
@@ -64,13 +65,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         snapshot.docs.forEach((doc) => {
             const platoData = doc.data();
             const platoRef = platoData.idPlato; // Esta es la referencia del documento
+            // const imagenUrl = plato.imagenUrl;
+
+            // Agregar console.log para verificar la URL de la imagen
+            // console.log('URL de la imagen:', imagenUrl);
 
             if (platoRef) {
                 getDoc(platoRef).then(platoDocSnapshot => {
                     if (platoDocSnapshot.exists()) {
                         const plato = platoDocSnapshot.data();
                         const nombrePlato = plato.nombrePlato; // Asume que el campo se llama 'nombrePlato'
-
+                        const imagenUrl = plato.imagenUrl;
                         // Actualizar el conteo acumulativo de platos
                         conteoPlatos[nombrePlato] = (conteoPlatos[nombrePlato] || 0) + 1;
 
@@ -97,12 +102,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             confirmarBtn.disabled = true; // Deshabilita el botón Confirmar
         } else {
             // Itera sobre los platos contados y crea el HTML
-            Object.entries(conteoPlatos).forEach(([nombrePlato, cantidad]) => {
+            Object.entries(conteoPlatos).forEach(([nombrePlato, cantidad, imagenUrl]) => {
+                
                 htmlContent += `
-                    <div class="platoItem">
-                        <strong>Plato: ${nombrePlato}</strong>
-                        <p>Cantidad total: ${cantidad}</p>
-                        <p>Tu Cantidad: ${cantidad}</p>
+                    <div class="platoItem d-flex justify-content-between pb-1 border-bottom mb-4"">
+                        <div class="descript d-flex flex-column">
+                        <strong class="fs-3">${nombrePlato}</strong>
+                        <p><strong>Cantidad total: ${cantidad}</p></strong>
+                            <div class="short">
+                                <p>Tu Cantidad: ${cantidad}</p>
+                            </div>
+                        </div>
+                        <div style="height: 100%;">
+                            <img src="${imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
+                        </div>
                     </div>
                 `;
             });
