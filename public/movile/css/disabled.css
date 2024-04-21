@@ -1,0 +1,4 @@
+.disabled {
+    opacity: 0;
+    pointer-events: none; /* Desabilita o clique */
+}
