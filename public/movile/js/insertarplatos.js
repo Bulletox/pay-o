@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     let cantidad = parseInt(cantidadPlatosElement.textContent, 10) || 0;
     const platosPedidoRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
     window.sumarCantidad = () => {
-        const botonSumar = document.getElementById('boton-sumar'); // Asegúrate de que tienes un elemento con este ID.
-        botonSumar.disabled = true; // Deshabilita el botón inmediatamente cuando se clickea.
+        const botonSumar = document.querySelector('.bi-plus-circle'); // Selecciona el ícono por su clase
+        botonSumar.classList.add('disabled'); // Agrega una clase 'disabled' para visualizar que está desactivado
     
         const nuevoPlato = {
             comentarios: '',
@@ -60,26 +60,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         addDoc(platosPedidoRef, nuevoPlato).then(docRef => {
             console.log("Plato agregado con ID: ", docRef.id);
             cantidad++;
-            cantidadPlatosElement.textContent = cantidad;
-            botonSumar.disabled = false; // Habilita el botón de nuevo.
+            document.getElementById('cantidadPlatos').textContent = cantidad;
+            botonSumar.classList.remove('disabled'); // Quita la clase 'disabled' cuando se completa la acción
         }).catch(error => {
             console.error("Error al agregar plato: ", error);
-            botonSumar.disabled = false; // Habilita el botón de nuevo.
+            botonSumar.classList.remove('disabled'); // Asegúrate de quitar la clase 'disabled' incluso si hay un error
         });
     };
     
+    
     window.restarCantidad = async () => {
-        const botonRestar = document.getElementById('boton-restar'); // Asegúrate de tener un elemento con este ID.
-        botonRestar.disabled = true; // Deshabilita el botón inmediatamente cuando se clickea.
+        const botonRestar = document.querySelector('.bi-dash-circle'); // Selecciona el ícono por su clase
+        botonRestar.classList.add('disabled'); // Deshabilita visualmente el botón
     
         console.log("Cantidad actual: ", cantidad);
         if (cantidad > 0) {
             console.log("Eliminando último plato...");
             const q = query(
-                platosPedidoRef, 
+                platosPedidoRef,
                 where('usuario', '==', uid),
                 where('idPlato', '==', doc(db, `Restaurantes/Restaurantes/Platos/${platoId}`)),
-                orderBy('timestamp', 'desc'), 
+                orderBy('timestamp', 'desc'),
                 limitToLast(1)
             );
             const snapshot = await getDocs(q);
@@ -89,14 +90,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await deleteDoc(doc(db, `${platosPedidoRef.path}/${lastDoc.id}`));
                 console.log("Plato eliminado con ID: ", lastDoc.id);
                 cantidad--;
-                cantidadPlatosElement.textContent = cantidad;
+                document.getElementById('cantidadPlatos').textContent = cantidad;
             } else {
                 console.log("No hay platos que coincidan para eliminar.");
             }
+            botonRestar.classList.remove('disabled'); // Habilita visualmente el botón
+        } else {
+            botonRestar.classList.remove('disabled'); // Asegúrate de quitar la deshabilitación si no se realiza ninguna acción
         }
-        botonRestar.disabled = false; // Habilita el botón de nuevo.
     };
-    
     
         
 });
