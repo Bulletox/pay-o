@@ -20,7 +20,7 @@
         linear-gradient(#50d61b, #abf009),
         linear-gradient(#deec10, #f5e50a),
         linear-gradient(#f5e50a, #ffc107);
-    animation: rotate 4s linear infinite;
+    animation: rotate 6s ease-in-out infinite;
 }
 
 .rainbow::after {
@@ -58,3 +58,7 @@
         opacity: 1;
     }
 }
+
+/* .rainbow::before {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
