@@ -78,6 +78,11 @@ function previewImage(event) {
     handleFiles([file]);
 }
 
+function goBack() {
+    window.history.back();
+}
+
+
 function handleFiles(files) {
     const file = files[0];
     if (file.type.startsWith('image/')) {
