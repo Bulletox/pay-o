@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
              const cantidadPlatosElement = document.getElementById('cantidadPlatos');
              const precioPlato = plato.precio;
  
-             let cantidad = 1; // Cantidad inicial
+             let cantidad = 0; // Cantidad inicial
              let precioTotal = precioPlato * cantidad; // Precio total inicial
  
              const actualizarCantidadYPrecio = () => {
