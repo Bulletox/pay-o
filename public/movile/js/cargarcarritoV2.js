@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Obtiene los parámetros de la URL
     const queryParams = new URLSearchParams(window.location.search);
     const pedidoId = queryParams.get('pId');
-    
+
 
     // Obtén el ID del último subpedido con estado 0
     const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
@@ -65,20 +65,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         snapshot.docs.forEach((doc) => {
             const platoData = doc.data();
             const platoRef = platoData.idPlato; // Esta es la referencia del documento
-    
+
             if (platoRef) {
                 getDoc(platoRef).then(platoDocSnapshot => {
                     if (platoDocSnapshot.exists()) {
                         const plato = platoDocSnapshot.data();
                         const nombrePlato = plato.nombrePlato; // Asume que el campo se llama 'nombrePlato'
                         const imagenUrl = plato.imagenUrl; // Asume que el campo se llama 'imagenUrl'
-    
+
                         // Actualizar el conteo acumulativo de platos
                         if (!conteoPlatos[nombrePlato]) {
                             conteoPlatos[nombrePlato] = { count: 0, imageUrl: imagenUrl };
                         }
                         conteoPlatos[nombrePlato].count += 1;
-    
+
                         // Actualizar la UI
                         updateUI(conteoPlatos);
                     } else {
@@ -90,33 +90,45 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, (error) => {
         console.error("Error al escuchar los cambios: ", error);
     });
-    
+
     function updateUI(conteoPlatos) {
         let htmlContent = '';
         const confirmarBtn = document.getElementById('confirmarPedidoBtn');
-    
+
         Object.entries(conteoPlatos).forEach(([nombrePlato, data]) => {
             const { count, imageUrl } = data;
             htmlContent += `
-                <div class="platoItem d-flex justify-content-between pb-1 border-bottom mb-4">
-                    <div class="descript d-flex flex-column">
-                        <strong class="fs-3">${nombrePlato}</strong>
-                        <p><strong>Cantidad total: ${count}</strong></p>
-                        <div class="short">
-                            <p>Tu Cantidad: ${count}</p>
-                        </div>
-                    </div>
-                    <div style="height: 100%;">
-                        <img src="${imageUrl || 'img/paella.png'}" alt="" height="125" width="125">
-                    </div>
-                </div>
+            <div class="card mb-4 shadow-sm" style="
+            padding: 10px; box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);">
+  <div class="card-body d-flex justify-content-between">
+    <div>
+      <h5 class="card-title">${nombrePlato}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Cantidad:</h6>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary btn-sm" onclick="restarCantidad()">
+          <i class="bi bi-dash-circle"></i>
+        </button>
+        <span class="mx-3 fs-4" id="cantidadPlatos">${count}</span>
+        <button class="btn btn-outline-secondary btn-sm" onclick="sumarCantidad()">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+      <div class="mt-2">
+        <h6 class="text-muted">Cantidad Total <strong id="cantidadTotalComensales">${count}</strong></h6>
+      </div>
+    </div>
+    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="" style="width: 125px; height: 125px;">
+  </div>
+</div>
+
+          
             `;
         });
-    
+
         confirmarBtn.disabled = Object.keys(conteoPlatos).length === 0;
         platosContainer.innerHTML = htmlContent;
     }
-    
+
 
 });
 

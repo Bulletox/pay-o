@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                     <p class="ellipsis">${plato.descripcion || ''}</p>
                                 </div>
                             </div>
+                            
                             <div class="" style="height: 100%;">
                                 <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
                             </div>

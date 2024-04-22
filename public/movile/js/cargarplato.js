@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <h1 class="nombre">${plato.nombrePlato}</h1>
                             <div class="d-flex flex-row align-items-center justify-content-around fs-2">
 
-                            <i class="bi bi-dash-circle cursor-pointer pe-4" onclick="restarCantidad()"></i>
+                            <i class="bi bi-dash-circle cursor-pointer pe-4" onclick="restarCantidad(${plato.id})"></i>
                             <!-- Cantidad actual -->
                             <p class="mb-4" id="cantidadPlatos">0</p>
                             <!-- Botón de Sumar -->
-                            <i class="bi bi-plus-circle cursor-pointer ps-4" onclick="sumarCantidad()"></i>
+                            <i class="bi bi-plus-circle cursor-pointer ps-4" onclick="sumarCantidad(${plato.id})"></i>
                                 
                             </div>
                         </div>
