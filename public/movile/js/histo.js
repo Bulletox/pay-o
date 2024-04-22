@@ -50,13 +50,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const subpedidosSnapshot = await getDocs(collection(db, `Pedidos/${pedidoId}/subPedidos`));
+        const subpedidos = [];
+
+        subpedidosSnapshot.forEach((subpedidoDoc) => {
+            const subpedido = subpedidoDoc.data();
+            subpedido.id = subpedidoDoc.id;
+            subpedidos.push(subpedido);
+        });
+
+        // Ordena los subpedidos poniendo los de estado 1 primero
+        subpedidos.sort((a, b) => {
+            if (a.estado === 1 && b.estado !== 1) return -1;
+            if (a.estado !== 1 && b.estado === 1) return 1;
+            return 0;
+        });
 
         let htmlContent = '';
 
-        subpedidosSnapshot.forEach((subpedidoDoc) => {
-            const subpedidoId = subpedidoDoc.id;
-            const subpedidoData = subpedidoDoc.data();
-            const estadoSubpedido = subpedidoData.estado || 0; // Asumiendo que 'estado' es un campo en tus documentos de subpedido
+        subpedidos.forEach((subpedido) => {
+            const subpedidoId = subpedido.id;
+            const estadoSubpedido = subpedido.estado || 0; // Asumiendo que 'estado' es un campo en tus documentos de subpedido
 
             // Determinar las clases de borde y color según el estado del subpedido
             let borderClasses = '';
@@ -68,7 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     suspedidoItem = 'rainbow';
                     estadoTexto = 'En proceso';
                     break;
-                    
                     
                 case 2:
                     suspedidoItem = 'suspedidoItem';
@@ -89,7 +101,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     padding: 10px; box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.1);">
                     <p><strong>ID del Subpedido:</strong> ${subpedidoId}</p>
                     <p>Estado: ${estadoTexto}</p>
-                    
                 </div>
             `;
         });
