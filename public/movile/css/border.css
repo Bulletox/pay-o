@@ -1,0 +1,60 @@
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.rainbow::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: linear-gradient(#198754, #50d61b),
+        linear-gradient(#50d61b, #abf009),
+        linear-gradient(#deec10, #f5e50a),
+        linear-gradient(#f5e50a, #ffc107);
+    animation: rotate 4s linear infinite;
+}
+
+.rainbow::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 6px;
+    top: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    background: white;
+    border-radius: 5px;
+    animation: opacityChange 3s infinite alternate;
+}
+
+
+.rainbow {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    /* height: 150px; */
+    border-radius: 10px;
+    overflow: hidden;
+    /* padding: 2rem;
+    margin: 2rem; */
+}
+
+@keyframes opacityChange {
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
