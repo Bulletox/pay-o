@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
+import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,39 +23,40 @@ const db = getFirestore(app);
 async function cargarPedidos() {
     const pedidosContainer = document.querySelector('.row[data-masonry]');
     const pedidosColRef = collection(db, 'Pedidos');
-    let cargasPlatosPromesas = []; // Arreglo para almacenar las promesas de cargarPlatosPedido()
 
     try {
         const querySnapshot = await getDocs(pedidosColRef);
-        querySnapshot.forEach((docPedido) => {
+        for (let docPedido of querySnapshot.docs) {
             const pedidoId = docPedido.id;
-            const tarjetaPedido = document.createElement('div');
-            tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
-            tarjetaPedido.innerHTML = `
-                <div class="card" id="card-${pedidoId}">
-                    <div class="card-header">
-                        <h5 class="card-title pb-0 text-dark mb-0 mt-0">Pedido - ${pedidoId.slice(0, 4)}</h5>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="platos">
-
+            // Crear una consulta para verificar si existen subpedidos con estado 1
+            const subPedidosQuery = query(collection(docPedido.ref, 'subPedidos'), where("estado", "==", 1));
+            const subPedidosSnapshot = await getDocs(subPedidosQuery);
+            if (subPedidosSnapshot.docs.length > 0) {
+                // Crear la tarjeta del pedido ya que existe al menos un subpedido con estado 1
+                const tarjetaPedido = document.createElement('div');
+                tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
+                tarjetaPedido.innerHTML = `
+                    <div class="card" id="card-${pedidoId}">
+                        <div class="card-header">
+                            <h5 class="card-title pb-0 text-dark mb-0 mt-0">Pedido - ${pedidoId.slice(0, 4)}</h5>
                         </div>
-                        <!-- Aquí irán los detalles del pedido -->
-                        <div class="d-flex justify-content-between mt-3">
-                            <button type="button" class="btn btn-outline-success">Confirmar</button>
-                            <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
+                        <div class="card-body pt-0">
+                            <div class="platos">
+                                <!-- Aquí se cargarán los platos del pedido -->
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-success">Confirmar</button>
+                                <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            pedidosContainer.appendChild(tarjetaPedido);
+                `;
+                pedidosContainer.appendChild(tarjetaPedido);
 
-            // Agregar cada promesa de cargarPlatosPedido al arreglo
-            cargasPlatosPromesas.push(cargarPlatosPedido(pedidoId, db));
-        });
-
-        // Espera a que todas las cargas de platos se completen
-        await Promise.all(cargasPlatosPromesas);
+                // Cargar los platos para el pedido
+                cargarPlatosPedido(pedidoId, db);
+            }
+        }
 
         // Ahora que todos los datos están cargados, inicializa Masonry
         var masonryGrid = document.querySelector('.row[data-masonry]');
@@ -73,13 +74,13 @@ async function cargarPedidos() {
 
 async function cargarPlatosPedido(pedidoId, db) {
     const pedidoRef = doc(db, 'Pedidos', pedidoId);
-    const subPedidosColRef = collection(pedidoRef, 'subPedido');
+    const subPedidosQuery = query(collection(pedidoRef, 'subPedidos'), where("estado", "==", 1));
     const platosContainer = document.querySelector(`#card-${pedidoId} .platos`);
     let platosAgrupados = {};
     let platosIndividuales = [];
 
     try {
-        const subPedidosSnapshot = await getDocs(subPedidosColRef);
+        const subPedidosSnapshot = await getDocs(subPedidosQuery);
         for (let subPedidoDoc of subPedidosSnapshot.docs) {
             const platosPedidoColRef = collection(subPedidoDoc.ref, 'platosPedido');
             const platosSnapshot = await getDocs(platosPedidoColRef);
