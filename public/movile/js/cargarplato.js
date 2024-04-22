@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                             <i class="bi bi-dash-circle cursor-pointer pe-4" onclick="restarCantidad()"></i>
                             <!-- Cantidad actual -->
-                            <p class="mb-4" id="cantidadPlatos">1</p>
+                            <p class="mb-4" id="cantidadPlatos">0</p>
                             <!-- Botón de Sumar -->
                             <i class="bi bi-plus-circle cursor-pointer ps-4" onclick="sumarCantidad()"></i>
                                 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Tu carro</title>
+    <link rel="stylesheet" href="css/border.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/disabled.css">
 </head>
@@ -22,22 +23,41 @@
         <header class="fixed-top FFD1A4 position-fixed">
             <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
                 <i class="bi bi-arrow-return-left cursor-pointer" onclick="goBack()"></i>
-                <h1 class="mb-0"><strong>Tu carrito</strong></h1>
+                <h1 class="mb-0"><strong>Historial</strong></h1>
                 <i class="bi bi-info-circle" style="visibility: hidden;"></i>
             </div>
         </header>
 
 
         <div class="contenedorPadre mt-10 m-3" id="comida">
-            <div class="d-flex flex-row align-items-center categoria justify-content-between" style="height: 20px;">
-              
-        </div>
+            <!-- <div class="d-flex flex-row align-items-center categoria justify-content-between" style="height: 50px;">
+                <div class="d-flex flex-row align-items-center iz" style="height: 10%;">
+                    <img class="me-3" src="img/food-restaurant.png" alt="" width="40" height="40">
+                    <h1>Comida</h1>
+                </div>
+                <div class="">
+                    <a href="alergias.html"><img src="img/advertencia.png" alt="" height="40" width="40"></a>
+                </div>
+            </div> -->
+        </div> 
 
-        <div class="contenedorPadre m-3 mb-2" id="platosContainer">
+        <div class="contenedorPadre m-3 mb-2" id="pedidosContainer">
             <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
             </div>
 
         </div>
+
+        <div class="contenedorPadre m-3 mb-2" id="subpedidosContainer">
+            <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
+            </div>
+            <div class="rainbow">
+                <p>Hola</p>
+            </div>
+
+        </div>
+
+        
+
 
         <!-- <div class="contenedorPadre mt-2 m-3" id="comida">
             <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between"
@@ -53,18 +73,18 @@
             </div>
         </div> -->
 
-        <div class="contenedorPadre mt-2 m-3 mb-10" id="carritoItems">
+        <!-- <div class="contenedorPadre mt-2 m-3 mb-10" id="carritoItems">
             <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
             </div>
-        </div>
+        </div> -->
 
-        <div class="abajo d-flex flex-row align-items-center justify-content-center position-fixed fixed-bottom">
+        <!-- <div class="abajo d-flex flex-row align-items-center justify-content-center position-fixed fixed-bottom">
             <button id="confirmarPedidoBtn" class="btn btn-primary w-100 p-4 border rounded-0">Confirmar</button>
-        </div>
+        </div> -->
         
         
     </div>
-    <script type="module" src="js/cargarcarritoV2.js"></script>
+    <script type="module" src="js/histo.js"></script>
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
