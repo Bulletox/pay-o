@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
-import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
+import { getFirestore, collection, getDocs, doc, getDoc, query, where, writeBatch, } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Import Firestore functions
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,31 +22,54 @@ const db = getFirestore(app);
 
 async function cargarPedidos() {
     const pedidosContainer = document.querySelector('.row[data-masonry]');
+    pedidosContainer.innerHTML = ''; // Limpia el contenedor antes de cargar nuevos pedidos
     const pedidosColRef = collection(db, 'Pedidos');
 
     try {
         const querySnapshot = await getDocs(pedidosColRef);
         for (let docPedido of querySnapshot.docs) {
             const pedidoId = docPedido.id;
-            // Crear una consulta para verificar si existen subpedidos con estado 1
+            const pedidoData = docPedido.data();
+
+            let diferenciaEnMinutos = Infinity; // Valor por defecto para pedidos sin timestamp
+            let claseColorHeader = 'bg-secondary'; // Un color por defecto para pedidos sin tiempo definido
+
+            if (pedidoData.timestampCreacion) {
+                // Si timestampCreacion está definido, entonces calcular la diferencia de tiempo
+                const tiempoCreacion = pedidoData.timestampCreacion.toDate();
+                const ahora = new Date();
+                diferenciaEnMinutos = (ahora.getTime() - tiempoCreacion.getTime()) / (1000 * 60);
+
+                if (diferenciaEnMinutos <= 5) {
+                    claseColorHeader = 'bg-success';
+                } else if (diferenciaEnMinutos <= 10) {
+                    claseColorHeader = 'bg-warning';
+                } else {
+                    claseColorHeader = 'bg-danger';
+                }
+            }
+
+            // Consulta para verificar si existen subpedidos con estado 1
             const subPedidosQuery = query(collection(docPedido.ref, 'subPedidos'), where("estado", "==", 1));
             const subPedidosSnapshot = await getDocs(subPedidosQuery);
             if (subPedidosSnapshot.docs.length > 0) {
-                // Crear la tarjeta del pedido ya que existe al menos un subpedido con estado 1
+                // Crear la tarjeta del pedido
                 const tarjetaPedido = document.createElement('div');
                 tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
                 tarjetaPedido.innerHTML = `
-                    <div class="card" id="card-${pedidoId}">
-                        <div class="card-header">
-                            <h5 class="card-title pb-0 text-dark mb-0 mt-0">Pedido - ${pedidoId.slice(0, 4)}</h5>
+                    <div class="card mb-3" id="card-${pedidoId}">
+                        <div class="card-header ${claseColorHeader} text-white">
+                            <h5 class="card-title mb-0">Pedido - ${pedidoId.slice(0, 4)}</h5>
                         </div>
-                        <div class="card-body pt-0">
+                        <div class="card-body mb-0">
                             <div class="platos">
                                 <!-- Aquí se cargarán los platos del pedido -->
                             </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <button type="button" class="btn btn-outline-success">Confirmar</button>
-                                <button type="button" class="btn btn-outline-danger" data-card-id="card-${pedidoId}">Eliminar</button>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-success confirmar" data-pedido-id="${pedidoId}">Confirmar</button>
+                                <button type="button" class="btn btn-danger eliminar" data-card-id="card-${pedidoId}">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -55,21 +78,47 @@ async function cargarPedidos() {
 
                 // Cargar los platos para el pedido
                 cargarPlatosPedido(pedidoId, db);
-            }
-        }
 
-        // Ahora que todos los datos están cargados, inicializa Masonry
-        var masonryGrid = document.querySelector('.row[data-masonry]');
-        if (masonryGrid) {
-            new Masonry(masonryGrid, {
-                itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
-                percentPosition: true
-            });
+                // Agregar controlador de eventos para el botón de confirmación
+                const btnConfirmar = tarjetaPedido.querySelector('.btn-success');
+                btnConfirmar.addEventListener('click', async () => {
+                    const batch = writeBatch(db);
+
+                    subPedidosSnapshot.docs.forEach((subPedidoDoc) => {
+                        batch.update(subPedidoDoc.ref, { estado: 2 });
+                    });
+
+                    const pedidoCard = document.getElementById(`card-${pedidoId}`);
+                    pedidoCard.classList.add('fade-out');
+                    pedidoCard.addEventListener('animationend', async () => {
+                        try {
+                            await batch.commit();
+                            // Eliminar la tarjeta después de la animación
+                            pedidoCard.remove();
+                            // Recalcular el layout de Masonry tras la eliminación de la tarjeta
+                            recalcularMasonry();
+                        } catch (error) {
+                            console.error(`Error al confirmar el pedido ${pedidoId}: `, error);
+                        }
+                    }, { once: true });
+                });
+            }
         }
     } catch (error) {
         console.error("Error al cargar los pedidos: ", error);
     }
 }
+function recalcularMasonry() {
+    const masonryGrid = document.querySelector('.row[data-masonry]');
+    if (masonryGrid) {
+        new Masonry(masonryGrid, {
+            itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
+            percentPosition: true,
+            transitionDuration: '0.3s' // Ajusta la duración de la transición según necesites
+        });
+    }
+}
+
 
 
 async function cargarPlatosPedido(pedidoId, db) {
@@ -101,53 +150,51 @@ async function cargarPlatosPedido(pedidoId, db) {
 
                 const platoInfo = platoSnap.data();
                 const idPlatoPath = platoRef.path;
+                const cantidad = platoInfo.cantidad ? parseInt(platoInfo.cantidad.replace(/\D/g, '')) : 1; // Asume 1 si no hay cantidad definida
 
                 if (platoData.comentarios) {
-                    // Para platos con comentarios, manejarlos individualmente
                     platosIndividuales.push({
                         ...platoData,
                         nombrePlato: platoInfo.nombrePlato,
-                        idPlatoPath
+                        idPlatoPath,
+                        cantidad // Añade la cantidad aquí para individuales
                     });
                 } else {
-                    // Agrupar platos sin comentarios
                     if (!platosAgrupados[idPlatoPath]) {
                         platosAgrupados[idPlatoPath] = {
                             cantidad: 0,
                             nombrePlato: platoInfo.nombrePlato
                         };
                     }
-                    platosAgrupados[idPlatoPath].cantidad += platoData.cantidad;
+                    platosAgrupados[idPlatoPath].cantidad += cantidad; // Suma la cantidad aquí para agrupados
                 }
             }
         }
 
-        // Crear elementos de interfaz para platos agrupados
         for (const [idPlatoPath, platoAgrupado] of Object.entries(platosAgrupados)) {
             const platoElement = document.createElement('div');
             platoElement.classList.add('form-check', 'mb-2');
             platoElement.innerHTML = `
-            <input class="form-check-input" type="checkbox" value="" id="plato-${idPlatoPath}">
-            <label class="form-check-label d-block text-break" for="plato-${idPlatoPath}">
-              ${platoAgrupado.nombrePlato} x${platoAgrupado.cantidad}
-            </label>
-        `;
+                <input class="form-check-input" type="checkbox" value="" id="plato-${idPlatoPath}">
+                <label class="form-check-label d-block text-break" for="plato-${idPlatoPath}">
+                  ${platoAgrupado.nombrePlato} x${platoAgrupado.cantidad}
+                </label>
+            `;
             platosContainer.appendChild(platoElement);
         }
 
-        // Crear elementos de interfaz para platos individuales
         platosIndividuales.forEach(plato => {
             const platoElement = document.createElement('div');
             platoElement.classList.add('form-check', 'mb-2');
             platoElement.innerHTML = `
-        <input class="form-check-input" type="checkbox" value="" id="plato-">
-            <label class="form-check-label d-block text-break" for="plato-">
-                ${plato.nombrePlato} x 1
-            </label>
-                 <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
-                 ${plato.comentarios}
+                <input class="form-check-input" type="checkbox" value="" id="plato-">
+                <label class="form-check-label d-block text-break" for="plato-">
+                    ${plato.nombrePlato} x 1
+                </label>
+                <div class="p-1 bg-warning-subtle border border-warning rounded-3 d-inline-block">
+                ${plato.comentarios}
                 </div>
-        `;
+            `;
             platosContainer.appendChild(platoElement);
         });
 
@@ -169,6 +216,7 @@ window.addEventListener('DOMContentLoaded', () => {
             new Masonry(masonryGrid, {
                 itemSelector: '.col-sm-6.col-md-6.col-lg-4.col-xl-2.col-xxl-2',
                 percentPosition: true
+                
             });
         }
     }).catch(error => console.error("Error durante la inicialización de los pedidos o Masonry: ", error));
