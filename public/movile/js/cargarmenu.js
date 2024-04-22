@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const restaurantesSnapshot = await getDocs(collection(db, 'Restaurantes'));
         let htmlContentcomida = ''; // Se utiliza para acumular el HTML de todos los platos
-        let htmlContentbebida = ''; 
+        let htmlContentbebida = '';
         for (const restauranteDoc of restaurantesSnapshot.docs) {
             const platosSnapshot = await getDocs(collection(restauranteDoc.ref, 'Platos'));
             platosSnapshot.forEach((platoDoc) => {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                             
                             <div class="" style="height: 100%;">
-                                <img src="${plato.imagenUrl || 'img/paella.png'}" alt="" height="125" width="125">
+                                <img src="${plato.imagenUrl || 'img/paellaperomejor.png'}" alt="" height="125" width="125">
                             </div>
                         </div>
                     </a>
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         }
-        platosContainer.innerHTML = htmlContentcomida; 
-        bebidasContainer.innerHTML = htmlContentbebida; 
+        platosContainer.innerHTML = htmlContentcomida;
+        bebidasContainer.innerHTML = htmlContentbebida;
     } catch (error) {
         console.error(error);
     }
