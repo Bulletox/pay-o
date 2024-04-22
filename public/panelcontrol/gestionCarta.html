@@ -41,9 +41,11 @@
 
                     <div class="d-flex flex-column justify-content-center align-items-center"
                         style="background-color: #F2D492;">
-                        <input class="input" type="text" placeholder="Nombre...">
-                        <input class="input" type="text" placeholder="Descripción..." style="padding-bottom: 60%;">
-                        <button class="button">Crear nuevo plato</button>
+                        <input id="nuevoNombre" class="input" type="text" placeholder="Nombre...">
+                        <input id="nuevoPrecio" class="input" type="text" placeholder="Precio...">
+                        <input id="nuevaDescripcion" class="input" type="text" placeholder="Descripción..."
+                            style="padding-bottom: 60%;">
+                        <button id="crearPlato" class="button">Crear nuevo plato</button>
                     </div>
                 </div>
             </nav>
@@ -68,7 +70,7 @@
             </div>
 
             <h1 class="text-dark">Cantidad</h1>
-            <div class="input-group mb-5">
+            <div id="cantidadComida" class="input-group mb-5">
                 <input id="cantidad" type="cantidad" class="form-control border" placeholder="/"
                     aria-label="Text input with dropdown button" disabled>
                 <button class="btn btn-outline-secondary dropdown-toggle ps-5 pe-5 pt-4 pb-4" type="button"
@@ -112,7 +114,7 @@
             </div>
 
             <h1 class="text-dark">Ingredientes</h1>
-            <input class="input w-100" type="text" placeholder="ingredientes..."
+            <input id="ingredientes" class="input w-100" type="text" placeholder="ingredientes..."
                 style="padding-bottom: 50vh; background-color: white !important; margin-bottom: 0 !important;">
         </div>
 </body>
@@ -155,5 +157,6 @@
     window.onload = iniciarSesionAnonima;
 </script>
 <script src="js/sidebar.js"></script>
+<script type="module" src="js/crearPlato.js"></script>
 
 </html>

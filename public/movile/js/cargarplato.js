@@ -4,7 +4,7 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 
 document.addEventListener('DOMContentLoaded', async () => {
     const platoCon = document.getElementById('platoCon');
-    
+
     // Usar URLSearchParams para obtener el ID del plato de la URL
     const queryParams = new URLSearchParams(window.location.search);
     const platoId = queryParams.get('plId');  // Obtiene el platoId de la URL
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="contenedorPadre d-flex flex-column">
                     <div class="contenedorIMG d-flex justify-content-start" style="width: 100%; height: 100%; overflow:hidden">
                         <i class="bi bi-arrow-left-circle-fill cursor-pointer position-fixed fs-2 text-light p-3" onclick="goBack()"></i>
-                        <img class="w-100" src="${plato.imagenUrl}" alt="" style="max-height: 35vh; object-fit: cover;">
+                        <img class="w-100" src="${plato.imagenUrl || 'img/paellaperomejor.png'}" alt="" style="max-height: 35vh; object-fit: cover;">
                     </div>
                     <div class="p-3" id="platoCon">
                         <div class="d-flex justify-content-between align-items-center" style="height: 2em !important; ">
@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <a href="alergias.html"><img src="img/advertencia.png" alt="" height="25" width="25"></a>
                         </div>
                         <div class="d-flex imgAlergias d-flex flex-row mb-4 flex-wrap">
-                        <img class="" src="${plato.Alergenos}" alt="" height=44 width=44 style="object-fit: cover;">
-                        <img class="" src="${plato.Alergenos1}" alt="" height=44 width=44 style="object-fit: cover;">
-                        <img class="" src="${plato.Alergenos2}" alt="" height=44 width=44 style="object-fit: cover;">
-                        <img class="" src="${plato.Alergenos3}" alt="" height=44 width=44 style="object-fit: cover;">
+                        <img class="me-3" src="${plato.Alergenos}" alt="" height=44 width=44 style="object-fit: cover;">
+                        <img class="me-3" src="${plato.Alergenos2}" alt="" height=44 width=44 style="object-fit: cover;">
+                        <img class="me-3" src="${plato.Alergenos3}" alt="" height=44 width=44 style="object-fit: cover;">
+                        <img class="me-3" src="${plato.Alergenos4}" alt="" height=44 width=44 style="object-fit: cover;">
                         </div>
                         <h1>Cantidad:</h1>
                         <p class="mb-4">${plato.Cantidad}</p>
@@ -86,45 +86,45 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
 
-             // Insertar el HTML generado en el contenedor de platos
-             platoCon.innerHTML = htmlPlato;
+            // Insertar el HTML generado en el contenedor de platos
+            platoCon.innerHTML = htmlPlato;
 
-             // Función para sumar la cantidad
-             const cantidadPlatosElement = document.getElementById('cantidadPlatos');
-             const precioPlato = plato.precio;
- 
-             let cantidad = 0; // Cantidad inicial
-             let precioTotal = precioPlato * cantidad; // Precio total inicial
- 
-             const actualizarCantidadYPrecio = () => {
+            // Función para sumar la cantidad
+            const cantidadPlatosElement = document.getElementById('cantidadPlatos');
+            const precioPlato = plato.precio;
+
+            let cantidad = 0; // Cantidad inicial
+            let precioTotal = precioPlato * cantidad; // Precio total inicial
+
+            const actualizarCantidadYPrecio = () => {
                 cantidadPlatosElement.textContent = cantidad;
                 const precioTexto = `${precioTotal.toFixed(2)} €`;
                 document.querySelector('#precio').textContent = precioTexto; // Actualizar el precio fuera del botón
                 document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
             };
-            
- 
-             window.sumarCantidad = () => {
-                 cantidad++;
-                 precioTotal = precioPlato * cantidad;
-                 actualizarCantidadYPrecio();
+
+
+            window.sumarCantidad = () => {
+                cantidad++;
+                precioTotal = precioPlato * cantidad;
+                actualizarCantidadYPrecio();
                 //  anadirPlato();
-             };
- 
-             window.restarCantidad = () => {
-                 if (cantidad > 1) {
-                     cantidad--;
-                     precioTotal = precioPlato * cantidad;
-                     actualizarCantidadYPrecio();
-                 }
-             };
- 
-             actualizarCantidadYPrecio(); // Actualizar la cantidad y el precio inicialmente
-         } else {
-             console.log('No se encontró el plato con la ID especificada.');
-         }
- 
-     } catch (error) {
-         console.error(error);
-     }
- });
+            };
+
+            window.restarCantidad = () => {
+                if (cantidad > 1) {
+                    cantidad--;
+                    precioTotal = precioPlato * cantidad;
+                    actualizarCantidadYPrecio();
+                }
+            };
+
+            actualizarCantidadYPrecio(); // Actualizar la cantidad y el precio inicialmente
+        } else {
+            console.log('No se encontró el plato con la ID especificada.');
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+});
