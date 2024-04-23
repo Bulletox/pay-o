@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const actualizarCantidadYPrecio = () => {
                 cantidadPlatosElement.textContent = cantidad;
                 const precioTexto = `${precioTotal.toFixed(2)} €`;
+                alert(precioTotal)
                 document.querySelector('#precio').textContent = precioTexto; // Actualizar el precio fuera del botón
                 document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
             };
@@ -119,7 +120,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             };
 
-            actualizarCantidadYPrecio(); // Actualizar la cantidad y el precio inicialmente
         } else {
             console.log('No se encontró el plato con la ID especificada.');
         }
