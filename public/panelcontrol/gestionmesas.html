@@ -168,8 +168,8 @@
 
 
                 function actualizarURLConPedido(idInstancia, idPedido) {
-                    // const urlBase = "http://localhost:3000/movile/menu.html";
-                    const urlBase = "http://dam2pay-o.web.app/movile/menu.html";
+                    // const urlBase = "http://localhost:3000/mobile/menu.html";
+                    const urlBase = "http://dam2pay-o.web.app/mobile/menu.html";
                     const urlCompleta = `${urlBase}?iId=${idInstancia}&pId=${idPedido}`;
                     document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
                     generarQR(urlCompleta);

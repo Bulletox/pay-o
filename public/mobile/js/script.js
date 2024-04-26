@@ -31,7 +31,7 @@ const instanciaManager = {
 
     navigate: function (page) {
         if (this.globalIdInstancia && this.globalIdpedido) {
-            location.href = `/movile/${page}?iId=${this.globalIdInstancia}&pId=${this.globalIdpedido}`;
+            location.href = `/mobile/${page}?iId=${this.globalIdInstancia}&pId=${this.globalIdpedido}`;
         } else {
             console.error("Error: No hay IDs de instancia o pedido disponibles.");
         }
