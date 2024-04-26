@@ -59,7 +59,7 @@ async function cargarPedidos() {
                 tarjetaPedido.innerHTML = `
                     <div class="card mb-3" id="card-${pedidoId}">
                         <div class="card-header ${claseColorHeader} text-white">
-                            <h5 class="card-title mb-0">Pedido - ${pedidoId.slice(0, 4)}</h5>
+                            <h5 class="card-title mb-0" style="color: black;">Pedido - ${pedidoId.slice(0, 4)}</h5>
                         </div>
                         <div class="card-body mb-0">
                             <div class="platos">
