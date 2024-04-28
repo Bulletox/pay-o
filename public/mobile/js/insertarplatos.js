@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             comentarios: '',
             idPlato: doc(db, `Restaurantes/Restaurantes/Platos/${platoId}`),
             usuario: uid,
-            timestamp: new Date()
+            timestamp: new Date(),
+            pagado: false
         };
     
         addDoc(platosPedidoRef, nuevoPlato).then(docRef => {
