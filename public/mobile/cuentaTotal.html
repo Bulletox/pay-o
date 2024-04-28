@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/mobile/css/bootstrap.css">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <title>Cuenta total</title>
+    <title>Pagar</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/disabled.css">
+    <link rel="stylesheet" href="css/headerpay.css">
 </head>
 
 <body>
@@ -16,171 +20,68 @@
         <div class="circulo2 animate__animated animate__pulse"></div>
         <div class="circulo3 animate__animated animate__pulse"></div>
     </div>
-    <div class="container animate__animated animate__fadeIn">
+    <div class="container animate__animated animate__fadeIn" id="">
         <header class="fixed-top FFD1A4 position-fixed">
             <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
                 <i class="bi bi-arrow-return-left cursor-pointer" onclick="goBack()"></i>
-                <h1 class="mb-0"><strong>Cuenta total</strong></h1>
-                <img class="cursor-pointer" id="modifyItemsBtn" src="img/carrito-de-compras.png" alt="" height="40"
-                    width="40">
+                <h1 class="mb-0"><strong>Tu carrito</strong></h1>
+                <i class="bi bi-info-circle" style="visibility: hidden;"></i>
+            </div>
+            <div class="radio-inputs justify-content-around">
+                <label class="radio">
+                    <input type="radio" name="radio" checked="" />
+                    <span class="name">PAGAR TODO</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="radio" />
+                    <span class="name">PAGAR LO TUYO</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="radio" />
+                    <span class="name">PERSONALIZADO</span>
+                </label>
             </div>
         </header>
 
-        <!-- Ejemplos de comida -->
 
-        <div class="contenedorPadre mt-10 m-3 mb-10">
-            <div class="d-flex flex-row align-items-center categoria mb-4 justify-content-between">
-                <div class="d-flex flex-row align-items-center iz">
-                    <img class="me-3" src="img/food-restaurant.png" alt="" width="35" height="35">
-                    <h1>Comida</h1>
-                </div>
-                <div class="de">
-                    <a href="/mobile/alergias.html"><img src="img/advertencia.png" alt="" height="35" width="35"></a>
-                </div>
-            </div>
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/paella.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/paella.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/paella.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex flex-row align-items-center categoria mb-4">
-                <img class="me-3" src="img/bebida-de-coco.png" alt="" width="35" height="35">
-                <h1>Bebida</h1>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/cocacola.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/cocacola.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="itemComida d-flex flex-row justify-content-between pb-1 border-bottom mb-3">
-                <div class="descript d-flex flex-column cursor-pointer" onclick="visuaComida()">
-                    <strong>Paella</strong>
-                    <p class="mt-0"><strong>2.35 €</strong></p>
-                    <div class="short">
-                        <p class="ellipsis">Paella valenciana auténtica blaasd basdasdasdasddsaddasdsdla bla bla lorem
-                            ipsum...</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="cursor-pointer" style="height: 100%;" onclick="visuaComida()">
-                        <img src="img/cocacola.png" alt="" height="125" width="125">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-center ms-3">
-                        <i class="bi bi-dash-circle cursor-pointer"></i>
-                        <p>1</p>
-                        <i class="bi bi-plus-circle cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
         <div class="abajo d-flex flex-row align-items-center justify-content-center position-fixed fixed-bottom">
-            <button class="btn btn-primary w-100 p-4 border rounded-0 fs-2">Pagar</button>
+            <button id="confirmarPedidoBtn" class="btn btn-primary w-100 p-4 border rounded-0">Confirmar</button>
         </div>
     </div>
+    <div class="master-container">
+        <div class="card cart">
+            <label class="title">Your cart</label>
+            <div id="products" class="products" >
+                
+            </div>
+        </div>
 
-    <!-- Elementos para evitar errores -->
-    <div id="addItemsBtn"></div>
-    <div id="payBtn"></div>
-    <div id="contenedorPadre"></div>
+        <!-- <div class="card coupons">
+          <label class="title">Apply coupons</label>
+          <form class="form">
+              <input type="text" placeholder="Apply your coupons here" class="input_field">
+              <button>Apply</button>
+          </form>
+        </div> -->
 
+        <div class="card checkout">
+            <label class="title">Checkout</label>
+            <div class="details">
+                <span>Your cart subtotal:</span>
+                <span>0€</span>
+                <!-- <span>Discount through applied coupons:</span>
+                <span>0$</span> -->
+                <span>IVA 10%:</span>
+                <span>0€</span>
+            </div>
+            <div class="checkout--footer">
+                <label class="price">0</label>
+                <button class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/cargarcuenta.js"></script>
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
