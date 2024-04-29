@@ -90,35 +90,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             platoCon.innerHTML = htmlPlato;
 
             // Función para sumar la cantidad
-            const cantidadPlatosElement = document.getElementById('cantidadPlatos');
-            const precioPlato = plato.precio;
+            // const cantidadPlatosElement = document.getElementById('cantidadPlatos');
+            // const precioPlato = plato.precio;
 
-            let cantidad = 0; // Cantidad inicial
-            let precioTotal = precioPlato * cantidad; // Precio total inicial
+            // let cantidad = 0; // Cantidad inicial
+            // let precioTotal = precioPlato * cantidad; // Precio total inicial
 
-            const actualizarCantidadYPrecio = () => {
-                cantidadPlatosElement.textContent = cantidad;
-                const precioTexto = `${precioTotal.toFixed(2)} €`;
-                alert(precioTotal)
-                document.querySelector('#precio').textContent = precioTexto; // Actualizar el precio fuera del botón
-                document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
-            };
+            // const actualizarCantidadYPrecio = () => {
+            //     cantidadPlatosElement.textContent = cantidad;
+            //     const precioTexto = `${precioTotal.toFixed(2)} €`;
+            //     // alert(precioTotal)
+            //     document.querySelector('#precio').textContent = precioTexto; // Actualizar el precio fuera del botón
+            //     document.querySelector('.btn.btn-primary').textContent = `Añadir ${precioTexto}`; // Actualizar el texto del botón
+            // };
 
 
-            window.sumarCantidad = () => {
-                cantidad++;
-                precioTotal = precioPlato * cantidad;
-                actualizarCantidadYPrecio();
-                //  anadirPlato();
-            };
+            // window.sumarCantidad = () => {
+            //     cantidad++;
+            //     precioTotal = precioPlato * cantidad;
+            //     actualizarCantidadYPrecio();
+            //     //  anadirPlato();
+            // };
 
-            window.restarCantidad = () => {
-                if (cantidad > 1) {
-                    cantidad--;
-                    precioTotal = precioPlato * cantidad;
-                    actualizarCantidadYPrecio();
-                }
-            };
+            // window.restarCantidad = () => {
+            //     if (cantidad > 1) {
+            //         cantidad--;
+            //         precioTotal = precioPlato * cantidad;
+            //         actualizarCantidadYPrecio();
+            //     }
+            // };
 
         } else {
             console.log('No se encontró el plato con la ID especificada.');
