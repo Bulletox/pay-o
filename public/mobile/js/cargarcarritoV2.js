@@ -162,24 +162,37 @@ async function confirmarPedido(pedidoId, db, unsub) {
 }
 
 function crearSubPedido(idPedido, db) {
-    let estadoSubPedido = 0; // Estado inicial para el subPedido
-    let timestampCreacionSubPedido = Timestamp.fromDate(new Date()); // Fecha y hora actual
-
-    // Creamos el subPedido
     const subPedidosRef = collection(db, `/Pedidos/${idPedido}/subPedidos`);
-    addDoc(subPedidosRef, {
-        estado: estadoSubPedido,
-        timestampCreacion: timestampCreacionSubPedido
-    }).then((docRefSubPedido) => {
-        console.log("SubPedido creado con ID: ", docRefSubPedido.id);
 
-        // Creamos un documento de marcador de posición en la subcolección "platosPedido"
-        const platosPedidoRef = collection(db, `/Pedidos/${idPedido}/subPedidos/${docRefSubPedido.id}/platosPedido`);
-        return addDoc(platosPedidoRef, {});
-    }).then((docRefPlato) => {
-        console.log("Documento de marcador de posición en platosPedido creado con ID: ", docRefPlato.id);
-    }).catch((error) => {
-        console.error("Error creando el subPedido o el documento de marcador de posición: ", error);
-    });
+    // Primero buscamos si ya existe un subPedido con estado 0
+    getDocs(query(subPedidosRef, where("estado", "==", 0)))
+        .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+                // No hay subPedidos con estado 0, podemos crear uno nuevo
+                let estadoSubPedido = 0; // Estado inicial para el subPedido
+                let timestampCreacionSubPedido = Timestamp.fromDate(new Date()); // Fecha y hora actual
+
+                addDoc(subPedidosRef, {
+                    estado: estadoSubPedido,
+                    timestampCreacion: timestampCreacionSubPedido
+                }).then((docRefSubPedido) => {
+                    console.log("SubPedido creado con ID: ", docRefSubPedido.id);
+
+                    // Creamos un documento de marcador de posición en la subcolección "platosPedido"
+                    const platosPedidoRef = collection(db, `/Pedidos/${idPedido}/subPedidos/${docRefSubPedido.id}/platosPedido`);
+                    return addDoc(platosPedidoRef, {});
+                }).then((docRefPlato) => {
+                    console.log("Documento de marcador de posición en platosPedido creado con ID: ", docRefPlato.id);
+                }).catch((error) => {
+                    console.error("Error creando el subPedido o el documento de marcador de posición: ", error);
+                });
+            } else {
+                console.log("Ya existe un subPedido con estado 0, no se creará uno nuevo.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error al consultar subPedidos existentes: ", error);
+        });
 }
+
 
