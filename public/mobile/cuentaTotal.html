@@ -36,10 +36,6 @@
                     <input type="radio" name="radio" />
                     <span class="name">PAGAR LO TUYO</span>
                 </label>
-                <label class="radio">
-                    <input type="radio" name="radio" />
-                    <span class="name">PERSONALIZADO</span>
-                </label>
             </div>
         </header>
 
@@ -49,9 +45,9 @@
             <button id="confirmarPedidoBtn" class="btn btn-primary w-100 p-4 border rounded-0">Confirmar</button>
         </div>
     </div>
-    <div class="master-container">
+    <div class="master-container d-flex flex-row align-items-center justify-content-center" >
         <div class="card cart">
-            <label class="title">Your cart</label>
+            
             <div id="products" class="products" >
                 
             </div>
@@ -65,7 +61,7 @@
           </form>
         </div> -->
 
-        <div class="card checkout">
+        <div class="card checkout position-fixed fixed-bottom" >
             <label class="title">Checkout</label>
             <div class="details">
                 <span>Your cart subtotal:</span>
@@ -75,13 +71,14 @@
                 <span>IVA 10%:</span>
                 <span>0€</span>
             </div>
-            <div class="checkout--footer">
+            <div class="checkout--footer ">
                 <label class="price">0</label>
-                <button class="checkout-btn">Checkout</button>
+                <button class="checkout-btn" style="background: #F29559;">Confirmar</button>
             </div>
         </div>
     </div>
     <script type="module" src="js/cargarcuenta.js"></script>
+    
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
