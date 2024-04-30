@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                             
                             <div class="" style="height: 100%;">
-                                <img src="${plato.imagenUrl || 'img/paellaperomejor.png'}" alt="" height="125" width="125">
+                                <img class= "rounded-2" src="${plato.imagenUrl || 'img/paellaperomejor.png'}" alt="" height="125" width="125">
                             </div>
                         </div>
                     </a>

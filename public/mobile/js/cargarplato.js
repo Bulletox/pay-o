@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="info p-3 vh-50" style="border-radius: 0.5em; background-color: #ffffff; margin: 0; padding: 0; height: 100%;">
                         <div class="d-flex flex-row justify-content-between">
                             <h1 class="alergias">Alérgenos:</h1>
-                            <a href="alergias.html"><img src="img/advertencia.png" alt="" height="25" width="25"></a>
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                            <a style="margin: 0; padding: 0;" href="alergias.html"><img src="img/advertencia.png" alt="" height="25" width="25"></a>
+                            <p style="margin: 0; padding: 0; font-size: 0.8em;"><strong>Alérgenos</strong></p>
+                        </div>
                         </div>
                         <div class="d-flex imgAlergias d-flex flex-row mb-4 flex-wrap">
                         <img class="me-3" src="${plato.Alergenos}" alt="" height=44 width=44 style="object-fit: cover;">

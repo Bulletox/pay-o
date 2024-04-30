@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Panel de Control</title>
     <link rel="stylesheet" href="panelcontrol/css/main.css">
+    <link rel="stylesheet" href="panelcontrol/css/land.css">
+    <link rel="stylesheet" href="panelcontrol/css/button.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="panelcontrol/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -25,18 +27,63 @@
                 <img class="me-3 ms-5" src="/panelcontrol/img/logo.png" alt="" height="60" width="60">
                 <h1 class="text-dark fs-1"><strong>Pay - o</strong></h1>
             </a>
-            <div class="d-flex flex-row align-items-center justify-content-between">
+            <div class="d-flex flex-row align-items-center justify-content-between" style="margin-bottom: 1em !important; margin-right: 1em !important;">
                 <a style="color: black;" href="panelcontrol/index.html">
-                    <p class="fs-4 me-4 mt-2 user-select-none cursor-pointer"><strong>Iniciar sesión</strong></p>
+                    <button class="animated-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                        <span class="text">Acceder</span>
+                        <span class="circle"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                      </button>
                 </a>
-
-                <button class="btn btn-primary mb-1 me-5 rounded-5"><strong>Comenzar gratis</strong></button>
             </div>
         </header>
     </div>
 
     <div class="d-flex flex-row align-items-center mb-4 bg-body-tertiary rounded-3">
-        <div class="col-7">
+        <div class="wrapper" style="background-color: #F2D492 !important;">
+            <div class="text-overlay" >
+            <div class="header">
+              <h2 id="logo">Pay - 0</h2>
+              <nav id="nav-menu" class="nav-menu">
+                
+                
+              </nav>
+              
+              
+            </div>
+              
+            <div class="main-content">
+              <h1 id="main-header">Gestión</h1>
+              <h3 id="sub-heading">& Pedidos</h3>
+            </div>     
+           </div>
+            
+            <div class="container1"></div>
+            
+            <div class="container2">
+               <img src="panelcontrol/img/land.jpg" alt="stack of clothes on a chair" class="image" id="image1-js">
+            </div>
+            <div class="container3">
+              <div class="container4">
+                <img src="panelcontrol/img/land2.jpg" alt="Row of different coloured jumpers" class="image" id="image2-js">
+              </div>
+              <div id="container5" class="container5">
+                <div class="text-container">
+                <h2 class="heading" id="heading" style="color: black !important;">100% <br> Movíl </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- <div class="col-7">
             <div class="d-flex flex-column align-items-start" style="max-width: 800px; margin-left: 15%;">
                 <h1 class="display-5 fw-bold text-dark">¡Simplifica tu gestión de pedidos con nuestra plataforma para
                     buffets!</h1>
@@ -49,9 +96,23 @@
         </div>
         <div class="">
             <img class="w-100 h-100" src="panelcontrol/img/imagen_restaurante.jpg" alt="">
-        </div>
+        </div> -->
     </div>
 
+    <div id="contenido" class="container d-flex justify-content-center align-items-center">
+        <img src="panelcontrol/img/javier.jpg" alt="" style="width: 40%;">
+        <div class="col-lg-3" style="margin-right: 1em; margin-left: 2em;">
+            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+            </svg>
+            <h2 class="fw-normal">Heading</h2>
+            <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+            
+        </div>
+        
+    </div>
+    
     <!-- Los cols -->
 
     <div class="container mb-5 mt-5">
@@ -92,7 +153,7 @@
             </div>
             <div class="col">
                 <div class="card2 shadow-sm rounded-top">
-                    <img src="panelcontrol/img/mobile.jpg" alt="" height="250" class="rounded-top">
+                    <img src="panelcontrol/img/comida.jpg" alt="" height="250" class="rounded-top">
 
                     <div class="card-body">
                         <h1 class="text-dark mb-2" style="max-height: 2.5m; min-height: 2.5em;"> Potencia tu buffet con
@@ -131,6 +192,7 @@
         </footer>
     </div>
 </body>
+<script src="panelcontrol/js/land.js" type="module"></script>
 <script src="panelcontrol/js/cargarmesas.js" type="module"></script>
 <script src="panelcontrol/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"

@@ -141,3 +141,13 @@
   .input_field[type=number] {
     -moz-appearance: textfield;
   }
+
+  @media (max-width: 450px) {
+    .payment--options {
+      width: calc(100% - 20px);
+      display: grid;
+      grid-template-columns: none;
+      gap: 10px;
+      padding: 0px;
+    }
+  }

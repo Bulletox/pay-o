@@ -1,4 +1,4 @@
-Cacahuete = "https://firebasestorage.googleapis.com/v0/b/dam2pay-o.appspot.com/o/Al%C3%A9rgenos%2Falergia-a-los-cacahuetes.png?alt=media&token=a1008172-37aa-462b-9c34-bca534bcee40"
+Cacahuete = "https://firebasestorage.googleapis.com/v0/b/dam2pay-o.appspot.com/o/Al%C3%A9rgenos%2Falergia-a-los-cacahuetes.png?alt=media&token=7fdb9294-9d03-4470-ba47-2310d843ab33"
 Altramuces = "https://firebasestorage.googleapis.com/v0/b/dam2pay-o.appspot.com/o/Al%C3%A9rgenos%2Faltramuces.png?alt=media&token=9ddf297f-39c2-484c-9ded-a2276fc12da7"
 Apio = "https://firebasestorage.googleapis.com/v0/b/dam2pay-o.appspot.com/o/Al%C3%A9rgenos%2Fapio.png?alt=media&token=1cae102d-0808-4d53-9678-2243be447f90"
 Moluscos = "https://firebasestorage.googleapis.com/v0/b/dam2pay-o.appspot.com/o/Al%C3%A9rgenos%2Fcascara.png?alt=media&token=aa35c56d-d091-4d9c-942c-c06778d4c506"
