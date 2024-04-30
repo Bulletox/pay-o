@@ -63,11 +63,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             cantidad++;
             document.getElementById('cantidadPlatos').textContent = cantidad;
             botonSumar.classList.remove('disabled'); // Quita la clase 'disabled' cuando se completa la acción
+    
+            // Actualiza el precio total
+            actualizarPrecioTotal(cantidad);
+    
         }).catch(error => {
             console.error("Error al agregar plato: ", error);
-            botonSumar.classList.remove('disabled'); // Asegúrate de quitar la clase 'disabled' incluso si hay un error
+            botonSumar.classList.remove('disabled'); 
         });
     };
+    
+    function actualizarPrecioTotal(cantidad) {
+        const precioUnitario = parseFloat(document.querySelector('.precio').textContent.split(' ')[0]); 
+        const precioTotal = precioUnitario * cantidad;
+        document.getElementById('precio').textContent = `Añadir ${precioTotal.toFixed(2)} €`; 
+    }
     
     
     window.restarCantidad = async () => {
@@ -92,6 +102,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.log("Plato eliminado con ID: ", lastDoc.id);
                 cantidad--;
                 document.getElementById('cantidadPlatos').textContent = cantidad;
+                
+                // Actualiza el precio total
+                actualizarPrecioTotal(cantidad);
+    
             } else {
                 console.log("No hay platos que coincidan para eliminar.");
             }
@@ -100,6 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             botonRestar.classList.remove('disabled'); // Asegúrate de quitar la deshabilitación si no se realiza ninguna acción
         }
     };
+    
     
         
 });

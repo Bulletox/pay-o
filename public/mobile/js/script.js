@@ -11,7 +11,7 @@ const instanciaManager = {
     handleLoad: function () {
         const queryParams = new URLSearchParams(window.location.search);
         this.globalIdInstancia = queryParams.get('iId');
-        this.globalIdpedido = queryParams.get('pId'); 
+        this.globalIdpedido = queryParams.get('pId');
         if (this.globalIdInstancia && this.globalIdpedido) { // Verifica ambos IDs
             console.log("ID de la Instancia:", this.globalIdInstancia);
             console.log("ID del Pedido:", this.globalIdpedido);
@@ -21,12 +21,11 @@ const instanciaManager = {
     },
 
     setupEventListeners: function () {
+        document.getElementById('modifyItemsBtn').addEventListener('click', () => this.navigate('carrito.html'));
         document.getElementById('historialItemsBtn').addEventListener('click', () => this.navigate('historial.html'));
         document.getElementById('addItemsBtn').addEventListener('click', () => this.navigate('comida.html'));
-        document.getElementById('modifyItemsBtn').addEventListener('click', () => this.navigate('carrito.html'));
         document.getElementById('payBtn').addEventListener('click', () => this.navigate('cuentaTotal.html'));
         document.getElementById('contenedorPadre').addEventListener('click', () => this.navigate('visua.html'));
-        
     },
 
     navigate: function (page) {
