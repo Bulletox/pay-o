@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <h6 class="text-muted">Cantidad Total <strong id="cantidadTotalComensales">${count}</strong></h6>
       </div>
     </div>
-    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="" style="width: 125px; height: 125px;">
+    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="" style="height: 125px; width: 125px; ">
   </div>
 </div>
 
@@ -152,8 +152,8 @@ async function confirmarPedido(pedidoId, db, unsub) {
         });
 
         alert('Pedido confirmado correctamente');
+        await crearSubPedido(pedidoId, db); // Crear un nuevo subpedido 
         unsub();// Detener la escucha de cambios en la colección de platosPedido
-        crearSubPedido(pedidoId, db); // Crear un nuevo subpedido 
         window.history.back();
 
     } catch (error) {
@@ -166,7 +166,7 @@ async function crearSubPedido(idPedido, db) {
     try {
         // Usamos async/await para esperar la consulta
         const querySnapshot = await getDocs(query(subPedidosRef, where("estado", "==", 0)));
-
+        console.log("SubPedidos con estado 0:", querySnapshot.docs.map(doc => doc.id));
         if (querySnapshot.empty) {
             // No hay subPedidos con estado 0, podemos crear uno nuevo
             let estadoSubPedido = 0; // Estado inicial para el subPedido

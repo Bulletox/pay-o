@@ -111,7 +111,7 @@ function updateUI(conteoPlatos, productsContainer) {
 
         htmlContent += `
         <div class="product">
-    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="" style="width: 60px; height: 60px;">
+    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="" style="width: 60px; height: 60px; object-fit: cover;">
     <div>
         <span>${nombrePlato}</span>
     </div>
