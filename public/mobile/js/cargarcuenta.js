@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 // Obtiene la referencia de Firestore
 const db = getFirestore(app);
 
-async function buscarSubpedidosConEstadoCero(pedidoId, db) {
+async function buscarSubpedidosConEstado2(pedidoId, db) {
     const subpedidosRef = collection(db, `/Pedidos/${pedidoId}/subPedidos`);
     const q = query(subpedidosRef, where('estado', '==', 2));
     try {
@@ -31,72 +31,70 @@ async function buscarSubpedidosConEstadoCero(pedidoId, db) {
 }
 // Obtiene todos los subpedidos con estado 0
 document.addEventListener('DOMContentLoaded', async () => {
-    // Asegúrate de que el identificador aquí coincida exactamente con el que está en el HTML
     const productsContainer = document.getElementById('products');
-
     if (!productsContainer) {
         console.error("El elemento 'products' no existe en el DOM.");
         return;
     }
 
-    // Obtiene los parámetros de la URL
     const queryParams = new URLSearchParams(window.location.search);
     const pedidoId = queryParams.get('pId');
-
-    // Obtiene los IDs de todos los subpedidos con estado 0
-    const subPedidoIds = await buscarSubpedidosConEstadoCero(pedidoId, db);
+    const subPedidoIds = await buscarSubpedidosConEstado2(pedidoId, db);
 
     if (subPedidoIds.length === 0) {
-        console.error('No se encontraron subpedidos con estado 0.');
-        console.error('Creando un nuevo subpedido...');
-        crearSubPedido(pedidoId, db); // Crear un nuevo subpedido
+        console.error('No se encontraron subpedidos con estado 2.');
         return;
     }
 
+    let conteoGlobalPlatos = {};  // Este objeto acumulará los platos de todos los subpedidos
+    const unsubscribeFunctions = [];  // Guarda todas las funciones para desuscribirse
+
     subPedidoIds.forEach(subPedidoId => {
-        // Suscribe a los cambios de la colección de platos de cada subpedido
-        const unsub = onSnapshot(collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`), (snapshot) => {
-            const conteoPlatos = {}; // Reiniciar el contador de platos cada vez
-            const confirmarBtn = document.getElementById('confirmarPedidoBtn');
-            confirmarBtn.addEventListener('click', () => {
-                confirmarPedido(pedidoId, db, unsub);
-            });
-            snapshot.docs.forEach((doc) => {
+        const unsubscribe = onSnapshot(collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`), snapshot => {
+            snapshot.docs.forEach(doc => {
                 const platoData = doc.data();
-                const platoRef = platoData.idPlato; // Esta es la referencia del documento
-                const pagado = platoData.pagado; // Asume que el campo se llama 'pagado'
-    
-                if (platoRef && !pagado) { // Solo procesar si el plato no está pagado
+                const platoRef = platoData.idPlato;
+                const pagado = platoData.pagado;
+
+                if (platoRef && !pagado) {
                     getDoc(platoRef).then(platoDocSnapshot => {
                         if (platoDocSnapshot.exists()) {
                             const plato = platoDocSnapshot.data();
-                            const nombrePlato = plato.nombrePlato; // Asume que el campo se llama 'nombrePlato'
-                            const imagenUrl = plato.imagenUrl; // Asume que el campo se llama 'imagenUrl'
-                            const precio = plato.precio; // Asume que el campo se llama 'precio'
-    
-                            // Actualizar el conteo acumulativo de platos
-                            if (!conteoPlatos[nombrePlato]) {
-                                conteoPlatos[nombrePlato] = {
+                            const nombrePlato = plato.nombrePlato;
+                            const imagenUrl = plato.imagenUrl;
+                            const precio = plato.precio;
+
+                            if (!conteoGlobalPlatos[nombrePlato]) {
+                                conteoGlobalPlatos[nombrePlato] = {
                                     count: 0,
                                     imageUrl: imagenUrl,
                                     totalPrecio: 0
                                 };
                             }
-                            conteoPlatos[nombrePlato].count += 1;
-                            conteoPlatos[nombrePlato].totalPrecio = conteoPlatos[nombrePlato].count * precio;
-    
-                            // Actualizar la UI
-                            updateUI(conteoPlatos, productsContainer); // Pasa el contenedor como argumento a la función
+                            conteoGlobalPlatos[nombrePlato].count += 1;
+                            conteoGlobalPlatos[nombrePlato].totalPrecio = conteoGlobalPlatos[nombrePlato].count * precio;
+
+                            // Solo actualizamos la UI una vez que todos los documentos se han procesado
+                            updateUI(conteoGlobalPlatos, productsContainer);
                         } else {
                             console.error(`No se encontró el plato con la referencia: ${platoRef.path}`);
                         }
                     });
                 }
             });
-        }, (error) => {
+        }, error => {
             console.error("Error al escuchar los cambios: ", error);
         });
+        unsubscribeFunctions.push(unsubscribe);  // Guardar función para desuscribirse más tarde
     });
+
+    const confirmarBtn = document.getElementById('confirmarPedidoBtn');
+    if (confirmarBtn) {
+        confirmarBtn.addEventListener('click', () => {
+            // Aquí podrías llamar a una función para confirmar el pedido, si lo necesitas
+            unsubscribeFunctions.forEach(unsub => unsub());  // Desuscribirse de todos los observadores
+        });
+    }
 });
 
 function updateUI(conteoPlatos, productsContainer) {

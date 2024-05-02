@@ -34,19 +34,16 @@ const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", async () => {
   const platosContainer = document.getElementById("platosContainer");
-
   if (!platosContainer) {
     console.error("El elemento 'platosContainer' no existe en el DOM.");
     return;
   }
 
-  // Obtiene los parámetros de la URL
   const queryParams = new URLSearchParams(window.location.search);
   const pedidoId = queryParams.get("pId");
 
-  // Obtén el ID del último subpedido con estado 0
+  // Obtiene el ID del último subpedido con estado 0
   const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
-
   if (!subPedidoId) {
     console.error("No se pudo obtener el último subpedido con estado 0.");
     console.error("Creando un nuevo subpedido...");
@@ -54,21 +51,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Suscribe a los cambios de la colección de platos del subpedido
+  // Suscribir a los cambios de la colección de platos del subpedido
   const unsub = onSnapshot(
-    collection(
-      db,
-      `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`
-    ),
+    collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`),
     (snapshot) => {
       const conteoPlatos = {}; // Reiniciar el contador de platos cada vez
       snapshot.docs.forEach((doc) => {
         const platoData = doc.data();
         const platoRef = platoData.idPlato; // Esta es la referencia del documento
-        const confirmarBtn = document.getElementById('confirmarPedidoBtn');
-        confirmarBtn.addEventListener('click', () => {
-            confirmarPedido(pedidoId, db, unsub);
-        });
         if (platoRef) {
           getDoc(platoRef).then((platoDocSnapshot) => {
             if (platoDocSnapshot.exists()) {
@@ -90,9 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               // Actualizar la UI
               updateUI(conteoPlatos);
             } else {
-              console.error(
-                `No se encontró el plato con la referencia: ${platoRef.path}`
-              );
+              console.error(`No se encontró el plato con la referencia: ${platoRef.path}`);
             }
           });
         }
@@ -103,33 +91,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   );
 
+  // Asignar manejador de eventos al botón confirmar solo una vez
+  const confirmarBtn = document.getElementById('confirmarPedidoBtn');
+  if (confirmarBtn) {
+    confirmarBtn.removeEventListener('click', confirmarPedidoHandler);
+    confirmarBtn.addEventListener('click', confirmarPedidoHandler);
+  }
+
+  function confirmarPedidoHandler() {
+    confirmarPedido(pedidoId, db, unsub);
+  }
+
   function updateUI(conteoPlatos) {
     let htmlContent = "";
     Object.entries(conteoPlatos).forEach(([idPlato, data]) => {
       const { nombre, count, imageUrl } = data;
       htmlContent += `
 <div class="card mb-4 shadow-sm" style="padding: 10px; box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);">
-    <div class="card-body d-flex justify-content-between">
-        <div>
-            <h5 class="card-title">${nombre}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Cantidad:</h6>
-            <div class="d-flex align-items-center">
-                <button class="btn btn-outline-secondary btn-sm" id="restar-${idPlato}" onclick="restarCantidad('${idPlato}')">
-                    <i class="bi bi-dash-circle"></i>
-                </button>
-                <span class="mx-3 fs-4" id="cantidadPlatosUsuario-${idPlato}">${count}</span>
-                <button class="btn btn-outline-secondary btn-sm" id="sumar-${idPlato}" onclick="sumarCantidad('${idPlato}')">
-                    <i class="bi bi-plus-circle"></i>
-                </button>
-            </div>
-            <div class="mt-2">
-                <h6 class="text-muted">Cantidad Total <strong id="cantidadTotalComensales-${idPlato}">${count}</strong></h6>
-            </div>
-        </div>
-        <img src="${
-          imageUrl || "img/paella.png"
-        }" class="img-fluid rounded" alt="${nombre}" style="height: 125px; width: 125px;">
+  <div class="card-body d-flex justify-content-between">
+    <div>
+      <h5 class="card-title">${nombre}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Cantidad:</h6>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary btn-sm" id="restar-${idPlato}" onclick="restarCantidad('${idPlato}')">
+          <i class="bi bi-dash-circle"></i>
+        </button>
+        <span class="mx-3 fs-4" id="cantidadPlatosUsuario-${idPlato}">${count}</span>
+        <button class="btn btn-outline-secondary btn-sm" id="sumar-${idPlato}" onclick="sumarCantidad('${idPlato}')">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+      <div class="mt-2">
+        <h6 class="text-muted">Cantidad Total <strong id="cantidadTotalComensales-${idPlato}">${count}</strong></h6>
+      </div>
     </div>
+    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="${nombre}" style="height: 125px; width: 125px;">
+  </div>
 </div>`;
     });
 
@@ -162,8 +159,11 @@ async function buscarUltimoSubpedidoConEstadoCero(pedidoId, db) {
 
 // Asegúrate de tener un botón o algún disparador que llame a esta función
 async function confirmarPedido(pedidoId, db, unsub) {
+  console.log("Inicio de la confirmación del pedido...");
   const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
+
   if (!subPedidoId) {
+    console.log("No hay subpedido en estado 0 para confirmar.");
     alert("No hay subpedido para confirmar.");
     return;
   }
@@ -171,12 +171,13 @@ async function confirmarPedido(pedidoId, db, unsub) {
   const subPedidoRef = doc(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}`);
 
   try {
+    console.log("Actualizando el estado del subpedido...");
     await updateDoc(subPedidoRef, {
       estado: parseInt(1), // Cambiar el estado del subpedido a "1" (confirmado)
     });
 
-    
-    await crearSubPedido(pedidoId, db); // Crear un nuevo subpedido
+    console.log("Verificando si es necesario crear un nuevo subpedido...");
+    await verificarYCrearSubPedido(pedidoId, db);
     unsub(); // Detener la escucha de cambios en la colección de platosPedido
     alert("Pedido confirmado correctamente");
     window.history.back();
@@ -185,48 +186,39 @@ async function confirmarPedido(pedidoId, db, unsub) {
   }
 }
 
-async function crearSubPedido(idPedido, db) {
+async function verificarYCrearSubPedido(idPedido, db) {
   const subPedidosRef = collection(db, `/Pedidos/${idPedido}/subPedidos`);
-  console.log("Consultando subPedidos con estado 0...");
   try {
-    // Usamos async/await para esperar la consulta
     const querySnapshot = await getDocs(
       query(subPedidosRef, where("estado", "==", 0))
     );
-    console.log(
-      "SubPedidos con estado 0:",
-      querySnapshot.docs.map((doc) => doc.id)
-    );
+    console.log("Verificación de subpedidos en estado 0...");
+
     if (querySnapshot.empty) {
-      // No hay subPedidos con estado 0, podemos crear uno nuevo
-      let estadoSubPedido = 0; // Estado inicial para el subPedido
-      let timestampCreacionSubPedido = Timestamp.fromDate(new Date()); // Fecha y hora actual
-
-      // Creación del nuevo subPedido
-      const docRefSubPedido = await addDoc(subPedidosRef, {
-        estado: estadoSubPedido,
-        timestampCreacion: timestampCreacionSubPedido,
-      });
-      console.log("SubPedido creado con ID: ", docRefSubPedido.id);
-
-      // Crear un documento de marcador de posición en la subcolección "platosPedido"
-      const platosPedidoRef = collection(
-        db,
-        `/Pedidos/${idPedido}/subPedidos/${docRefSubPedido.id}/platosPedido`
-      );
-      const docRefPlato = await addDoc(platosPedidoRef, {});
-      console.log(
-        "Documento de marcador de posición en platosPedido creado con ID: ",
-        docRefPlato.id
-      );
+      console.log("No hay subpedidos en estado 0, creando uno nuevo...");
+      await crearSubPedido(idPedido, db);
     } else {
       console.log(
-        "Ya existe un subPedido con estado 0, no se creará uno nuevo."
+        "Ya existe un subPedido en estado 0, no se creará uno nuevo. Subpedidos actuales:", 
+        querySnapshot.docs.map(doc => doc.id)
       );
     }
   } catch (error) {
-    console.error("Error al consultar o crear subPedidos: ", error);
+    console.error("Error al verificar subpedidos: ", error);
   }
+}
+
+async function crearSubPedido(idPedido, db) {
+  const subPedidosRef = collection(db, `/Pedidos/${idPedido}/subPedidos`);
+  let estadoSubPedido = 0; // Estado inicial para el subPedido
+  let timestampCreacionSubPedido = Timestamp.fromDate(new Date()); // Fecha y hora actual
+
+  // Creación del nuevo subPedido
+  const docRefSubPedido = await addDoc(subPedidosRef, {
+    estado: estadoSubPedido,
+    timestampCreacion: timestampCreacionSubPedido,
+  });
+  console.log("SubPedido creado con ID: ", docRefSubPedido.id);
 }
 
 async function iniciarSesionAnonima(auth) {
