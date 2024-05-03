@@ -296,6 +296,43 @@ video {
     margin-bottom: 10px;
 }
 
-.video-overlay p {    color: white;
+.video-overlay p {
+    color: white;
     font-size: 1.2em;
+}
+
+#video {
+    font-weight: bold;
+}
+
+#oediv {
+    font-weight: bold;
+}
+
+.hoverC{
+    transition: .5s;
+    cursor: pointer;
+}
+
+.hoverC:hover{
+    font-size: 2em !important;
+}
+
+.textA {
+    animation: cursorBlink 1s infinite alternate;
+    /* Animación del cursor */
+}
+
+@keyframes cursorBlink {
+    0% {
+        border-right: 0.1em solid transparent;
+    }
+
+    50% {
+        border-right: 0.1em solid #F29559;
+    }
+
+    100% {
+        border-right: 0.1em solid transparent;
+    }
 }
