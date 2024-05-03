@@ -68,8 +68,8 @@ async function cargarPedidos() {
                         </div>
                         <div class="card-footer bg-transparent">
                             <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-success confirmar" data-pedido-id="${pedidoId}">Confirmar</button>
-                                <button type="button" class="btn btn-danger eliminar" data-card-id="card-${pedidoId}">Eliminar</button>
+                            <button type="button" class="btn btn-success confirmar" style="margin-right: 1em;  data-pedido-id="${pedidoId}">Confirmar</button>
+                                <button type="button" class="btn btn-danger eliminar"  data-card-id="card-${pedidoId}">Eliminar</button>
                             </div>
                         </div>
                     </div>
