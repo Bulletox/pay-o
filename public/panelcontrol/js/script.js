@@ -138,3 +138,11 @@ function emergenteInfo(){
         emergente = true
     }
 }
+
+const video = document.querySelector('video');
+
+video.addEventListener('loadedmetadata', () => {
+  video.duration = 11; // Duración del video en segundos
+  video.play();
+  video.loop = true;
+});
