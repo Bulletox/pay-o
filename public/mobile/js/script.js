@@ -26,6 +26,8 @@ const instanciaManager = {
         document.getElementById('addItemsBtn').addEventListener('click', () => this.navigate('comida.html'));
         document.getElementById('payBtn').addEventListener('click', () => this.navigate('cuentaTotal.html'));
         document.getElementById('contenedorPadre').addEventListener('click', () => this.navigate('visua.html'));
+        document.getElementById('irMenu').addEventListener('click', () => this.navigate('menu.html'));
+        document.getElementById('irPagar').addEventListener('click', () => this.navigate('Pagar.html'));
     },
 
     navigate: function (page) {

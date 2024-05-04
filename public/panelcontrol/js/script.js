@@ -53,6 +53,10 @@ function irAyuda() {
 function irmesas() {
     location.href = "/panelcontrol/gestionmesas.html"
 }
+
+function irIndex(){
+    location.href = "/panelcontrol/index.html"
+}
 // Imagen
 
 function handleClick() {
@@ -126,13 +130,13 @@ function updatePlaceholder() {
     alergenosInput.value = alergenosArray.join(", ");
 }
 
-function emergenteInfo(){
-    if(emergente){
+function emergenteInfo() {
+    if (emergente) {
         document.querySelector('.caja').style.display = "none"
         document.querySelector('.capaNegra').style.display = "none"
 
         emergente = false
-    }else{
+    } else {
         document.querySelector('.caja').style.display = "flex"
         document.querySelector('.capaNegra').style.display = "flex"
         emergente = true

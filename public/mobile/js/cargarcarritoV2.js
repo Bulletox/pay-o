@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h6 class="text-muted">Cantidad Total <strong id="cantidadTotalComensales-${idPlato}">${count}</strong></h6>
       </div>
     </div>
-    <img src="${imageUrl || 'img/paella.png'}" class="img-fluid rounded" alt="${nombre}" style="height: 125px; width: 125px;">
+    <img src="${imageUrl || 'img/paellaperomejor.png'}" class="img-fluid rounded" alt="${nombre}" style="height: 125px; width: 125px;">
   </div>
 </div>`;
     });
