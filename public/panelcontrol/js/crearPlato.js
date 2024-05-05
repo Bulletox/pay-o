@@ -95,6 +95,7 @@ const crearNuevoPlato = async () => {
     } catch (error) {
         console.error('Error al crear el nuevo plato:', error);
     }
+    location.href = "/panelcontrol/visuaCarta.html"
 };
 
 // Obtener referencia al botón "Crear nuevo plato"
