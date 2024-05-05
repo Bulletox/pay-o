@@ -39,7 +39,7 @@ async function crearTablaDePlatos(db) {
                 <td class = "text-dark" scope="row"><strong>${id}</strong></td>
                 <td id="nombrePlato">${plato.nombrePlato}</td>
                 <td id="precioPlato">${plato.precio} €</td>
-                <td id="cantidad">${plato.Cantidad} personas</td>
+                <td id="cantidad">${plato.Cantidad}</td>
                 <td><button class="btn btn-primary" onclick="irCarta()">Modificar</button></td>
             `;
             id++;
