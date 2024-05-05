@@ -180,7 +180,9 @@ async function confirmarPedido(pedidoId, db, unsub) {
 
   if (platosValidos.length === 0) {
     console.error("El subpedido no contiene platos válidos para confirmar.");
-    alert("No se puede confirmar el subpedido porque no contiene platos válidos.");
+    alert("Por favor, añade platos en el menu para completar tu pedido.");
+
+
     return;
   }
 
