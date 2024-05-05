@@ -28,7 +28,8 @@
             <nav id="sidebar" class=" js-sidebar vw-15">
                 <div class="sidebar-content js-simplebar ">
                     <a class="sidebar-brand m-1" href="/">
-                        <img class="me-3" src="/panelcontrol/img/logoNombre.png" alt="" style="height: 100%; width: 100%;">
+                        <img class="me-3" src="/panelcontrol/img/logoNombre.png" alt=""
+                            style="height: 100%; width: 100%;">
                     </a>
 
                     <ul class="sidebar-nav">
@@ -39,16 +40,21 @@
                         </div>
 
                         <li class="sidebar-item mt-4 d-flex flex-column fs-2 ms-4" style="z-index: 999;">
-                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer" style="flex-wrap: nowrap;" onclick="irPedidos()"> <i
+                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer"
+                                style="flex-wrap: nowrap;" onclick="irPedidos()"> <i
                                     class="bi bi-card-list me-3"></i>Pedidos
                             </span>
-                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer" style="flex-wrap: nowrap;" onclick="irVisuaCarta()"><i
+                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer"
+                                style="flex-wrap: nowrap;" onclick="irVisuaCarta()"><i
                                     class="bi bi-journals me-3"></i>Carta</span>
-                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer" style="flex-wrap: nowrap;" onclick="irCocina()"><i
+                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer"
+                                style="flex-wrap: nowrap;" onclick="irCocina()"><i
                                     class="bi bi-cup-hot me-3"></i>Cocina</span>
-                            <span class="d-flex align-items-center align-middle mb-4 text-light cursor-pointer" style="flex-wrap: nowrap;" onclick="irmesas()"><i
-                                    class="bi bi-share me-3"></i>QR Mesa</span>
-                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer" style="flex-wrap: nowrap;" onclick="irAyuda()"><i
+                            <span class="d-flex align-items-center align-middle mb-4 text-light cursor-pointer"
+                                style="flex-wrap: nowrap;" onclick="irmesas()"><i class="bi bi-share me-3"></i>QR
+                                Mesa</span>
+                            <span class="d-flex align-items-center align-middle mb-4 text-dark cursor-pointer"
+                                style="flex-wrap: nowrap;" onclick="irAyuda()"><i
                                     class="bi bi-info-circle me-3"></i>Help</span>
                         </li>
                     </ul>
@@ -75,14 +81,17 @@
         style="z-index: 10;">
         <h1 class="me-5 ms-5 mb-4" style="color: #F29559; font-size: 3em;"><strong>Su acceso</strong>
         </h1>
-        <button class="btn btn-primary mb-3 w-25 fs-3 p-3" id="crearInstancia" style="height: 3em !important; width: auto !important;"><i class="bi bi-link me-3"></i></i>Crear</button>
+        <button class="btn btn-primary mb-3 w-25 fs-3 p-3" id="crearInstancia"
+            style="height: 3em !important; width: auto !important;"><i class="bi bi-link me-3"></i></i>Crear</button>
         <h1 class="fs-2 text-dark m-3">URL del QR:</h1>
 
         <div class="d-flex justify-content-center input-group" style="flex-wrap: nowrap;">
-            <div class="fs-4 border p-1 rounded-start-3" id="urlInstancia" style="height: auto; min-width: 85%; text-align: center;">
+            <div class="fs-4 border p-1 rounded-start-3" id="urlInstancia"
+                style="height: auto; min-width: 85%; text-align: center;">
             </div>
-            <span style="min-width: 10%;" class="f-flex align-items-center justify-content-center input-group-text cursor-pointer border" onclick="copyToClipboard(this)"><i
-                    class="bi bi-clipboard"></i></span>
+            <span style="min-width: 10%;"
+                class="f-flex align-items-center justify-content-center input-group-text cursor-pointer border"
+                onclick="copyToClipboard(this)"><i class="bi bi-clipboard"></i></span>
         </div>
 
         <!-- Elemento para mostrar la URL -->
@@ -153,17 +162,11 @@
                         timestampCreacion: timestampCreacionSubPedido
                     }).then((docRefSubPedido) => {
                         console.log("SubPedido creado con ID: ", docRefSubPedido.id);
-
-                        // Creamos un documento de marcador de posición en la subcolección "platosPedido"
-                        return db.collection(`/Pedidos/${idPedido}/subPedidos/${docRefSubPedido.id}/platosPedido`).add({
-                        });
-
-                    }).then((docRefPlato) => {
-                        console.log("Documento de marcador de posición en platosPedido creado con ID: ", docRefPlato.id);
                     }).catch((error) => {
-                        console.error("Error creando el subPedido o el documento de marcador de posición: ", error);
+                        console.error("Error creando el subPedido: ", error);
                     });
                 }
+
 
 
                 function actualizarURLConPedido(idInstancia, idPedido) {
@@ -177,7 +180,7 @@
                 function generarQR(urlCompleta) {
                     console.log("Generando QR para la URL: ", urlCompleta);
                     let tipo = 10;  // Tipo del QR, donde '4' es un valor que permite cierta cantidad de datos.
-                    let errorCorrectionLevel = 'L';  // Nivel de corrección de errores: 'L' (Low), 'M' (Medium), 'Q' (Quartile), 'H' (High)
+                    let errorCorrectionLevel = 'H';  // Nivel de corrección de errores: 'L' (Low), 'M' (Medium), 'Q' (Quartile), 'H' (High)
                     let qr = qrcode(tipo, errorCorrectionLevel);
                     qr.addData(urlCompleta);
                     qr.make();

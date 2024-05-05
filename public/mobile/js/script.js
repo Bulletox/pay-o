@@ -21,14 +21,27 @@ const instanciaManager = {
     },
 
     setupEventListeners: function () {
-        document.getElementById('modifyItemsBtn').addEventListener('click', () => this.navigate('carrito.html'));
-        document.getElementById('historialItemsBtn').addEventListener('click', () => this.navigate('historial.html'));
-        document.getElementById('addItemsBtn').addEventListener('click', () => this.navigate('comida.html'));
-        document.getElementById('payBtn').addEventListener('click', () => this.navigate('cuentaTotal.html'));
-        document.getElementById('contenedorPadre').addEventListener('click', () => this.navigate('visua.html'));
-        document.getElementById('irMenu').addEventListener('click', () => this.navigate('menu.html'));
-        document.getElementById('irPagar').addEventListener('click', () => this.navigate('Pagar.html'));
+        // Helper function to safely add event listeners
+        const safeAddEventListener = (selector, event, handler) => {
+            const element = document.getElementById(selector);
+            if (element) {
+                element.addEventListener(event, handler);
+            } else {
+                console.log(`Elemento no encontrado: ${selector}`);
+            }
+        };
+    
+        // Añadir listeners usando la función de ayuda
+        safeAddEventListener('qr', 'click', () => this.navigate('index.html'));
+        safeAddEventListener('modifyItemsBtn', 'click', () => this.navigate('carrito.html'));
+        safeAddEventListener('historialItemsBtn', 'click', () => this.navigate('historial.html'));
+        safeAddEventListener('addItemsBtn', 'click', () => this.navigate('comida.html'));
+        safeAddEventListener('payBtn', 'click', () => this.navigate('cuentaTotal.html'));
+        safeAddEventListener('contenedorPadre', 'click', () => this.navigate('visua.html'));
+        safeAddEventListener('irMenu', 'click', () => this.navigate('menu.html'));
+        safeAddEventListener('irPagar', 'click', () => this.navigate('Pagar.html'));
     },
+    
 
     navigate: function (page) {
         if (this.globalIdInstancia && this.globalIdpedido) {
