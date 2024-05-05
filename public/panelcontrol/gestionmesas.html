@@ -202,6 +202,7 @@
                 return db.collection(`/Pedidos/${idPedido}/subPedidos/${docRefSubPedido.id}/platosPedido`).add({
                 });
 
+<<<<<<< HEAD
             }).then((docRefPlato) => {
                 console.log("Documento de marcador de posición en platosPedido creado con ID: ", docRefPlato.id);
             }).catch((error) => {
@@ -232,6 +233,67 @@
                 console.error('El elemento para mostrar el QR no está disponible en el DOM');
             }
         }
+=======
+                function crearPedido(idInstancia) {
+                    let estadoPedido = "";
+                    let idMesaPedido = "Restaurantes/Restaurantes/Mesas/sPZgLeLOPevATqC3UFoG";
+                    let idRestaurantePedido = "";
+                    let timestampCreacion = firebase.firestore.Timestamp.fromDate(new Date());
+
+                    db.collection("/Pedidos").add({
+                        estado: estadoPedido,
+                        idMesa: db.doc(idMesaPedido),
+                        idRestaurante: idRestaurantePedido,
+                        idInstancia: db.doc(`/Instanciamesas/${idInstancia}`),
+                        timestampCreacion: timestampCreacion,
+                    }).then((docRefPedido) => {
+                        console.log("Pedido creado con ID: ", docRefPedido.id);
+                        crearSubPedido(docRefPedido.id);
+                        actualizarURLConPedido(idInstancia, docRefPedido.id);
+                    }).catch((error) => {
+                        console.error("Error creando el pedido: ", error);
+                    });
+                }
+                function crearSubPedido(idPedido) {
+                    let estadoSubPedido = 0; // Estado inicial para el subPedido
+                    let timestampCreacionSubPedido = firebase.firestore.Timestamp.fromDate(new Date()); // Fecha y hora actual
+
+                    // Creamos el subPedido
+                    db.collection("/Pedidos").doc(idPedido).collection("subPedidos").add({
+                        estado: parseInt(estadoSubPedido),
+                        timestampCreacion: timestampCreacionSubPedido
+                    }).then((docRefSubPedido) => {
+                        console.log("SubPedido creado con ID: ", docRefSubPedido.id);
+                    }).catch((error) => {
+                        console.error("Error creando el subPedido: ", error);
+                    });
+                }
+
+
+
+                function actualizarURLConPedido(idInstancia, idPedido) {
+                    // const urlBase = "http://localhost:3000/mobile/menu.html";
+                    const urlBase = "http://dam2pay-o.web.app/mobile/menu.html";
+                    const urlCompleta = `${urlBase}?iId=${idInstancia}&pId=${idPedido}`;
+                    document.getElementById("urlInstancia").innerHTML = `${urlCompleta}`;
+                    generarQR(urlCompleta);
+                }
+
+                function generarQR(urlCompleta) {
+                    console.log("Generando QR para la URL: ", urlCompleta);
+                    let tipo = 10;  // Tipo del QR, donde '4' es un valor que permite cierta cantidad de datos.
+                    let errorCorrectionLevel = 'H';  // Nivel de corrección de errores: 'L' (Low), 'M' (Medium), 'Q' (Quartile), 'H' (High)
+                    let qr = qrcode(tipo, errorCorrectionLevel);
+                    qr.addData(urlCompleta);
+                    qr.make();
+                    let qrCodeDiv = document.getElementById('qr-code');
+                    if (qrCodeDiv) {
+                        qrCodeDiv.innerHTML = qr.createImgTag(); // Esta función crea un <img> con el QR
+                    } else {
+                        console.error('El elemento para mostrar el QR no está disponible en el DOM');
+                    }
+                }
+>>>>>>> e685d142cbcaa5e273deaccd12f5d63409c381c9
 
 
 

@@ -90,7 +90,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     
                 default:
                     suspedidoItem = 'suspedidoItem';
-                    borderClasses = 'border border-warning border-5';
+                    // borderClasses = 'border border-warning border-5';
+                    borderClasses = 'border border-5';
                     estadoTexto = 'Creando';
                     break;
             }
