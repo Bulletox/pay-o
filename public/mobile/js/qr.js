@@ -21,7 +21,7 @@ function generarQR(urlCompleta) {
     qr.make();
     let qrCodeDiv = document.getElementById('qr-code');
     if (qrCodeDiv) {
-        qrCodeDiv.innerHTML = qr.createImgTag(5);
+        qrCodeDiv.innerHTML = qr.createImgTag(4);
     } else {
         console.error('El elemento para mostrar el QR no está disponible en el DOM');
     }
