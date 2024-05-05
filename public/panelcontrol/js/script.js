@@ -1,13 +1,6 @@
-// function toggleSidebar() {
-//     var sidebar = document.getElementById('egg-fried-sidebar');
-//     sidebar.classList.toggle('show');
-// }
-
-// function toggleSidebarhide() {
-//     var sidebar = document.getElementById('egg-fried-sidebar');
-//     sidebar.classList.toggle('hide');
 let sideBar = true;
 let emergente = false;
+let emergente2 = false;
 
 function toggleSidebar() {
     var sidebar = document.getElementById('egg-fried-sidebar');
@@ -54,7 +47,7 @@ function irmesas() {
     location.href = "/panelcontrol/gestionmesas.html"
 }
 
-function irIndex(){
+function irIndex() {
     location.href = "/panelcontrol/index.html"
 }
 // Imagen
@@ -140,5 +133,22 @@ function emergenteInfo() {
         document.querySelector('.caja').style.display = "flex"
         document.querySelector('.capaNegra').style.display = "flex"
         emergente = true
+    }
+}
+
+function emergenteInfo2() {
+    let qrCodeImg = document.querySelector('#qr-code img').src;
+
+    if (emergente2) {
+        document.querySelector('.caja').style.display = "none"
+        document.querySelector('.capaNegra').style.display = "none"
+        document.querySelector('#imagenQR').style.display = "none"
+        emergente2 = false
+    } else {
+        document.querySelector('.caja').style.display = "flex"
+        document.querySelector('.capaNegra').style.display = "flex"
+        emergente2 = true
+        document.querySelector('#imagenQR').src = qrCodeImg
+        document.querySelector('#imagenQR').style.display = "flex"
     }
 }

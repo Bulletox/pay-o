@@ -38,8 +38,8 @@ async function crearTablaDePlatos(db) {
             nuevaFila.innerHTML = `
                 <td class = "text-dark" scope="row"><strong>${id}</strong></td>
                 <td id="nombrePlato">${plato.nombrePlato}</td>
-                <td id="precioPlato">${plato.precio} €</td>
-                <td id="cantidad">${plato.Cantidad} personas</td>
+                <td id="precioPlato" style="width: 25% !important;">${plato.precio} €</td>
+                <td id="cantidad">${plato.Cantidad}</td>
                 <td><button class="btn btn-primary" onclick="irCarta()">Modificar</button></td>
             `;
             id++;

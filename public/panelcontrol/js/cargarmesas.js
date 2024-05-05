@@ -55,7 +55,7 @@ async function cargarPedidos() {
             if (subPedidosSnapshot.docs.length > 0) {
                 // Crear la tarjeta del pedido
                 const tarjetaPedido = document.createElement('div');
-                tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-2', 'col-xxl-2', 'mb-4');
+                tarjetaPedido.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'col-xl-3', 'col-xxl-3', 'mb-4');
                 tarjetaPedido.innerHTML = `
                     <div class="card mb-3" id="card-${pedidoId}">
                         <div class="card-header ${claseColorHeader} text-white">
@@ -177,7 +177,7 @@ async function cargarPlatosPedido(pedidoId, db) {
             platoElement.innerHTML = `
                 <input class="form-check-input" type="checkbox" value="" id="plato-${idPlatoPath}">
                 <label class="form-check-label d-block text-break" for="plato-${idPlatoPath}">
-                  ${platoAgrupado.nombrePlato} x${platoAgrupado.cantidad}
+                  ${platoAgrupado.nombrePlato} x ${platoAgrupado.cantidad}
                 </label>
             `;
             platosContainer.appendChild(platoElement);
