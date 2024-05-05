@@ -131,6 +131,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     platosContainer.innerHTML = htmlContent;
+    const cssLink = document.querySelector('link[href="css/loader_coffe.css"]');
+    if (cssLink) {
+      cssLink.remove();
+    }
   }
 });
 
@@ -157,7 +161,6 @@ async function buscarUltimoSubpedidoConEstadoCero(pedidoId, db) {
   }
 }
 
-// Asegúrate de tener un botón o algún disparador que llame a esta función
 async function confirmarPedido(pedidoId, db, unsub) {
   console.log("Inicio de la confirmación del pedido...");
   const subPedidoId = await buscarUltimoSubpedidoConEstadoCero(pedidoId, db);
@@ -168,12 +171,25 @@ async function confirmarPedido(pedidoId, db, unsub) {
     return;
   }
 
+  // Verifica si hay platos en el subpedido
+  const platosRef = collection(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}/platosPedido`);
+  const snapshotPlatos = await getDocs(platosRef);
+
+  // Filtra los documentos para verificar si alguno tiene datos
+  const platosValidos = snapshotPlatos.docs.filter(doc => Object.keys(doc.data()).length > 0);
+
+  if (platosValidos.length === 0) {
+    console.error("El subpedido no contiene platos válidos para confirmar.");
+    alert("No se puede confirmar el subpedido porque no contiene platos válidos.");
+    return;
+  }
+
   const subPedidoRef = doc(db, `Pedidos/${pedidoId}/subPedidos/${subPedidoId}`);
 
   try {
     console.log("Actualizando el estado del subpedido...");
     await updateDoc(subPedidoRef, {
-      estado: parseInt(1), // Cambiar el estado del subpedido a "1" (confirmado)
+      estado: 1, // Cambiar el estado del subpedido a "1" (confirmado)
     });
 
     console.log("Verificando si es necesario crear un nuevo subpedido...");
@@ -185,6 +201,8 @@ async function confirmarPedido(pedidoId, db, unsub) {
     console.error("Error al confirmar el pedido:", error);
   }
 }
+
+
 
 async function verificarYCrearSubPedido(idPedido, db) {
   const subPedidosRef = collection(db, `/Pedidos/${idPedido}/subPedidos`);
