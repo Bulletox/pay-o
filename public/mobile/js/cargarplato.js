@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                     <div class="abajo d-flex flex-row justify-content-center position-fixed fixed-bottom">
                     <button id="precio" class="btn btn-primary d-flex justify-content-center align-items-center w-100 p-4 border rounded-0 fs-2"
-                        style="max-height: 74px !important; "onclick="goBack()">Añadir ${plato.precio} €</button>
+                        style="max-height: 74px !important; "onclick="goBack()">Añadir 0.00 €</button>
                     </div>
                 </div>
             `;
