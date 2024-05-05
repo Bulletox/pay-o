@@ -21,8 +21,8 @@
         <div class="circulo2 animate__animated animate__pulse"></div>
         <div class="circulo3 animate__animated animate__pulse"></div>
     </div>
-    <div class="container animate__animated animate__fadeIn" id="">
-        <header class="fixed-top FFD1A4 position-fixed">
+    <div class="container animate__animated animate__fadeIn " id="">
+        <header class="fixed-top FFD1A4 position-fixed" style="z-index: 1000;">
             <div class="iconos d-flex justify-content-around mt-4 mb-4 fs-7 align-items-center">
                 <i class="bi bi-arrow-return-left cursor-pointer" onclick="goBack()"></i>
                 <h1 class="mb-0"><strong>Tu carrito</strong></h1>
@@ -34,10 +34,11 @@
                     <span class="name">PAGAR TODO</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" name="radio" />
+                    <input type="radio" name="radio" id="pay-your-own" />
                     <span class="name">PAGAR LO TUYO</span>
                 </label>
             </div>
+            
         </header>
 
 
@@ -84,20 +85,19 @@
           </form>
         </div> -->
 
-        <div class="card checkout position-fixed fixed-bottom" >
-            <label class="title">Checkout</label>
+        <div class="card checkout position-fixed fixed-bottom">
+            <label class="title">Finalizar compra</label>
             <div class="details">
-                <span>Your cart subtotal:</span>
+                <span>Subtotal de tu carrito:</span>
                 <span>0€</span>
-                <!-- <span>Discount through applied coupons:</span>
-                <span>0$</span> -->
+                <!-- <span>Descuento por cupones aplicados:</span>
+                <span>0€</span> -->
                 <span>IVA 10%:</span>
                 <span>0€</span>
             </div>
-            <div class="checkout--footer ">
+            <div class="checkout--footer">
                 <label class="price">0</label>
-            <button id="irPagar" class="checkout-btn" style="background: #F29559;">Confirmar</button>
-               
+                <button id="irPagar" class="checkout-btn" style="background: #F29559;">Confirmar</button>
             </div>
         </div>
     </div>
